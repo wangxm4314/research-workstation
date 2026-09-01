@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>脚本仓库</title>
+    <style id="theme-vars">
+/* ============================================================
+   Research Workstation — Warm Editorial Theme
+   科研暖色编辑风格 · 琥珀赭色系
+   ============================================================ */
+
+/* ---- Brand Prefix: research ---- */
+
+:root {
+  /* ---- Primary Brand Hue (Amber/Ochre) ---- */
+  --color-brand-50: #FBF4E8;
+  --color-brand-100: #F5E6CC;
+  --color-brand-200: #EBCFA0;
+  --color-brand-300: #DDB26E;
+  --color-brand-400: #C99542;
+  --color-brand-500: #B8770C;
+  --color-brand-600: #A06608;
+  --color-brand-700: #84540A;
+  --color-brand-800: #6B450C;
+  --color-brand-900: #543708;
+
+  /* ---- Neutral Scale (Warm) ---- */
+  --color-neutral-50: #FAF7F2;
+  --color-neutral-100: #F5F1EB;
+  --color-neutral-200: #E8E2D8;
+  --color-neutral-300: #D4CCC0;
+  --color-neutral-400: #B0A89C;
+  --color-neutral-500: #8A8275;
+  --color-neutral-600: #6B6357;
+  --color-neutral-700: #4D463C;
+  --color-neutral-800: #363028;
+  --color-neutral-900: #241F1A;
+
+  /* ---- Semantic Aliases (Light Mode) ---- */
+  --research-background: #FAF7F2;
+  --research-foreground: #241F1A;
+  --research-card: #FFFFFF;
+  --research-card-foreground: #241F1A;
+  --research-popover: #FFFFFF;
+  --research-popover-foreground: #241F1A;
+  --research-primary: #B8770C;
+  --research-primary-foreground: #FFFFFF;
+  --research-muted: #F5F1EB;
+  --research-muted-foreground: #6B6357;
+  --research-border: #E8E2D8;
+  --research-input: #E8E2D8;
+  --research-ring: #B8770C;
+
+  /* ---- Surface Tokens ---- */
+  --research-surface: #FFFFFF;
+  --research-surface-2: #F5F1EB;
+  --research-surface-3: #EFE9DF;
+
+  /* ---- Ink Tokens ---- */
+  --research-ink: #241F1A;
+  --research-ink-2: #4D463C;
+  --research-ink-3: #8A8275;
+
+  /* ---- Line Token ---- */
+  --research-line: #E8E2D8;
+
+  /* ---- Radius Scale ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --research-radius-small: 4px;
+  --research-radius-medium: 8px;
+  --research-radius-large: 16px;
+
+  /* ---- Shadow Scale ---- */
+  --research-shadow-1: 0 1px 2px rgba(36, 31, 26, 0.04), 0 1px 1px rgba(36, 31, 26, 0.02);
+  --research-shadow-floating: 0 8px 24px -8px rgba(36, 31, 26, 0.12);
+  --research-shadow-modal: 0 24px 60px -20px rgba(36, 31, 26, 0.20);
+
+  /* ---- Spacing Scale (8pt grid) ---- */
+  --research-s-1: 4px;
+  --research-s-2: 8px;
+  --research-s-3: 12px;
+  --research-s-4: 16px;
+  --research-s-5: 24px;
+  --research-s-6: 32px;
+  --research-s-7: 48px;
+  --research-s-8: 80px;
+
+  /* ---- State Colors ---- */
+  --state-success: #4A7C4A;
+  --state-warning: #C99542;
+  --state-error: #B0454B;
+  --state-info: #4A6B8A;
+
+  /* ---- Typography ---- */
+  --research-font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --research-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --research-font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+
+  /* ---- Color alias for general use ---- */
+  --research-brand: #B8770C;
+  --research-brand-ink: #FFFFFF;
+}
+
+/* ---- Dark Mode ---- */
+.dark {
+  --research-background: #1A1612;
+  --research-foreground: #E8E2D8;
+  --research-card: #241F1A;
+  --research-card-foreground: #E8E2D8;
+  --research-popover: #2A241E;
+  --research-popover-foreground: #E8E2D8;
+  --research-primary: #C99542;
+  --research-primary-foreground: #1A1612;
+  --research-muted: #2A241E;
+  --research-muted-foreground: #B0A89C;
+  --research-border: #363028;
+  --research-input: #363028;
+  --research-ring: #C99542;
+
+  --research-surface: #241F1A;
+  --research-surface-2: #2A241E;
+  --research-surface-3: #363028;
+
+  --research-ink: #E8E2D8;
+  --research-ink-2: #B0A89C;
+  --research-ink-3: #8A8275;
+
+  --research-line: #363028;
+
+  --state-success: #6B9C6B;
+  --state-warning: #DDB26E;
+  --state-error: #D06870;
+  --state-info: #7A9CBA;
+
+  --research-brand: #C99542;
+  --research-brand-ink: #1A1612;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--research-background);
+    --color-foreground: var(--research-foreground);
+    --color-card: var(--research-card);
+    --color-card-foreground: var(--research-card-foreground);
+    --color-popover: var(--research-popover);
+    --color-popover-foreground: var(--research-popover-foreground);
+    --color-primary: var(--research-primary);
+    --color-primary-foreground: var(--research-primary-foreground);
+    --color-muted: var(--research-muted);
+    --color-muted-foreground: var(--research-muted-foreground);
+    --color-border: var(--research-border);
+    --color-input: var(--research-input);
+    --color-ring: var(--research-ring);
+    --radius-sm: var(--research-radius-small);
+    --radius-md: var(--research-radius-medium);
+    --radius-lg: var(--research-radius-large);
+  }
+  @layer base {
+    body { background: var(--research-background); color: var(--research-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--research-background); }
+      .text-background { color: var(--research-background); }
+      .border-background { border-color: var(--research-background); }
+      .ring-background { --tw-ring-color: var(--research-background); }
+      .bg-foreground { background-color: var(--research-foreground); }
+      .text-foreground { color: var(--research-foreground); }
+      .border-foreground { border-color: var(--research-foreground); }
+      .ring-foreground { --tw-ring-color: var(--research-foreground); }
+      .bg-card { background-color: var(--research-card); }
+      .text-card { color: var(--research-card); }
+      .border-card { border-color: var(--research-card); }
+      .ring-card { --tw-ring-color: var(--research-card); }
+      .bg-card-foreground { background-color: var(--research-card-foreground); }
+      .text-card-foreground { color: var(--research-card-foreground); }
+      .border-card-foreground { border-color: var(--research-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--research-card-foreground); }
+      .bg-popover { background-color: var(--research-popover); }
+      .text-popover { color: var(--research-popover); }
+      .border-popover { border-color: var(--research-popover); }
+      .ring-popover { --tw-ring-color: var(--research-popover); }
+      .bg-popover-foreground { background-color: var(--research-popover-foreground); }
+      .text-popover-foreground { color: var(--research-popover-foreground); }
+      .border-popover-foreground { border-color: var(--research-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--research-popover-foreground); }
+      .bg-primary { background-color: var(--research-primary); }
+      .text-primary { color: var(--research-primary); }
+      .border-primary { border-color: var(--research-primary); }
+      .ring-primary { --tw-ring-color: var(--research-primary); }
+      .bg-primary-foreground { background-color: var(--research-primary-foreground); }
+      .text-primary-foreground { color: var(--research-primary-foreground); }
+      .border-primary-foreground { border-color: var(--research-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--research-primary-foreground); }
+      .bg-muted { background-color: var(--research-muted); }
+      .text-muted { color: var(--research-muted); }
+      .border-muted { border-color: var(--research-muted); }
+      .ring-muted { --tw-ring-color: var(--research-muted); }
+      .bg-muted-foreground { background-color: var(--research-muted-foreground); }
+      .text-muted-foreground { color: var(--research-muted-foreground); }
+      .border-muted-foreground { border-color: var(--research-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--research-muted-foreground); }
+      .bg-border { background-color: var(--research-border); }
+      .text-border { color: var(--research-border); }
+      .border-border { border-color: var(--research-border); }
+      .ring-border { --tw-ring-color: var(--research-border); }
+      .bg-input { background-color: var(--research-input); }
+      .text-input { color: var(--research-input); }
+      .border-input { border-color: var(--research-input); }
+      .ring-input { --tw-ring-color: var(--research-input); }
+      .bg-ring { background-color: var(--research-ring); }
+      .text-ring { color: var(--research-ring); }
+      .border-ring { border-color: var(--research-ring); }
+      .ring-ring { --tw-ring-color: var(--research-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+      <!-- ============ Shared Sidebar ============ -->
+      <aside style="position:fixed;top:0;left:0;width:240px;height:100vh;background:var(--research-surface);border-right:1px solid var(--research-border);z-index:50;display:flex;flex-direction:column;">
+        <!-- Logo -->
+        <div style="padding:20px 24px;border-bottom:1px solid var(--research-border);">
+          <span style="font-family:var(--research-font-serif);font-size:18px;font-weight:600;color:var(--research-ink);">科研工作站</span>
+        </div>
+        <!-- Nav -->
+        <nav style="flex:1;overflow-y:auto;padding-top:8px;">
+          <a href="#" data-dom-id="nav-dashboard" data-nav-key="dashboard" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;color:var(--research-ink-2);border-left:3px solid transparent;transition:color 120ms;text-decoration:none;">
+            <i data-lucide="layout-dashboard" style="width:20px;height:20px;"></i>
+            <span>概览</span>
+          </a>
+          <a href="#" data-dom-id="nav-mp-articles" data-nav-key="mp-articles" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;color:var(--research-ink-2);border-left:3px solid transparent;transition:color 120ms;text-decoration:none;">
+            <i data-lucide="newspaper" style="width:20px;height:20px;"></i>
+            <span>公众号推文</span>
+          </a>
+          <a href="#" data-dom-id="nav-scripts" data-nav-key="scripts" data-active="true" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;background:var(--research-surface-2);color:var(--research-primary);border-left:3px solid var(--research-primary);transition:color 120ms;text-decoration:none;font-weight:500;">
+            <i data-lucide="code-2" style="width:20px;height:20px;"></i>
+            <span>脚本仓库</span>
+          </a>
+          <a href="#" data-dom-id="nav-literature" data-nav-key="literature" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;color:var(--research-ink-2);border-left:3px solid transparent;transition:color 120ms;text-decoration:none;">
+            <i data-lucide="book-open" style="width:20px;height:20px;"></i>
+            <span>文献阅读</span>
+          </a>
+          <a href="#" data-dom-id="nav-gallery" data-nav-key="gallery" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;color:var(--research-ink-2);border-left:3px solid transparent;transition:color 120ms;text-decoration:none;">
+            <i data-lucide="image" style="width:20px;height:20px;"></i>
+            <span>图片存储</span>
+          </a>
+          <a href="#" data-dom-id="nav-writing" data-nav-key="writing" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;color:var(--research-ink-2);border-left:3px solid transparent;transition:color 120ms;text-decoration:none;">
+            <i data-lucide="pen-line" style="width:20px;height:20px;"></i>
+            <span>文章撰写</span>
+          </a>
+          <a href="#" data-dom-id="nav-knowledge-network" data-nav-key="knowledge-network" style="display:flex;align-items:center;gap:12px;padding:12px 24px;font-size:14px;color:var(--research-ink-2);border-left:3px solid transparent;transition:color 120ms;text-decoration:none;">
+            <i data-lucide="share-2" style="width:20px;height:20px;"></i>
+            <span>知识网络</span>
+          </a>
+        </nav>
+        <!-- Bottom avatar -->
+        <div style="padding:20px 24px;border-top:1px solid var(--research-border);display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--research-primary);display:flex;align-items:center;justify-content:center;color:var(--research-primary-foreground);font-size:13px;font-weight:600;">研</div>
+          <span style="font-size:14px;color:var(--research-ink-2);">研究员</span>
+        </div>
+      </aside>
+
+      <!-- ============ Main Content ============ -->
+      <div style="margin-left:240px;padding:32px;background:var(--research-background);min-height:100vh;">
+        <!-- Header Bar -->
+        <div style="height:60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--research-border);margin-bottom:24px;padding-bottom:16px;">
+          <h1 style="font-family:var(--research-font-serif);font-size:24px;font-weight:600;color:var(--research-ink);margin:0;">脚本仓库</h1>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <input type="text" placeholder="搜索脚本..." style="width:240px;padding:8px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:var(--research-card);color:var(--research-ink);font-size:14px;outline:none;font-family:var(--research-font-sans);">
+            <button style="background:var(--research-primary);color:var(--research-primary-foreground);padding:8px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:500;border:none;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:6px;">
+              <i data-lucide="upload" style="width:16px;height:16px;"></i>
+              上传脚本
+            </button>
+          </div>
+        </div>
+
+        <!-- Two-column layout -->
+        <div style="display:grid;grid-template-columns:240px 1fr;gap:24px;">
+          <!-- Left Column: Category Tree -->
+          <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:16px;">
+            <div style="font-family:var(--research-font-serif);font-size:16px;font-weight:600;color:var(--research-ink);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--research-border);">分类</div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="padding:8px 12px;font-size:14px;background:var(--research-surface-2);color:var(--research-primary);border-radius:var(--radius-sm);cursor:pointer;font-weight:500;display:flex;justify-content:space-between;align-items:center;">
+                <span>数据分析</span>
+                <span style="background:var(--research-primary);color:var(--research-primary-foreground);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">4</span>
+              </div>
+              <div style="padding:8px 12px;font-size:14px;color:var(--research-ink-2);border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="this.style.background='var(--research-surface-2)'" onmouseout="this.style.background='transparent'">
+                <span>可视化</span>
+                <span style="background:var(--research-surface-3);color:var(--research-ink-2);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">2</span>
+              </div>
+              <div style="padding:8px 12px;font-size:14px;color:var(--research-ink-2);border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="this.style.background='var(--research-surface-2)'" onmouseout="this.style.background='transparent'">
+                <span>文件处理</span>
+                <span style="background:var(--research-surface-3);color:var(--research-ink-2);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">1</span>
+              </div>
+              <div style="padding:8px 12px;font-size:14px;color:var(--research-ink-2);border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="this.style.background='var(--research-surface-2)'" onmouseout="this.style.background='transparent'">
+                <span>统计检验</span>
+                <span style="background:var(--research-surface-3);color:var(--research-ink-2);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Script List -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+
+            <!-- Script 1 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">bulk_RNA_seq_pipeline.py</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">批量RNA-seq数据分析标准流程，包含质控、比对、定量</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import subprocess
+
+def run_pipeline(fastq_files, reference):
+    # Step 1: Quality control
+    subprocess.run(['fastqc', '-o', 'qc_results', fastq_files])
+    # Step 2: Alignment
+    subprocess.run(['hisat2', '-x', reference, '-U', fastq_files])</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-08-28</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">RNA-seq</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">生物信息</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 2 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">single_cell_qc.R</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">单细胞数据质控和过滤，使用Seurat框架</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">library(Seurat)
+
+obj &lt;- CreateSeuratObject(counts = data)
+obj &lt;- PercentageFeatureSet(obj, pattern = "^MT-", col.name = "percent.mt")
+obj &lt;- subset(obj, subset = nFeature_RNA &gt; 200 & nFeature_RNA &lt; 2500 & percent.mt &lt; 20)</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-08-15</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">单细胞</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">质控</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 3 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">volcano_plot.py</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">火山图绘制脚本，支持自定义阈值和标注</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import matplotlib.pyplot as plt
+import numpy as np
+
+def volcano_plot(df, log2fc_col, pval_col, threshold=0.05):
+    df['-log10p'] = -np.log10(df[pval_col])</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-07-20</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">可视化</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">火山图</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 4 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">gene_ontology_enrichment.R</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">GO富集分析及可视化</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">library(clusterProfiler)
+library(org.Hs.eg.db)
+
+ego &lt;- enrichGO(gene = gene_list, OrgDb = org.Hs.eg.db, ont = "BP")</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-07-10</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">GO分析</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">富集</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 5 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">file_rename_batch.py</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">批量重命名文件，支持正则匹配和模板替换</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import os, re
+
+def batch_rename(directory, pattern, replacement):
+    for filename in os.listdir(directory):
+        new_name = re.sub(pattern, replacement, filename)</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-06-05</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">文件处理</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 6 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">statistical_test_groups.R</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">多组间统计检验和事后比较</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;"># ANOVA + Tukey HSD
+result &lt;- aov(value ~ group, data = df)
+summary(result)
+TukeyHSD(result)</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-05-15</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">统计</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">ANOVA</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 7 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">heatmap_complex.py</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">复杂热图绘制，支持行列注释</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import seaborn as sns
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 8))
+sns.heatmap(data, annot=True, cmap='YlOrBr', ax=ax)</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-04-20</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">可视化</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">热图</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+            <!-- Script 8 -->
+            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">differential_expression.R</span>
+                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
+                </div>
+                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
+                  复制
+                </button>
+              </div>
+              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">差异表达分析，支持DESeq2和edgeR</p>
+              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">library(DESeq2)
+
+dds &lt;- DESeqDataSetFromMatrix(countData = cts, colData = coldata, design = ~ condition)
+dds &lt;- DESeq(dds)
+res &lt;- results(dds)</pre>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
+                <span style="font-size:13px;color:var(--research-ink-3);">2024-03-10</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">差异表达</span>
+                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">DESeq2</span>
+                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="padding-top:32px;margin-top:32px;border-top:1px solid var(--research-border);font-size:13px;color:var(--research-ink-3);">
+          科研工作站 · 脚本仓库 · 共 8 个脚本
+        </div>
+      </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,1790 @@
+{
+  "schemaVersion": "1.0",
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.08.06.19.15.08",
+    "version_source": "skill-release-manifest.json",
+    "schema_version": "1.0",
+    "release": "prompt-base-cloud-ssot-migration",
+    "read_status": "ok"
+  },
+  "project": {
+    "operation": "create",
+    "resolvedLane": "complex_html_page",
+    "selectedIntentWorkflowRead": true,
+    "contextRequirementsLoaded": [
+      {
+        "path": "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/page-rendering-quality-gate.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/design-artifact-validation.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "delivery-quality/delivery-evidence-contract.md",
+        "readStatus": "loaded",
+        "bodyRead": false
+      },
+      {
+        "path": "visual-experience/visual-experience-guidelines.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      },
+      {
+        "path": "visual-experience/visual-checkpoint-protocol.md",
+        "readStatus": "loaded",
+        "bodyRead": false
+      },
+      {
+        "path": "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+        "readStatus": "loaded",
+        "bodyRead": true
+      }
+    ],
+    "contextReadScope": "complex-build-create",
+    "deviceType": "desktop",
+    "projectName": "科研工作站",
+    "styleDefinitionBrief": "科研暖色编辑风格，暖白背景+琥珀赭色系，Noto Serif SC标题+Noto Sans SC正文，编辑式排版节奏，适合文献阅读和文章撰写场景",
+    "designRead": "desktop workstation / researcher / editorial-warm / information-dense / avoid generic SaaS template",
+    "designDials": {
+      "layoutVariance": 3,
+      "motionIntensity": 2,
+      "visualDensity": 4
+    },
+    "styleContinuityAnchors": {
+      "typographySystem": "Noto Serif SC for headings, Noto Sans SC for body, JetBrains Mono for code",
+      "colorSystem": "Warm neutral palette with amber/ochre primary (#B8770C)",
+      "radiusScale": "4px/8px/16px restrained",
+      "surfaceDepthModel": "Border and surface layering first, shadow alpha <= 0.05 for static surfaces",
+      "sidebarNavigation": "Fixed left sidebar 240px, all pages share identical nav structure"
+    },
+    "sharedProjectShellContract": {
+      "navigationShell": "desktop-sidebar",
+      "sidebar": {
+        "width": "240px",
+        "position": "fixed-left",
+        "items": [
+          {
+            "key": "dashboard",
+            "label": "概览",
+            "icon": "layout-dashboard"
+          },
+          {
+            "key": "mp-articles",
+            "label": "公众号推文",
+            "icon": "newspaper"
+          },
+          {
+            "key": "scripts",
+            "label": "脚本仓库",
+            "icon": "code-2"
+          },
+          {
+            "key": "literature",
+            "label": "文献阅读",
+            "icon": "book-open"
+          },
+          {
+            "key": "gallery",
+            "label": "图片存储",
+            "icon": "image"
+          },
+          {
+            "key": "writing",
+            "label": "文章撰写",
+            "icon": "pen-line"
+          },
+          {
+            "key": "knowledge-network",
+            "label": "知识网络",
+            "icon": "share-2"
+          }
+        ]
+      },
+      "header": {
+        "height": "60px",
+        "elements": [
+          "global-search",
+          "breadcrumb",
+          "user-avatar"
+        ]
+      },
+      "radiusScale": {
+        "sm": 4,
+        "md": 8,
+        "lg": 16,
+        "full": 9999
+      },
+      "surfaceDepthModel": "static surfaces use border or surface layering; floating layers use shadow-2"
+    },
+    "cssPreflightEvidence": {
+      "command": "node apply-html-head-contract.mjs colors_and_type.css .preflight/preflight.html --title=Preflight --lang=zh --prefix=research",
+      "exitCode": 0,
+      "themeVarsPresent": true,
+      "semanticTokenFallbackPresent": true,
+      "tailwindCdnPresent": true,
+      "lucidePresent": true,
+      "htmlClassPresent": true,
+      "atThemeInlinePresent": true
+    },
+    "validationRunDiscipline": {
+      "maxFullValidationRuns": 2,
+      "softWarningsTriggerRepair": false,
+      "blockingRepairMode": "targeted-once",
+      "forbiddenRepairTriggers": [
+        "soft-warning-only",
+        "provenance-warning-only",
+        "style-warning-only"
+      ]
+    },
+    "lowValueCallWatchdog": {
+      "applies": true,
+      "noProgressNextAction": "proceed-to-dispatch-or-readiness"
+    },
+    "generationTree": {
+      "root": {
+        "nodeId": "gen-project-shell",
+        "kind": "project-shell",
+        "pageIds": [
+          "page-dashboard",
+          "page-mp-articles",
+          "page-scripts",
+          "page-literature",
+          "page-gallery",
+          "page-writing",
+          "page-knowledge-network"
+        ],
+        "output": "partials/project-shell.html",
+        "sharedRegions": [
+          "sidebar",
+          "header",
+          "root-frame",
+          "footer"
+        ],
+        "privateRegions": [],
+        "mutableSlots": [
+          "activeNavItem",
+          "pageTitle",
+          "mainContent"
+        ],
+        "status": "planned",
+        "children": [
+          {
+            "nodeId": "page-dashboard",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-dashboard"
+            ],
+            "output": "pages/dashboard.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "dashboard-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "page-mp-articles",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-mp-articles"
+            ],
+            "output": "pages/mp-articles.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "mp-articles-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "page-scripts",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-scripts"
+            ],
+            "output": "pages/scripts.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "scripts-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "page-literature",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-literature"
+            ],
+            "output": "pages/literature.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "literature-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "page-gallery",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-gallery"
+            ],
+            "output": "pages/gallery.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "gallery-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "page-writing",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-writing"
+            ],
+            "output": "pages/writing.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "writing-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "page-knowledge-network",
+            "kind": "page-leaf",
+            "pageIds": [
+              "page-knowledge-network"
+            ],
+            "output": "pages/knowledge-network.html",
+            "sharedRegions": [],
+            "privateRegions": [
+              "knowledge-network-content"
+            ],
+            "mutableSlots": [
+              "activeNavItem",
+              "pageTitle",
+              "mainContent"
+            ],
+            "status": "planned",
+            "children": []
+          }
+        ]
+      }
+    },
+    "dispatchPreflightManifest": [
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-dashboard",
+        "htmlSrc": "pages/dashboard.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/dashboard.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/dashboard.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-dashboard' --html-src='pages/dashboard.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/dashboard.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/dashboard.html' --title='概览首页' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-mp-articles",
+        "htmlSrc": "pages/mp-articles.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/mp-articles.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/mp-articles.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-mp-articles' --html-src='pages/mp-articles.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/mp-articles.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/mp-articles.html' --title='公众号推文' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-scripts",
+        "htmlSrc": "pages/scripts.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/scripts.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/scripts.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-scripts' --html-src='pages/scripts.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/scripts.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/scripts.html' --title='脚本仓库' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-literature",
+        "htmlSrc": "pages/literature.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/literature.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/literature.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-literature' --html-src='pages/literature.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/literature.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/literature.html' --title='文献阅读' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-gallery",
+        "htmlSrc": "pages/gallery.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/gallery.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/gallery.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-gallery' --html-src='pages/gallery.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/gallery.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/gallery.html' --title='图片存储' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-writing",
+        "htmlSrc": "pages/writing.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/writing.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/writing.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-writing' --html-src='pages/writing.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/writing.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/writing.html' --title='文章撰写' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      },
+      {
+        "recorded_at": "2026-09-01T23:17:07.810Z",
+        "generatedBy": "build-page-dispatch-manifest.mjs",
+        "packetType": "ComplexPagePacket",
+        "laneContract": {
+          "resolvedLane": "complex_html_page",
+          "packetType": "ComplexPagePacket",
+          "pageRuntimeGuide": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+          "dispatchContract": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md"
+        },
+        "taskLinePresent": true,
+        "outputPathPresent": true,
+        "sharedTemplate": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "nodeId": "page-knowledge-network",
+        "htmlSrc": "pages/knowledge-network.html",
+        "supplementaryReads": [],
+        "allowedWritePaths": [
+          "pages/knowledge-network.html",
+          "assets/"
+        ],
+        "forbiddenWriteRoots": [
+          "*.design",
+          "runtime-orchestration-summary.json",
+          "validation-report.json",
+          "finish-readiness-report.json",
+          "restore-contract-report.json",
+          "page-generation-summary.json"
+        ],
+        "toolPolicy": {
+          "todoWriteAllowed": false,
+          "validationScriptsAllowed": false,
+          "previewAllowed": false,
+          "helperScriptsAllowed": false,
+          "designFileWriteAllowed": false,
+          "allowedWritePaths": [
+            "pages/knowledge-network.html",
+            "assets/"
+          ]
+        },
+        "skillRuntime": {
+          "skillDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design",
+          "deterministicToolDir": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling",
+          "toolPaths": {
+            "applyHtmlHeadContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs",
+            "recordDispatchCompletion": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs",
+            "buildPageDispatchManifest": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/build-page-dispatch-manifest.mjs",
+            "validateDesignWorkspace": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-design-workspace.mjs",
+            "validateFinishReadiness": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-finish-readiness.mjs",
+            "validateRestoreContract": "/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/validate-restore-contract.mjs"
+          },
+          "requiredForPageSubAgent": [
+            "applyHtmlHeadContract",
+            "recordDispatchCompletion"
+          ],
+          "pathInjection": "absolute",
+          "pathContract": "Do not use {SKILL_DIR} placeholders inside Page Sub-Agent packets; use toolPaths.* absolute paths.",
+          "commandTemplates": {
+            "recordDispatchCompletion": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/record-dispatch-completion.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation' --node-id='page-knowledge-network' --html-src='pages/knowledge-network.html' --status=completed --changed-files=<comma-separated-project-relative-files> --trace-digest=<main-agent-runtime-trace-digest> --tool-ledger-json=<tool-ledger-json-or-file>"
+          }
+        },
+        "cssFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css",
+        "htmlFilePath": "/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/knowledge-network.html",
+        "brandPrefix": "research",
+        "aestheticsMode": "free-explore",
+        "toolDisciplineBlockPresent": true,
+        "fillHtmlHeadCommand": "node '/Users/xiaoman/.trae-cn/builtin/design/default/skills/solo-design/shared-runtime/deterministic-tooling/apply-html-head-contract.mjs' '/Users/xiaoman/Desktop/文献阅读/research-workstation/colors_and_type.css' '/Users/xiaoman/Desktop/文献阅读/research-workstation/pages/knowledge-network.html' --title='知识网络' --lang='zh-CN' --prefix='research'",
+        "headFillMode": "skeleton-first",
+        "viewportMode": null,
+        "completionSchemaExpected": "full",
+        "restoreFields": null,
+        "restoreContractStatus": null,
+        "restoreCompactPacket": null,
+        "deterministicCommands": null,
+        "sourceAuthorityLock": null,
+        "preDispatchFileHashes": {
+          "research-workstation.design": "41588656c31eb4784c45ef75e1a50eeeb42836cf63f9789969b90c3f94fa1264"
+        },
+        "contextPreflight": {
+          "workflowPath": "intent-workflows/intent-project-complex-build/INTENT_WORKFLOW.md",
+          "requiredContextFiles": [
+            "shared-runtime/runtime-boundaries/lane-runtime-contracts.md",
+            "shared-runtime/agent-dispatch-runtime/lane-dispatch-index.md",
+            "shared-runtime/agent-dispatch-runtime/shared-page-rendering-kernel.md",
+            "delivery-quality/page-rendering-quality-gate.md",
+            "delivery-quality/design-artifact-validation.md",
+            "delivery-quality/delivery-evidence-contract.md",
+            "visual-experience/visual-experience-guidelines.md",
+            "visual-experience/visual-checkpoint-protocol.md"
+          ],
+          "optionalContextFiles": [],
+          "passed": true
+        },
+        "pageSliceOnly": true,
+        "requiredFieldsPresent": true,
+        "missingFields": [],
+        "fillHtmlHeadCommandValid": true,
+        "mobileNavigation": {
+          "required": false,
+          "appliesToThisPage": false,
+          "canonicalHtmlIncluded": false,
+          "missingFields": []
+        },
+        "persistedToSummary": true,
+        "taskQueryAudited": false,
+        "proofSource": "summary-only",
+        "largeWorkflowFilesInTaskQuery": null
+      }
+    ],
+    "validationHistory": [
+      {
+        "reportPath": "validation-report.json",
+        "reportHash": "733aa5bfeb36b0475166b2ec6c24ca0165317324016181010687d9cec3a46d22",
+        "checkedAt": "2026-09-01T23:25:28.522Z",
+        "success": false,
+        "exitCode": 1,
+        "renderBlockingErrorCount": 1,
+        "repairPlanHints": [
+          "hardcoded-color-in-body"
+        ],
+        "errorSignatures": [
+          {
+            "errorClass": "dispatch-preflight-or-ownership",
+            "normalized": "[dispatch-changed-files] project.expectedDispatches[] is required when dispatchPreflightManifest[] exists",
+            "signature": "1863095a5236c379a633d22a8424261bfcde770ff9ab246147a2326cba87f6fd"
+          }
+        ],
+        "terminalState": null
+      }
+    ],
+    "readScopeLedger": [
+      {
+        "actor": "page-sub-agent",
+        "lane": "complex_html_page",
+        "path": "intent-workflows/intent-project-complex-build/complex-page-runtime.md",
+        "reason": "page runtime guide",
+        "scopeClass": "page-runtime",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-09-01T23:17:07.810Z",
+        "nodeId": "page-dashboard",
+        "htmlSrc": "pages/dashboard.html"
+      },
+      {
+        "actor": "page-sub-agent",
+        "lane": "complex_html_page",
+        "path": "intent-workflows/intent-project-complex-build/complex-page-dispatch-contract.md",
+        "reason": "dispatch contract",
+        "scopeClass": "dispatch-contract",
+        "declaredBeforeRead": true,
+        "recordedAt": "2026-09-01T23:17:07.810Z",
+        "nodeId": "page-dashboard",
+        "htmlSrc": "pages/dashboard.html"
+      }
+    ],
+    "validationRepairLedger": [
+      {
+        "failedReportPath": "validation-report.json",
+        "failedReportHash": "733aa5bfeb36b0475166b2ec6c24ca0165317324016181010687d9cec3a46d22",
+        "repairWorkflowReadPath": "intent-workflows/intent-project-mutation/main-agent-repair-workflow.md",
+        "repairStartedAt": "2026-09-01T23:27:34.918Z",
+        "repairEntryStatus": "started-awaiting-owner-batch-repair",
+        "ownerTriage": [
+          {
+            "owner": "sub-agent",
+            "errorClass": "hardcoded-color-in-body",
+            "affectedFiles": [
+              "literature.html"
+            ],
+            "repairScope": "targeted-token-replace",
+            "strategy": "targeted_token_replace_once"
+          }
+        ],
+        "repairPlanHints": [
+          {
+            "errorClass": "hardcoded-color-in-body",
+            "owner": "sub-agent",
+            "repairScope": "targeted-token-replace",
+            "strategy": "targeted_token_replace_once",
+            "affectedFiles": [
+              "literature.html"
+            ],
+            "repairReportPath": null,
+            "repairAlreadyAttempted": false,
+            "allowSourceRead": "no-full-html-read",
+            "maxValidationRuns": 2
+          }
+        ],
+        "repairActions": [],
+        "revalidationReportPath": null,
+        "revalidationReportHash": null,
+        "revalidationSuccess": null,
+        "blockedReason": null
+      }
+    ],
+    "repairEntryEvidence": [
+      {
+        "failedReportPath": "validation-report.json",
+        "failedReportHash": "733aa5bfeb36b0475166b2ec6c24ca0165317324016181010687d9cec3a46d22",
+        "repairWorkflowReadPath": "intent-workflows/intent-project-mutation/main-agent-repair-workflow.md",
+        "repairStartedAt": "2026-09-01T23:27:34.918Z",
+        "ledgerIndex": 0,
+        "ownerTriageCount": 1,
+        "repairActionCount": 0,
+        "revalidationReportPath": null,
+        "revalidationReportHash": null,
+        "revalidationSuccess": null
+      }
+    ],
+    "expectedDispatches": [
+      {
+        "nodeId": "page-dashboard",
+        "pageId": "page-dashboard",
+        "targetPageId": "page-dashboard",
+        "htmlSrc": "pages/dashboard.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/dashboard.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.476Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-mp-articles",
+        "pageId": "page-mp-articles",
+        "targetPageId": "page-mp-articles",
+        "htmlSrc": "pages/mp-articles.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/mp-articles.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.505Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-scripts",
+        "pageId": "page-scripts",
+        "targetPageId": "page-scripts",
+        "htmlSrc": "pages/scripts.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/scripts.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.533Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-literature",
+        "pageId": "page-literature",
+        "targetPageId": "page-literature",
+        "htmlSrc": "pages/literature.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/literature.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.562Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-gallery",
+        "pageId": "page-gallery",
+        "targetPageId": "page-gallery",
+        "htmlSrc": "pages/gallery.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/gallery.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.593Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-writing",
+        "pageId": "page-writing",
+        "targetPageId": "page-writing",
+        "htmlSrc": "pages/writing.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/writing.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.623Z",
+        "source": "record-dispatch-completion.mjs"
+      },
+      {
+        "nodeId": "page-knowledge-network",
+        "pageId": "page-knowledge-network",
+        "targetPageId": "page-knowledge-network",
+        "htmlSrc": "pages/knowledge-network.html",
+        "packetType": "ComplexPagePacket",
+        "status": "completed",
+        "changedFiles": [
+          "pages/knowledge-network.html"
+        ],
+        "toolCallLedger": {
+          "source": "main-agent-runtime-trace",
+          "traceDigest": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+          "todoWriteCalls": 0,
+          "previewCalls": 0,
+          "validationScriptCalls": 0,
+          "helperScriptWrites": 0
+        },
+        "recordedAt": "2026-09-01T23:30:00.653Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ],
+    "mainAgentPostDispatchMutations": [
+      {
+        "path": "research-workstation.design",
+        "reason": "navigation-wiring-and-interaction-registration",
+        "owner": "main-agent",
+        "recordedAt": "2026-09-01T23:30:00.476Z",
+        "source": "record-dispatch-completion.mjs"
+      }
+    ]
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "cssFilePath": "colors_and_type.css",
+    "brandPrefix": "research",
+    "styleConstraints": {
+      "radiusMax": 16,
+      "staticShadowAlphaMax": 0.05,
+      "primaryHue": "amber/ochre",
+      "typographyStack": "Noto Serif SC + Noto Sans SC"
+    },
+    "libraryIdentity": null,
+    "iconAssets": []
+  },
+  "pages": [
+    {
+      "nodeId": "page-dashboard",
+      "htmlSrc": "pages/dashboard.html",
+      "title": "概览首页",
+      "pageIndex": 1,
+      "pageType": "information-dense",
+      "visualNorthStar": "科研工作台总览，五个模块的统计数据卡片+最近活动时间线+快捷入口",
+      "compositionPattern": "large-medium-small-stacked",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    },
+    {
+      "nodeId": "page-mp-articles",
+      "htmlSrc": "pages/mp-articles.html",
+      "title": "公众号推文",
+      "pageIndex": 2,
+      "pageType": "information-dense",
+      "visualNorthStar": "公众号推文管理列表，卡片式展示文章标题/摘要/标签/发布状态，带搜索和筛选",
+      "compositionPattern": "sticky-left-flowing-right",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    },
+    {
+      "nodeId": "page-scripts",
+      "htmlSrc": "pages/scripts.html",
+      "title": "脚本仓库",
+      "pageIndex": 3,
+      "pageType": "task-driven",
+      "visualNorthStar": "脚本代码仓库，左侧分类树+右侧代码列表带语法高亮预览",
+      "compositionPattern": "sticky-left-flowing-right",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    },
+    {
+      "nodeId": "page-literature",
+      "htmlSrc": "pages/literature.html",
+      "title": "文献阅读",
+      "pageIndex": 4,
+      "pageType": "information-dense",
+      "visualNorthStar": "文献管理界面，论文列表带阅读状态/笔记/关键词标签，类似Zotero的卡片视图",
+      "compositionPattern": "sticky-left-flowing-right",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    },
+    {
+      "nodeId": "page-gallery",
+      "htmlSrc": "pages/gallery.html",
+      "title": "图片存储",
+      "pageIndex": 5,
+      "pageType": "showcase",
+      "visualNorthStar": "BioRender图片画廊，网格瀑布流布局，按项目分类，支持预览缩略图",
+      "compositionPattern": "large-medium-small-stacked",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    },
+    {
+      "nodeId": "page-writing",
+      "htmlSrc": "pages/writing.html",
+      "title": "文章撰写",
+      "pageIndex": 6,
+      "pageType": "task-driven",
+      "visualNorthStar": "课题文章撰写进度追踪，看板式布局展示草稿/修改中/审阅中/完成各阶段文章",
+      "compositionPattern": "asymmetric-two-column",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    },
+    {
+      "nodeId": "page-knowledge-network",
+      "htmlSrc": "pages/knowledge-network.html",
+      "title": "知识网络",
+      "pageIndex": 7,
+      "pageType": "showcase",
+      "visualNorthStar": "跨模块关键词网络图，节点-链接可视化展示公众号推文/文献/脚本/图片之间的关键词关联",
+      "compositionPattern": "full-screen-scenes",
+      "continuityAnchors": [
+        "sidebar-navigation",
+        "warm-editorial-palette",
+        "serif-headings"
+      ],
+      "mobileNavigationActiveKey": null
+    }
+  ],
+  "wiringPlan": [
+    {
+      "from": "page-dashboard",
+      "to": "page-mp-articles",
+      "domId": "nav-mp-articles",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-scripts",
+      "domId": "nav-scripts",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-literature",
+      "domId": "nav-literature",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-gallery",
+      "domId": "nav-gallery",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-writing",
+      "domId": "nav-writing",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-knowledge-network",
+      "domId": "nav-knowledge-network",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-mp-articles",
+      "to": "page-dashboard",
+      "domId": "nav-dashboard",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-mp-articles",
+      "to": "page-scripts",
+      "domId": "nav-scripts",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-mp-articles",
+      "to": "page-literature",
+      "domId": "nav-literature",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-mp-articles",
+      "to": "page-gallery",
+      "domId": "nav-gallery",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-mp-articles",
+      "to": "page-writing",
+      "domId": "nav-writing",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-mp-articles",
+      "to": "page-knowledge-network",
+      "domId": "nav-knowledge-network",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-scripts",
+      "to": "page-dashboard",
+      "domId": "nav-dashboard",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-scripts",
+      "to": "page-mp-articles",
+      "domId": "nav-mp-articles",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-scripts",
+      "to": "page-literature",
+      "domId": "nav-literature",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-scripts",
+      "to": "page-gallery",
+      "domId": "nav-gallery",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-scripts",
+      "to": "page-writing",
+      "domId": "nav-writing",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-scripts",
+      "to": "page-knowledge-network",
+      "domId": "nav-knowledge-network",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-literature",
+      "to": "page-dashboard",
+      "domId": "nav-dashboard",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-literature",
+      "to": "page-mp-articles",
+      "domId": "nav-mp-articles",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-literature",
+      "to": "page-scripts",
+      "domId": "nav-scripts",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-literature",
+      "to": "page-gallery",
+      "domId": "nav-gallery",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-literature",
+      "to": "page-writing",
+      "domId": "nav-writing",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-literature",
+      "to": "page-knowledge-network",
+      "domId": "nav-knowledge-network",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-gallery",
+      "to": "page-dashboard",
+      "domId": "nav-dashboard",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-gallery",
+      "to": "page-mp-articles",
+      "domId": "nav-mp-articles",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-gallery",
+      "to": "page-scripts",
+      "domId": "nav-scripts",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-gallery",
+      "to": "page-literature",
+      "domId": "nav-literature",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-gallery",
+      "to": "page-writing",
+      "domId": "nav-writing",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-gallery",
+      "to": "page-knowledge-network",
+      "domId": "nav-knowledge-network",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-writing",
+      "to": "page-dashboard",
+      "domId": "nav-dashboard",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-writing",
+      "to": "page-mp-articles",
+      "domId": "nav-mp-articles",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-writing",
+      "to": "page-scripts",
+      "domId": "nav-scripts",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-writing",
+      "to": "page-literature",
+      "domId": "nav-literature",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-writing",
+      "to": "page-gallery",
+      "domId": "nav-gallery",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-writing",
+      "to": "page-knowledge-network",
+      "domId": "nav-knowledge-network",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-knowledge-network",
+      "to": "page-dashboard",
+      "domId": "nav-dashboard",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-knowledge-network",
+      "to": "page-mp-articles",
+      "domId": "nav-mp-articles",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-knowledge-network",
+      "to": "page-scripts",
+      "domId": "nav-scripts",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-knowledge-network",
+      "to": "page-literature",
+      "domId": "nav-literature",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-knowledge-network",
+      "to": "page-gallery",
+      "domId": "nav-gallery",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    },
+    {
+      "from": "page-knowledge-network",
+      "to": "page-writing",
+      "domId": "nav-writing",
+      "hideEdge": true,
+      "reason": "sidebar navigation"
+    }
+  ],
+  "hiddenInteractionPlan": [
+    {
+      "from": "page-dashboard",
+      "to": "page-mp-articles",
+      "domId": "cta-mp-articles",
+      "hideEdge": true,
+      "reason": "quick access card"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-scripts",
+      "domId": "cta-scripts",
+      "hideEdge": true,
+      "reason": "quick access card"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-literature",
+      "domId": "cta-literature",
+      "hideEdge": true,
+      "reason": "quick access card"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-gallery",
+      "domId": "cta-gallery",
+      "hideEdge": true,
+      "reason": "quick access card"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-writing",
+      "domId": "cta-writing",
+      "hideEdge": true,
+      "reason": "quick access card"
+    },
+    {
+      "from": "page-dashboard",
+      "to": "page-knowledge-network",
+      "domId": "cta-knowledge-network",
+      "hideEdge": true,
+      "reason": "quick access card"
+    }
+  ]
+}

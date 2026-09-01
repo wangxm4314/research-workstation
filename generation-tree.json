@@ -1,0 +1,21 @@
+{
+  "root": {
+    "nodeId": "gen-project-shell",
+    "kind": "project-shell",
+    "pageIds": ["page-dashboard", "page-mp-articles", "page-scripts", "page-literature", "page-gallery", "page-writing", "page-knowledge-network"],
+    "output": "partials/project-shell.html",
+    "sharedRegions": ["sidebar", "header", "root-frame", "footer"],
+    "privateRegions": [],
+    "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"],
+    "status": "planned",
+    "children": [
+      { "nodeId": "page-dashboard", "kind": "page-leaf", "pageIds": ["page-dashboard"], "output": "pages/dashboard.html", "sharedRegions": [], "privateRegions": ["dashboard-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] },
+      { "nodeId": "page-mp-articles", "kind": "page-leaf", "pageIds": ["page-mp-articles"], "output": "pages/mp-articles.html", "sharedRegions": [], "privateRegions": ["mp-articles-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] },
+      { "nodeId": "page-scripts", "kind": "page-leaf", "pageIds": ["page-scripts"], "output": "pages/scripts.html", "sharedRegions": [], "privateRegions": ["scripts-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] },
+      { "nodeId": "page-literature", "kind": "page-leaf", "pageIds": ["page-literature"], "output": "pages/literature.html", "sharedRegions": [], "privateRegions": ["literature-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] },
+      { "nodeId": "page-gallery", "kind": "page-leaf", "pageIds": ["page-gallery"], "output": "pages/gallery.html", "sharedRegions": [], "privateRegions": ["gallery-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] },
+      { "nodeId": "page-writing", "kind": "page-leaf", "pageIds": ["page-writing"], "output": "pages/writing.html", "sharedRegions": [], "privateRegions": ["writing-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] },
+      { "nodeId": "page-knowledge-network", "kind": "page-leaf", "pageIds": ["page-knowledge-network"], "output": "pages/knowledge-network.html", "sharedRegions": [], "privateRegions": ["knowledge-network-content"], "mutableSlots": ["activeNavItem", "pageTitle", "mainContent"], "status": "planned", "children": [] }
+    ]
+  }
+}

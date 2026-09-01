@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片存储</title>
+    <style id="theme-vars">
+/* ============================================================
+   Research Workstation — Warm Editorial Theme
+   科研暖色编辑风格 · 琥珀赭色系
+   ============================================================ */
+
+/* ---- Brand Prefix: research ---- */
+
+:root {
+  /* ---- Primary Brand Hue (Amber/Ochre) ---- */
+  --color-brand-50: #FBF4E8;
+  --color-brand-100: #F5E6CC;
+  --color-brand-200: #EBCFA0;
+  --color-brand-300: #DDB26E;
+  --color-brand-400: #C99542;
+  --color-brand-500: #B8770C;
+  --color-brand-600: #A06608;
+  --color-brand-700: #84540A;
+  --color-brand-800: #6B450C;
+  --color-brand-900: #543708;
+
+  /* ---- Neutral Scale (Warm) ---- */
+  --color-neutral-50: #FAF7F2;
+  --color-neutral-100: #F5F1EB;
+  --color-neutral-200: #E8E2D8;
+  --color-neutral-300: #D4CCC0;
+  --color-neutral-400: #B0A89C;
+  --color-neutral-500: #8A8275;
+  --color-neutral-600: #6B6357;
+  --color-neutral-700: #4D463C;
+  --color-neutral-800: #363028;
+  --color-neutral-900: #241F1A;
+
+  /* ---- Semantic Aliases (Light Mode) ---- */
+  --research-background: #FAF7F2;
+  --research-foreground: #241F1A;
+  --research-card: #FFFFFF;
+  --research-card-foreground: #241F1A;
+  --research-popover: #FFFFFF;
+  --research-popover-foreground: #241F1A;
+  --research-primary: #B8770C;
+  --research-primary-foreground: #FFFFFF;
+  --research-muted: #F5F1EB;
+  --research-muted-foreground: #6B6357;
+  --research-border: #E8E2D8;
+  --research-input: #E8E2D8;
+  --research-ring: #B8770C;
+
+  /* ---- Surface Tokens ---- */
+  --research-surface: #FFFFFF;
+  --research-surface-2: #F5F1EB;
+  --research-surface-3: #EFE9DF;
+
+  /* ---- Ink Tokens ---- */
+  --research-ink: #241F1A;
+  --research-ink-2: #4D463C;
+  --research-ink-3: #8A8275;
+
+  /* ---- Line Token ---- */
+  --research-line: #E8E2D8;
+
+  /* ---- Radius Scale ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --research-radius-small: 4px;
+  --research-radius-medium: 8px;
+  --research-radius-large: 16px;
+
+  /* ---- Shadow Scale ---- */
+  --research-shadow-1: 0 1px 2px rgba(36, 31, 26, 0.04), 0 1px 1px rgba(36, 31, 26, 0.02);
+  --research-shadow-floating: 0 8px 24px -8px rgba(36, 31, 26, 0.12);
+  --research-shadow-modal: 0 24px 60px -20px rgba(36, 31, 26, 0.20);
+
+  /* ---- Spacing Scale (8pt grid) ---- */
+  --research-s-1: 4px;
+  --research-s-2: 8px;
+  --research-s-3: 12px;
+  --research-s-4: 16px;
+  --research-s-5: 24px;
+  --research-s-6: 32px;
+  --research-s-7: 48px;
+  --research-s-8: 80px;
+
+  /* ---- State Colors ---- */
+  --state-success: #4A7C4A;
+  --state-warning: #C99542;
+  --state-error: #B0454B;
+  --state-info: #4A6B8A;
+
+  /* ---- Typography ---- */
+  --research-font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --research-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --research-font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+
+  /* ---- Color alias for general use ---- */
+  --research-brand: #B8770C;
+  --research-brand-ink: #FFFFFF;
+}
+
+/* ---- Dark Mode ---- */
+.dark {
+  --research-background: #1A1612;
+  --research-foreground: #E8E2D8;
+  --research-card: #241F1A;
+  --research-card-foreground: #E8E2D8;
+  --research-popover: #2A241E;
+  --research-popover-foreground: #E8E2D8;
+  --research-primary: #C99542;
+  --research-primary-foreground: #1A1612;
+  --research-muted: #2A241E;
+  --research-muted-foreground: #B0A89C;
+  --research-border: #363028;
+  --research-input: #363028;
+  --research-ring: #C99542;
+
+  --research-surface: #241F1A;
+  --research-surface-2: #2A241E;
+  --research-surface-3: #363028;
+
+  --research-ink: #E8E2D8;
+  --research-ink-2: #B0A89C;
+  --research-ink-3: #8A8275;
+
+  --research-line: #363028;
+
+  --state-success: #6B9C6B;
+  --state-warning: #DDB26E;
+  --state-error: #D06870;
+  --state-info: #7A9CBA;
+
+  --research-brand: #C99542;
+  --research-brand-ink: #1A1612;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--research-background);
+    --color-foreground: var(--research-foreground);
+    --color-card: var(--research-card);
+    --color-card-foreground: var(--research-card-foreground);
+    --color-popover: var(--research-popover);
+    --color-popover-foreground: var(--research-popover-foreground);
+    --color-primary: var(--research-primary);
+    --color-primary-foreground: var(--research-primary-foreground);
+    --color-muted: var(--research-muted);
+    --color-muted-foreground: var(--research-muted-foreground);
+    --color-border: var(--research-border);
+    --color-input: var(--research-input);
+    --color-ring: var(--research-ring);
+    --radius-sm: var(--research-radius-small);
+    --radius-md: var(--research-radius-medium);
+    --radius-lg: var(--research-radius-large);
+  }
+  @layer base {
+    body { background: var(--research-background); color: var(--research-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--research-background); }
+      .text-background { color: var(--research-background); }
+      .border-background { border-color: var(--research-background); }
+      .ring-background { --tw-ring-color: var(--research-background); }
+      .bg-foreground { background-color: var(--research-foreground); }
+      .text-foreground { color: var(--research-foreground); }
+      .border-foreground { border-color: var(--research-foreground); }
+      .ring-foreground { --tw-ring-color: var(--research-foreground); }
+      .bg-card { background-color: var(--research-card); }
+      .text-card { color: var(--research-card); }
+      .border-card { border-color: var(--research-card); }
+      .ring-card { --tw-ring-color: var(--research-card); }
+      .bg-card-foreground { background-color: var(--research-card-foreground); }
+      .text-card-foreground { color: var(--research-card-foreground); }
+      .border-card-foreground { border-color: var(--research-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--research-card-foreground); }
+      .bg-popover { background-color: var(--research-popover); }
+      .text-popover { color: var(--research-popover); }
+      .border-popover { border-color: var(--research-popover); }
+      .ring-popover { --tw-ring-color: var(--research-popover); }
+      .bg-popover-foreground { background-color: var(--research-popover-foreground); }
+      .text-popover-foreground { color: var(--research-popover-foreground); }
+      .border-popover-foreground { border-color: var(--research-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--research-popover-foreground); }
+      .bg-primary { background-color: var(--research-primary); }
+      .text-primary { color: var(--research-primary); }
+      .border-primary { border-color: var(--research-primary); }
+      .ring-primary { --tw-ring-color: var(--research-primary); }
+      .bg-primary-foreground { background-color: var(--research-primary-foreground); }
+      .text-primary-foreground { color: var(--research-primary-foreground); }
+      .border-primary-foreground { border-color: var(--research-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--research-primary-foreground); }
+      .bg-muted { background-color: var(--research-muted); }
+      .text-muted { color: var(--research-muted); }
+      .border-muted { border-color: var(--research-muted); }
+      .ring-muted { --tw-ring-color: var(--research-muted); }
+      .bg-muted-foreground { background-color: var(--research-muted-foreground); }
+      .text-muted-foreground { color: var(--research-muted-foreground); }
+      .border-muted-foreground { border-color: var(--research-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--research-muted-foreground); }
+      .bg-border { background-color: var(--research-border); }
+      .text-border { color: var(--research-border); }
+      .border-border { border-color: var(--research-border); }
+      .ring-border { --tw-ring-color: var(--research-border); }
+      .bg-input { background-color: var(--research-input); }
+      .text-input { color: var(--research-input); }
+      .border-input { border-color: var(--research-input); }
+      .ring-input { --tw-ring-color: var(--research-input); }
+      .bg-ring { background-color: var(--research-ring); }
+      .text-ring { color: var(--research-ring); }
+      .border-ring { border-color: var(--research-ring); }
+      .ring-ring { --tw-ring-color: var(--research-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+      <!-- ===== Layout ===== -->
+      <style>
+        .gw-layout { display: flex; min-height: 100vh; }
+
+        /* ---- Sidebar ---- */
+        .gw-sidebar {
+          position: fixed;
+          left: 0; top: 0; bottom: 0;
+          width: 240px;
+          background: var(--research-surface);
+          border-right: 1px solid var(--research-border);
+          z-index: 50;
+          display: flex;
+          flex-direction: column;
+        }
+        .gw-logo {
+          font-family: var(--research-font-serif);
+          font-size: 18px;
+          font-weight: 600;
+          padding: 20px 24px;
+          border-bottom: 1px solid var(--research-border);
+          color: var(--research-ink);
+        }
+        .gw-nav {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          padding-top: 8px;
+        }
+        .gw-nav-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 24px;
+          font-size: 14px;
+          color: var(--research-ink-2);
+          border-left: 3px solid transparent;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        .gw-nav-item:hover { background: var(--research-surface-2); }
+        .gw-nav-item.is-active {
+          background: var(--research-surface-2);
+          color: var(--research-primary);
+          border-left: 3px solid var(--research-primary);
+        }
+        .gw-nav-item [data-lucide] { width: 20px; height: 20px; }
+        .gw-user {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 20px 24px;
+          border-top: 1px solid var(--research-border);
+        }
+        .gw-avatar {
+          width: 32px; height: 32px;
+          border-radius: var(--radius-full);
+          background: var(--research-brand);
+          color: var(--research-brand-ink);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 13px; font-weight: 600;
+        }
+        .gw-user-name { font-size: 14px; color: var(--research-ink-2); }
+
+        /* ---- Main ---- */
+        .gw-main {
+          margin-left: 240px;
+          padding: 32px;
+          background: var(--research-background);
+          min-height: 100vh;
+          flex: 1;
+        }
+
+        /* ---- Header bar ---- */
+        .gw-header {
+          height: 60px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid var(--research-border);
+          margin-bottom: 24px;
+          padding-bottom: 16px;
+        }
+        .gw-header h1 {
+          font-family: var(--research-font-serif);
+          font-size: 24px;
+          font-weight: 600;
+          color: var(--research-ink);
+        }
+        .gw-header-actions { display: flex; align-items: center; gap: 12px; }
+        .gw-search {
+          width: 240px;
+          padding: 8px 12px;
+          border: 1px solid var(--research-border);
+          border-radius: var(--radius-md);
+          background: var(--research-surface);
+          color: var(--research-ink);
+          font-size: 14px;
+          font-family: var(--research-font-sans);
+          outline: none;
+        }
+        .gw-search::placeholder { color: var(--research-ink-3); }
+        .gw-btn-primary {
+          background: var(--research-primary);
+          color: var(--research-primary-foreground);
+          padding: 8px 16px;
+          border-radius: var(--radius-md);
+          font-size: 14px;
+          font-weight: 500;
+          border: none;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-family: var(--research-font-sans);
+        }
+        .gw-btn-primary [data-lucide] { width: 16px; height: 16px; }
+
+        /* ---- Filter bar ---- */
+        .gw-filter {
+          display: flex;
+          gap: 8px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+        }
+        .gw-pill {
+          padding: 6px 14px;
+          border-radius: var(--radius-full);
+          font-size: 13px;
+          background: var(--research-surface);
+          border: 1px solid var(--research-border);
+          color: var(--research-ink-2);
+          cursor: pointer;
+          font-family: var(--research-font-sans);
+        }
+        .gw-pill.is-active {
+          background: var(--research-primary);
+          color: var(--research-primary-foreground);
+          border-color: var(--research-primary);
+        }
+
+        /* ---- Image grid ---- */
+        .gw-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          gap: 20px;
+        }
+        .gw-card {
+          background: var(--research-card);
+          border: 1px solid var(--research-border);
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          cursor: pointer;
+          transition: border-color 120ms ease;
+          display: flex;
+          flex-direction: column;
+        }
+        .gw-card:hover { border-color: var(--research-primary); }
+        .gw-card-thumb {
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          background: var(--research-surface-3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .gw-card-thumb [data-lucide] { width: 48px; height: 48px; color: var(--research-ink-3); }
+        .gw-card-body { padding: 16px; }
+        .gw-card-title {
+          font-family: var(--research-font-serif);
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--research-ink);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .gw-card-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 8px;
+        }
+        .gw-card-date { font-size: 13px; color: var(--research-ink-3); }
+        .gw-card-cat {
+          font-size: 12px;
+          background: var(--research-surface-2);
+          color: var(--research-ink-2);
+          padding: 2px 8px;
+          border-radius: var(--radius-sm);
+        }
+
+        /* ---- Upload zone ---- */
+        .gw-upload {
+          margin-top: 24px;
+          border: 2px dashed var(--research-border);
+          border-radius: var(--radius-lg);
+          padding: 48px;
+          text-align: center;
+          background: var(--research-surface);
+        }
+        .gw-upload [data-lucide] { width: 48px; height: 48px; color: var(--research-ink-3); }
+        .gw-upload-text {
+          font-size: 16px;
+          color: var(--research-ink-2);
+          margin-top: 12px;
+        }
+        .gw-upload-sub {
+          font-size: 13px;
+          color: var(--research-ink-3);
+          margin-top: 4px;
+        }
+
+        /* ---- Footer ---- */
+        .gw-footer {
+          margin-top: 24px;
+          padding-top: 32px;
+          border-top: 1px solid var(--research-border);
+          font-size: 13px;
+          color: var(--research-ink-3);
+        }
+      </style>
+
+      <div class="gw-layout">
+        <!-- ===== Sidebar ===== -->
+        <aside class="gw-sidebar">
+          <div class="gw-logo">科研工作站</div>
+          <nav class="gw-nav">
+            <a class="gw-nav-item" data-dom-id="nav-dashboard" data-nav-key="dashboard"><i data-lucide="layout-dashboard"></i><span>概览</span></a>
+            <a class="gw-nav-item" data-dom-id="nav-mp-articles" data-nav-key="mp-articles"><i data-lucide="newspaper"></i><span>公众号推文</span></a>
+            <a class="gw-nav-item" data-dom-id="nav-scripts" data-nav-key="scripts"><i data-lucide="code-2"></i><span>脚本仓库</span></a>
+            <a class="gw-nav-item" data-dom-id="nav-literature" data-nav-key="literature"><i data-lucide="book-open"></i><span>文献阅读</span></a>
+            <a class="gw-nav-item is-active" data-dom-id="nav-gallery" data-nav-key="gallery"><i data-lucide="image"></i><span>图片存储</span></a>
+            <a class="gw-nav-item" data-dom-id="nav-writing" data-nav-key="writing"><i data-lucide="pen-line"></i><span>文章撰写</span></a>
+            <a class="gw-nav-item" data-dom-id="nav-knowledge-network" data-nav-key="knowledge-network"><i data-lucide="share-2"></i><span>知识网络</span></a>
+          </nav>
+          <div class="gw-user">
+            <div class="gw-avatar">研</div>
+            <div class="gw-user-name">研究员</div>
+          </div>
+        </aside>
+
+        <!-- ===== Main content ===== -->
+        <div class="gw-main">
+          <!-- Header bar -->
+          <header class="gw-header">
+            <h1>图片存储</h1>
+            <div class="gw-header-actions">
+              <input type="text" class="gw-search" placeholder="搜索图片...">
+              <button class="gw-btn-primary"><i data-lucide="upload"></i>上传图片</button>
+            </div>
+          </header>
+
+          <!-- Filter bar -->
+          <div class="gw-filter">
+            <span class="gw-pill is-active">全部</span>
+            <span class="gw-pill">信号通路</span>
+            <span class="gw-pill">实验流程</span>
+            <span class="gw-pill">数据图表</span>
+            <span class="gw-pill">机制示意</span>
+            <span class="gw-pill">封面图</span>
+          </div>
+
+          <!-- Image grid -->
+          <div class="gw-grid">
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="git-branch"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">Wnt信号通路图</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-09-01</span>
+                  <span class="gw-card-cat">信号通路</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="flask-conical"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">CRISPR-Cas9编辑机制</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-08-25</span>
+                  <span class="gw-card-cat">机制示意</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="list-ordered"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">单细胞测序流程</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-08-20</span>
+                  <span class="gw-card-cat">实验流程</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="microscope"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">肿瘤微环境示意图</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-08-15</span>
+                  <span class="gw-card-cat">机制示意</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="bar-chart-3"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">基因表达热图</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-08-10</span>
+                  <span class="gw-card-cat">数据图表</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="share-2"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">细胞凋亡通路</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-08-05</span>
+                  <span class="gw-card-cat">信号通路</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="git-fork"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">蛋白印迹实验流程</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-07-28</span>
+                  <span class="gw-card-cat">实验流程</span>
+                </div>
+              </div>
+            </div>
+            <div class="gw-card">
+              <div class="gw-card-thumb"><i data-lucide="image"></i></div>
+              <div class="gw-card-body">
+                <div class="gw-card-title">公众号封面-CRISPR</div>
+                <div class="gw-card-meta">
+                  <span class="gw-card-date">2024-07-20</span>
+                  <span class="gw-card-cat">封面图</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upload zone -->
+          <div class="gw-upload">
+            <i data-lucide="upload-cloud"></i>
+            <div class="gw-upload-text">拖拽图片到此处或点击上传</div>
+            <div class="gw-upload-sub">支持 PNG, JPG, SVG, BioRender 导出文件</div>
+          </div>
+
+          <!-- Footer -->
+          <div class="gw-footer">科研工作站 · 图片存储 · 共 23 张图片</div>
+        </div>
+      </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

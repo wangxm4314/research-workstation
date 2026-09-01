@@ -1,0 +1,465 @@
+{
+  "data": [
+    {
+      "id": "page-dashboard",
+      "title": "概览首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 948,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-43651959",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/dashboard.html",
+        "interactions": [
+          {
+            "domId": "nav-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "公众号推文"
+          },
+          {
+            "domId": "nav-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "脚本仓库"
+          },
+          {
+            "domId": "nav-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "文献阅读"
+          },
+          {
+            "domId": "nav-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "图片存储"
+          },
+          {
+            "domId": "nav-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "文章撰写"
+          },
+          {
+            "domId": "nav-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "知识网络"
+          },
+          {
+            "domId": "cta-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "查看公众号推文"
+          },
+          {
+            "domId": "cta-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "查看脚本仓库"
+          },
+          {
+            "domId": "cta-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "查看文献阅读"
+          },
+          {
+            "domId": "cta-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "查看图片存储"
+          },
+          {
+            "domId": "cta-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "查看文章撰写"
+          },
+          {
+            "domId": "cta-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "查看知识网络"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-mp-articles",
+      "title": "公众号推文",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 480,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1202,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-ccf04ea6",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/mp-articles.html",
+        "interactions": [
+          {
+            "domId": "nav-dashboard",
+            "targetPageId": "page-dashboard",
+            "hideEdge": true,
+            "transitionLabel": "概览"
+          },
+          {
+            "domId": "nav-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "脚本仓库"
+          },
+          {
+            "domId": "nav-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "文献阅读"
+          },
+          {
+            "domId": "nav-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "图片存储"
+          },
+          {
+            "domId": "nav-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "文章撰写"
+          },
+          {
+            "domId": "nav-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "知识网络"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-scripts",
+      "title": "脚本仓库",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 960,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 2425,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-8f726aec",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/scripts.html",
+        "interactions": [
+          {
+            "domId": "nav-dashboard",
+            "targetPageId": "page-dashboard",
+            "hideEdge": true,
+            "transitionLabel": "概览"
+          },
+          {
+            "domId": "nav-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "公众号推文"
+          },
+          {
+            "domId": "nav-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "文献阅读"
+          },
+          {
+            "domId": "nav-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "图片存储"
+          },
+          {
+            "domId": "nav-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "文章撰写"
+          },
+          {
+            "domId": "nav-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "知识网络"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-literature",
+      "title": "文献阅读",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 1440,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1129,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-09cdcc9d",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/literature.html",
+        "interactions": [
+          {
+            "domId": "nav-dashboard",
+            "targetPageId": "page-dashboard",
+            "hideEdge": true,
+            "transitionLabel": "概览"
+          },
+          {
+            "domId": "nav-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "公众号推文"
+          },
+          {
+            "domId": "nav-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "脚本仓库"
+          },
+          {
+            "domId": "nav-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "图片存储"
+          },
+          {
+            "domId": "nav-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "文章撰写"
+          },
+          {
+            "domId": "nav-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "知识网络"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-gallery",
+      "title": "图片存储",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 1920,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1104,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-04ad863f",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/gallery.html",
+        "interactions": [
+          {
+            "domId": "nav-dashboard",
+            "targetPageId": "page-dashboard",
+            "hideEdge": true,
+            "transitionLabel": "概览"
+          },
+          {
+            "domId": "nav-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "公众号推文"
+          },
+          {
+            "domId": "nav-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "脚本仓库"
+          },
+          {
+            "domId": "nav-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "文献阅读"
+          },
+          {
+            "domId": "nav-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "文章撰写"
+          },
+          {
+            "domId": "nav-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "知识网络"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-writing",
+      "title": "文章撰写",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 2400,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 900,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-0986ae2a",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/writing.html",
+        "interactions": [
+          {
+            "domId": "nav-dashboard",
+            "targetPageId": "page-dashboard",
+            "hideEdge": true,
+            "transitionLabel": "概览"
+          },
+          {
+            "domId": "nav-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "公众号推文"
+          },
+          {
+            "domId": "nav-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "脚本仓库"
+          },
+          {
+            "domId": "nav-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "文献阅读"
+          },
+          {
+            "domId": "nav-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "图片存储"
+          },
+          {
+            "domId": "nav-knowledge-network",
+            "targetPageId": "page-knowledge-network",
+            "hideEdge": true,
+            "transitionLabel": "知识网络"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-knowledge-network",
+      "title": "知识网络",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725264000000,
+      "canvasData": {
+        "x": 2880,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1060,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-702591aa",
+          "measuredAt": 1788305441683
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/knowledge-network.html",
+        "interactions": [
+          {
+            "domId": "nav-dashboard",
+            "targetPageId": "page-dashboard",
+            "hideEdge": true,
+            "transitionLabel": "概览"
+          },
+          {
+            "domId": "nav-mp-articles",
+            "targetPageId": "page-mp-articles",
+            "hideEdge": true,
+            "transitionLabel": "公众号推文"
+          },
+          {
+            "domId": "nav-scripts",
+            "targetPageId": "page-scripts",
+            "hideEdge": true,
+            "transitionLabel": "脚本仓库"
+          },
+          {
+            "domId": "nav-literature",
+            "targetPageId": "page-literature",
+            "hideEdge": true,
+            "transitionLabel": "文献阅读"
+          },
+          {
+            "domId": "nav-gallery",
+            "targetPageId": "page-gallery",
+            "hideEdge": true,
+            "transitionLabel": "图片存储"
+          },
+          {
+            "domId": "nav-writing",
+            "targetPageId": "page-writing",
+            "hideEdge": true,
+            "transitionLabel": "文章撰写"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "科研工作站"
+  }
+}

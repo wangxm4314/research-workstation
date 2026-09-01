@@ -1,0 +1,135 @@
+/* ============================================================
+   Research Workstation — Warm Editorial Theme
+   科研暖色编辑风格 · 琥珀赭色系
+   ============================================================ */
+
+/* ---- Brand Prefix: research ---- */
+
+:root {
+  /* ---- Primary Brand Hue (Amber/Ochre) ---- */
+  --color-brand-50: #FBF4E8;
+  --color-brand-100: #F5E6CC;
+  --color-brand-200: #EBCFA0;
+  --color-brand-300: #DDB26E;
+  --color-brand-400: #C99542;
+  --color-brand-500: #B8770C;
+  --color-brand-600: #A06608;
+  --color-brand-700: #84540A;
+  --color-brand-800: #6B450C;
+  --color-brand-900: #543708;
+
+  /* ---- Neutral Scale (Warm) ---- */
+  --color-neutral-50: #FAF7F2;
+  --color-neutral-100: #F5F1EB;
+  --color-neutral-200: #E8E2D8;
+  --color-neutral-300: #D4CCC0;
+  --color-neutral-400: #B0A89C;
+  --color-neutral-500: #8A8275;
+  --color-neutral-600: #6B6357;
+  --color-neutral-700: #4D463C;
+  --color-neutral-800: #363028;
+  --color-neutral-900: #241F1A;
+
+  /* ---- Semantic Aliases (Light Mode) ---- */
+  --research-background: #FAF7F2;
+  --research-foreground: #241F1A;
+  --research-card: #FFFFFF;
+  --research-card-foreground: #241F1A;
+  --research-popover: #FFFFFF;
+  --research-popover-foreground: #241F1A;
+  --research-primary: #B8770C;
+  --research-primary-foreground: #FFFFFF;
+  --research-muted: #F5F1EB;
+  --research-muted-foreground: #6B6357;
+  --research-border: #E8E2D8;
+  --research-input: #E8E2D8;
+  --research-ring: #B8770C;
+
+  /* ---- Surface Tokens ---- */
+  --research-surface: #FFFFFF;
+  --research-surface-2: #F5F1EB;
+  --research-surface-3: #EFE9DF;
+
+  /* ---- Ink Tokens ---- */
+  --research-ink: #241F1A;
+  --research-ink-2: #4D463C;
+  --research-ink-3: #8A8275;
+
+  /* ---- Line Token ---- */
+  --research-line: #E8E2D8;
+
+  /* ---- Radius Scale ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --research-radius-small: 4px;
+  --research-radius-medium: 8px;
+  --research-radius-large: 16px;
+
+  /* ---- Shadow Scale ---- */
+  --research-shadow-1: 0 1px 2px rgba(36, 31, 26, 0.04), 0 1px 1px rgba(36, 31, 26, 0.02);
+  --research-shadow-floating: 0 8px 24px -8px rgba(36, 31, 26, 0.12);
+  --research-shadow-modal: 0 24px 60px -20px rgba(36, 31, 26, 0.20);
+
+  /* ---- Spacing Scale (8pt grid) ---- */
+  --research-s-1: 4px;
+  --research-s-2: 8px;
+  --research-s-3: 12px;
+  --research-s-4: 16px;
+  --research-s-5: 24px;
+  --research-s-6: 32px;
+  --research-s-7: 48px;
+  --research-s-8: 80px;
+
+  /* ---- State Colors ---- */
+  --state-success: #4A7C4A;
+  --state-warning: #C99542;
+  --state-error: #B0454B;
+  --state-info: #4A6B8A;
+
+  /* ---- Typography ---- */
+  --research-font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --research-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --research-font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+
+  /* ---- Color alias for general use ---- */
+  --research-brand: #B8770C;
+  --research-brand-ink: #FFFFFF;
+}
+
+/* ---- Dark Mode ---- */
+.dark {
+  --research-background: #1A1612;
+  --research-foreground: #E8E2D8;
+  --research-card: #241F1A;
+  --research-card-foreground: #E8E2D8;
+  --research-popover: #2A241E;
+  --research-popover-foreground: #E8E2D8;
+  --research-primary: #C99542;
+  --research-primary-foreground: #1A1612;
+  --research-muted: #2A241E;
+  --research-muted-foreground: #B0A89C;
+  --research-border: #363028;
+  --research-input: #363028;
+  --research-ring: #C99542;
+
+  --research-surface: #241F1A;
+  --research-surface-2: #2A241E;
+  --research-surface-3: #363028;
+
+  --research-ink: #E8E2D8;
+  --research-ink-2: #B0A89C;
+  --research-ink-3: #8A8275;
+
+  --research-line: #363028;
+
+  --state-success: #6B9C6B;
+  --state-warning: #DDB26E;
+  --state-error: #D06870;
+  --state-info: #7A9CBA;
+
+  --research-brand: #C99542;
+  --research-brand-ink: #1A1612;
+}

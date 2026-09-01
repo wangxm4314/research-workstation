@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文献阅读</title>
+    <style id="theme-vars">
+/* ============================================================
+   Research Workstation — Warm Editorial Theme
+   科研暖色编辑风格 · 琥珀赭色系
+   ============================================================ */
+
+/* ---- Brand Prefix: research ---- */
+
+:root {
+  /* ---- Primary Brand Hue (Amber/Ochre) ---- */
+  --color-brand-50: #FBF4E8;
+  --color-brand-100: #F5E6CC;
+  --color-brand-200: #EBCFA0;
+  --color-brand-300: #DDB26E;
+  --color-brand-400: #C99542;
+  --color-brand-500: #B8770C;
+  --color-brand-600: #A06608;
+  --color-brand-700: #84540A;
+  --color-brand-800: #6B450C;
+  --color-brand-900: #543708;
+
+  /* ---- Neutral Scale (Warm) ---- */
+  --color-neutral-50: #FAF7F2;
+  --color-neutral-100: #F5F1EB;
+  --color-neutral-200: #E8E2D8;
+  --color-neutral-300: #D4CCC0;
+  --color-neutral-400: #B0A89C;
+  --color-neutral-500: #8A8275;
+  --color-neutral-600: #6B6357;
+  --color-neutral-700: #4D463C;
+  --color-neutral-800: #363028;
+  --color-neutral-900: #241F1A;
+
+  /* ---- Semantic Aliases (Light Mode) ---- */
+  --research-background: #FAF7F2;
+  --research-foreground: #241F1A;
+  --research-card: #FFFFFF;
+  --research-card-foreground: #241F1A;
+  --research-popover: #FFFFFF;
+  --research-popover-foreground: #241F1A;
+  --research-primary: #B8770C;
+  --research-primary-foreground: #FFFFFF;
+  --research-muted: #F5F1EB;
+  --research-muted-foreground: #6B6357;
+  --research-border: #E8E2D8;
+  --research-input: #E8E2D8;
+  --research-ring: #B8770C;
+
+  /* ---- Surface Tokens ---- */
+  --research-surface: #FFFFFF;
+  --research-surface-2: #F5F1EB;
+  --research-surface-3: #EFE9DF;
+
+  /* ---- Ink Tokens ---- */
+  --research-ink: #241F1A;
+  --research-ink-2: #4D463C;
+  --research-ink-3: #8A8275;
+
+  /* ---- Line Token ---- */
+  --research-line: #E8E2D8;
+
+  /* ---- Radius Scale ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --research-radius-small: 4px;
+  --research-radius-medium: 8px;
+  --research-radius-large: 16px;
+
+  /* ---- Shadow Scale ---- */
+  --research-shadow-1: 0 1px 2px rgba(36, 31, 26, 0.04), 0 1px 1px rgba(36, 31, 26, 0.02);
+  --research-shadow-floating: 0 8px 24px -8px rgba(36, 31, 26, 0.12);
+  --research-shadow-modal: 0 24px 60px -20px rgba(36, 31, 26, 0.20);
+
+  /* ---- Spacing Scale (8pt grid) ---- */
+  --research-s-1: 4px;
+  --research-s-2: 8px;
+  --research-s-3: 12px;
+  --research-s-4: 16px;
+  --research-s-5: 24px;
+  --research-s-6: 32px;
+  --research-s-7: 48px;
+  --research-s-8: 80px;
+
+  /* ---- State Colors ---- */
+  --state-success: #4A7C4A;
+  --state-warning: #C99542;
+  --state-error: #B0454B;
+  --state-info: #4A6B8A;
+
+  /* ---- Typography ---- */
+  --research-font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --research-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --research-font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+
+  /* ---- Color alias for general use ---- */
+  --research-brand: #B8770C;
+  --research-brand-ink: #FFFFFF;
+}
+
+/* ---- Dark Mode ---- */
+.dark {
+  --research-background: #1A1612;
+  --research-foreground: #E8E2D8;
+  --research-card: #241F1A;
+  --research-card-foreground: #E8E2D8;
+  --research-popover: #2A241E;
+  --research-popover-foreground: #E8E2D8;
+  --research-primary: #C99542;
+  --research-primary-foreground: #1A1612;
+  --research-muted: #2A241E;
+  --research-muted-foreground: #B0A89C;
+  --research-border: #363028;
+  --research-input: #363028;
+  --research-ring: #C99542;
+
+  --research-surface: #241F1A;
+  --research-surface-2: #2A241E;
+  --research-surface-3: #363028;
+
+  --research-ink: #E8E2D8;
+  --research-ink-2: #B0A89C;
+  --research-ink-3: #8A8275;
+
+  --research-line: #363028;
+
+  --state-success: #6B9C6B;
+  --state-warning: #DDB26E;
+  --state-error: #D06870;
+  --state-info: #7A9CBA;
+
+  --research-brand: #C99542;
+  --research-brand-ink: #1A1612;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--research-background);
+    --color-foreground: var(--research-foreground);
+    --color-card: var(--research-card);
+    --color-card-foreground: var(--research-card-foreground);
+    --color-popover: var(--research-popover);
+    --color-popover-foreground: var(--research-popover-foreground);
+    --color-primary: var(--research-primary);
+    --color-primary-foreground: var(--research-primary-foreground);
+    --color-muted: var(--research-muted);
+    --color-muted-foreground: var(--research-muted-foreground);
+    --color-border: var(--research-border);
+    --color-input: var(--research-input);
+    --color-ring: var(--research-ring);
+    --radius-sm: var(--research-radius-small);
+    --radius-md: var(--research-radius-medium);
+    --radius-lg: var(--research-radius-large);
+  }
+  @layer base {
+    body { background: var(--research-background); color: var(--research-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--research-background); }
+      .text-background { color: var(--research-background); }
+      .border-background { border-color: var(--research-background); }
+      .ring-background { --tw-ring-color: var(--research-background); }
+      .bg-foreground { background-color: var(--research-foreground); }
+      .text-foreground { color: var(--research-foreground); }
+      .border-foreground { border-color: var(--research-foreground); }
+      .ring-foreground { --tw-ring-color: var(--research-foreground); }
+      .bg-card { background-color: var(--research-card); }
+      .text-card { color: var(--research-card); }
+      .border-card { border-color: var(--research-card); }
+      .ring-card { --tw-ring-color: var(--research-card); }
+      .bg-card-foreground { background-color: var(--research-card-foreground); }
+      .text-card-foreground { color: var(--research-card-foreground); }
+      .border-card-foreground { border-color: var(--research-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--research-card-foreground); }
+      .bg-popover { background-color: var(--research-popover); }
+      .text-popover { color: var(--research-popover); }
+      .border-popover { border-color: var(--research-popover); }
+      .ring-popover { --tw-ring-color: var(--research-popover); }
+      .bg-popover-foreground { background-color: var(--research-popover-foreground); }
+      .text-popover-foreground { color: var(--research-popover-foreground); }
+      .border-popover-foreground { border-color: var(--research-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--research-popover-foreground); }
+      .bg-primary { background-color: var(--research-primary); }
+      .text-primary { color: var(--research-primary); }
+      .border-primary { border-color: var(--research-primary); }
+      .ring-primary { --tw-ring-color: var(--research-primary); }
+      .bg-primary-foreground { background-color: var(--research-primary-foreground); }
+      .text-primary-foreground { color: var(--research-primary-foreground); }
+      .border-primary-foreground { border-color: var(--research-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--research-primary-foreground); }
+      .bg-muted { background-color: var(--research-muted); }
+      .text-muted { color: var(--research-muted); }
+      .border-muted { border-color: var(--research-muted); }
+      .ring-muted { --tw-ring-color: var(--research-muted); }
+      .bg-muted-foreground { background-color: var(--research-muted-foreground); }
+      .text-muted-foreground { color: var(--research-muted-foreground); }
+      .border-muted-foreground { border-color: var(--research-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--research-muted-foreground); }
+      .bg-border { background-color: var(--research-border); }
+      .text-border { color: var(--research-border); }
+      .border-border { border-color: var(--research-border); }
+      .ring-border { --tw-ring-color: var(--research-border); }
+      .bg-input { background-color: var(--research-input); }
+      .text-input { color: var(--research-input); }
+      .border-input { border-color: var(--research-input); }
+      .ring-input { --tw-ring-color: var(--research-input); }
+      .bg-ring { background-color: var(--research-ring); }
+      .text-ring { color: var(--research-ring); }
+      .border-ring { border-color: var(--research-ring); }
+      .ring-ring { --tw-ring-color: var(--research-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+      <!-- Shared Sidebar -->
+      <aside class="fixed top-0 left-0 h-screen w-[240px] flex flex-col" style="background-color: var(--research-surface); border-right: 1px solid var(--research-border); z-index: 50;">
+        <!-- Logo -->
+        <div style="font-family: var(--research-font-serif); font-size: 18px; font-weight: 600; padding: 20px 24px; border-bottom: 1px solid var(--research-border);">科研工作站</div>
+        <!-- Nav -->
+        <nav class="flex-1 flex flex-col" style="padding-top: 8px;">
+          <a href="#" data-dom-id="nav-dashboard" data-nav-key="dashboard" class="flex items-center gap-3" style="padding: 12px 24px; font-size: 14px; color: var(--research-ink-2); border-left: 3px solid transparent;">
+            <i data-lucide="layout-dashboard" style="width:20px;height:20px;"></i><span>概览</span>
+          </a>
+          <a href="#" data-dom-id="nav-mp-articles" data-nav-key="mp-articles" class="flex items-center gap-3" style="padding: 12px 24px; font-size: 14px; color: var(--research-ink-2); border-left: 3px solid transparent;">
+            <i data-lucide="newspaper" style="width:20px;height:20px;"></i><span>公众号推文</span>
+          </a>
+          <a href="#" data-dom-id="nav-scripts" data-nav-key="scripts" class="flex items-center gap-3" style="padding: 12px 24px; font-size: 14px; color: var(--research-ink-2); border-left: 3px solid transparent;">
+            <i data-lucide="code-2" style="width:20px;height:20px;"></i><span>脚本仓库</span>
+          </a>
+          <a href="#" data-dom-id="nav-literature" data-nav-key="literature" class="flex items-center gap-3 nav-active" style="padding: 12px 24px; font-size: 14px; color: var(--research-primary); background-color: var(--research-surface-2); border-left: 3px solid var(--research-primary);">
+            <i data-lucide="book-open" style="width:20px;height:20px;"></i><span>文献阅读</span>
+          </a>
+          <a href="#" data-dom-id="nav-gallery" data-nav-key="gallery" class="flex items-center gap-3" style="padding: 12px 24px; font-size: 14px; color: var(--research-ink-2); border-left: 3px solid transparent;">
+            <i data-lucide="image" style="width:20px;height:20px;"></i><span>图片存储</span>
+          </a>
+          <a href="#" data-dom-id="nav-writing" data-nav-key="writing" class="flex items-center gap-3" style="padding: 12px 24px; font-size: 14px; color: var(--research-ink-2); border-left: 3px solid transparent;">
+            <i data-lucide="pen-line" style="width:20px;height:20px;"></i><span>文章撰写</span>
+          </a>
+          <a href="#" data-dom-id="nav-knowledge-network" data-nav-key="knowledge-network" class="flex items-center gap-3" style="padding: 12px 24px; font-size: 14px; color: var(--research-ink-2); border-left: 3px solid transparent;">
+            <i data-lucide="share-2" style="width:20px;height:20px;"></i><span>知识网络</span>
+          </a>
+        </nav>
+        <!-- Bottom avatar -->
+        <div class="flex items-center gap-3" style="padding: 20px 24px; border-top: 1px solid var(--research-border);">
+          <div style="width:32px;height:32px;border-radius:9999px;background-color:var(--research-primary);display:flex;align-items:center;justify-content:center;color:var(--research-primary-foreground);font-size:13px;font-weight:600;">研</div>
+          <span style="font-size:14px;color:var(--research-ink-2);">研究员</span>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div style="margin-left: 240px; padding: 32px; background-color: var(--research-background); min-height: 100vh;">
+        <!-- Header Bar -->
+        <header class="flex justify-between items-center" style="height:60px;border-bottom:1px solid var(--research-border);margin-bottom:24px;padding-bottom:16px;">
+          <h1 style="font-family: var(--research-font-serif); font-size: 24px; font-weight: 600; color: var(--research-ink);">文献阅读</h1>
+          <div class="flex items-center gap-3">
+            <input type="text" placeholder="搜索文献..." style="width:280px;padding:8px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background-color:var(--research-card);font-size:14px;color:var(--research-ink-2);outline:none;">
+            <button style="background-color:var(--research-primary);color:var(--research-primary-foreground);padding:8px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:500;border:none;cursor:pointer;">添加文献</button>
+          </div>
+        </header>
+
+        <!-- Filter Bar -->
+        <div class="flex" style="gap:8px;margin-bottom:24px;">
+          <span style="background-color:var(--research-primary);color:var(--research-primary-foreground);padding:6px 14px;border-radius:var(--radius-full);font-size:13px;">全部</span>
+          <span style="background-color:var(--research-surface);border:1px solid var(--research-border);color:var(--research-ink-2);padding:6px 14px;border-radius:var(--radius-full);font-size:13px;">待读</span>
+          <span style="background-color:var(--research-surface);border:1px solid var(--research-border);color:var(--research-ink-2);padding:6px 14px;border-radius:var(--radius-full);font-size:13px;">阅读中</span>
+          <span style="background-color:var(--research-surface);border:1px solid var(--research-border);color:var(--research-ink-2);padding:6px 14px;border-radius:var(--radius-full);font-size:13px;">已完成</span>
+          <span style="background-color:var(--research-surface);border:1px solid var(--research-border);color:var(--research-ink-2);padding:6px 14px;border-radius:var(--radius-full);font-size:13px;">已笔记</span>
+        </div>
+
+        <!-- Stats Summary -->
+        <div class="flex" style="gap:32px;padding:16px 24px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);margin-bottom:24px;">
+          <div class="flex flex-col">
+            <span style="font-family:var(--research-font-serif);font-size:28px;font-weight:600;color:var(--research-ink);line-height:1.1;">47 篇</span>
+            <span style="font-size:13px;color:var(--research-ink-3);margin-top:4px;">总文献</span>
+          </div>
+          <div class="flex flex-col">
+            <span style="font-family:var(--research-font-serif);font-size:28px;font-weight:600;color:var(--research-ink);line-height:1.1;">12 篇</span>
+            <span style="font-size:13px;color:var(--research-ink-3);margin-top:4px;">待读</span>
+          </div>
+          <div class="flex flex-col">
+            <span style="font-family:var(--research-font-serif);font-size:28px;font-weight:600;color:var(--research-ink);line-height:1.1;">28 篇</span>
+            <span style="font-size:13px;color:var(--research-ink-3);margin-top:4px;">已完成</span>
+          </div>
+        </div>
+
+        <!-- Literature List -->
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+
+          <!-- Card 1 -->
+          <div class="flex flex-col" style="gap:12px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-family:var(--research-font-serif);font-size:15px;font-weight:600;color:var(--research-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;">A single-cell atlas of the human tumor vasculature</h3>
+                <span style="font-size:13px;color:var(--research-ink-3);">Nature, 2024</span>
+              </div>
+              <span style="background-color:var(--state-info);color:var(--research-primary-foreground);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;white-space:nowrap;">阅读中</span>
+            </div>
+            <div style="font-size:13px;color:var(--research-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Wang et al.</div>
+            <p style="font-size:13px;color:var(--research-ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">We present a comprehensive single-cell atlas of tumor vasculature across multiple cancer types, revealing novel endothelial subpopulations...</p>
+            <div class="flex flex-wrap" style="gap:6px;">
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">单细胞</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">肿瘤血管</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">内皮细胞</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-1" style="font-size:13px;color:var(--research-ink-3);"><i data-lucide="sticky-note" style="width:14px;height:14px;"></i>笔记 3 条</span>
+              <a href="#" style="font-size:13px;color:var(--research-primary);">查看详情</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="flex flex-col" style="gap:12px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-family:var(--research-font-serif);font-size:15px;font-weight:600;color:var(--research-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;">Tumor microenvironment remodeling after immunotherapy</h3>
+                <span style="font-size:13px;color:var(--research-ink-3);">Cell, 2024</span>
+              </div>
+              <span style="background-color:var(--state-success);color:var(--research-primary-foreground);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;white-space:nowrap;">已读</span>
+            </div>
+            <div style="font-size:13px;color:var(--research-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zhang et al.</div>
+            <p style="font-size:13px;color:var(--research-ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">This study characterizes the dynamic changes in tumor microenvironment following immune checkpoint blockade therapy...</p>
+            <div class="flex flex-wrap" style="gap:6px;">
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">肿瘤微环境</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">免疫治疗</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">T细胞</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-1" style="font-size:13px;color:var(--research-ink-3);"><i data-lucide="sticky-note" style="width:14px;height:14px;"></i>笔记 5 条</span>
+              <a href="#" style="font-size:13px;color:var(--research-primary);">查看详情</a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="flex flex-col" style="gap:12px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-family:var(--research-font-serif);font-size:15px;font-weight:600;color:var(--research-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;">CRISPR-Cas9 screens identify synthetic lethal interactions</h3>
+                <span style="font-size:13px;color:var(--research-ink-3);">Nature Genetics, 2024</span>
+              </div>
+              <span style="background-color:var(--state-success);color:var(--research-primary-foreground);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;white-space:nowrap;">已读</span>
+            </div>
+            <div style="font-size:13px;color:var(--research-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Liu et al.</div>
+            <p style="font-size:13px;color:var(--research-ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">Genome-wide CRISPR screens reveal synthetic lethal gene pairs that can be exploited for cancer therapy...</p>
+            <div class="flex flex-wrap" style="gap:6px;">
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">CRISPR</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">合成致死</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">基因编辑</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-1" style="font-size:13px;color:var(--research-ink-3);"><i data-lucide="sticky-note" style="width:14px;height:14px;"></i>笔记 4 条</span>
+              <a href="#" style="font-size:13px;color:var(--research-primary);">查看详情</a>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="flex flex-col" style="gap:12px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-family:var(--research-font-serif);font-size:15px;font-weight:600;color:var(--research-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;">Spatial transcriptomics reveals tumor heterogeneity</h3>
+                <span style="font-size:13px;color:var(--research-ink-3);">Cancer Cell, 2024</span>
+              </div>
+              <span style="background-color:var(--state-warning);color:var(--research-primary-foreground);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;white-space:nowrap;">待读</span>
+            </div>
+            <div style="font-size:13px;color:var(--research-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Chen et al.</div>
+            <p style="font-size:13px;color:var(--research-ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">Using spatial transcriptomics, we mapped the transcriptional landscape of tumor tissues at single-cell resolution...</p>
+            <div class="flex flex-wrap" style="gap:6px;">
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">空间转录组</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">肿瘤异质性</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-1" style="font-size:13px;color:var(--research-ink-3);"><i data-lucide="sticky-note" style="width:14px;height:14px;"></i>笔记 0 条</span>
+              <a href="#" style="font-size:13px;color:var(--research-primary);">查看详情</a>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="flex flex-col" style="gap:12px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-family:var(--research-font-serif);font-size:15px;font-weight:600;color:var(--research-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;">Machine learning predicts patient response to immunotherapy</h3>
+                <span style="font-size:13px;color:var(--research-ink-3);">Nature Medicine, 2024</span>
+              </div>
+              <span style="background-color:var(--state-info);color:var(--research-primary-foreground);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;white-space:nowrap;">阅读中</span>
+            </div>
+            <div style="font-size:13px;color:var(--research-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kim et al.</div>
+            <p style="font-size:13px;color:var(--research-ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">A deep learning model trained on multi-omics data predicts clinical response to immune checkpoint inhibitors...</p>
+            <div class="flex flex-wrap" style="gap:6px;">
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">机器学习</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">免疫治疗</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">预测模型</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-1" style="font-size:13px;color:var(--research-ink-3);"><i data-lucide="sticky-note" style="width:14px;height:14px;"></i>笔记 2 条</span>
+              <a href="#" style="font-size:13px;color:var(--research-primary);">查看详情</a>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="flex flex-col" style="gap:12px;background-color:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;min-width:0;">
+                <h3 style="font-family:var(--research-font-serif);font-size:15px;font-weight:600;color:var(--research-ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;">The role of extracellular vesicles in tumor metastasis</h3>
+                <span style="font-size:13px;color:var(--research-ink-3);">Cell Reports, 2024</span>
+              </div>
+              <span style="background-color:var(--state-warning);color:var(--research-primary-foreground);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;white-space:nowrap;">待读</span>
+            </div>
+            <div style="font-size:13px;color:var(--research-ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Huang et al.</div>
+            <p style="font-size:13px;color:var(--research-ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">Extracellular vesicles mediate intercellular communication in the tumor microenvironment and promote pre-metastatic niche formation...</p>
+            <div class="flex flex-wrap" style="gap:6px;">
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">细胞外囊泡</span>
+              <span style="background-color:var(--research-surface-2);color:var(--research-ink-2);padding:2px 8px;border-radius:var(--radius-sm);font-size:12px;">肿瘤转移</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-1" style="font-size:13px;color:var(--research-ink-3);"><i data-lucide="sticky-note" style="width:14px;height:14px;"></i>笔记 0 条</span>
+              <a href="#" style="font-size:13px;color:var(--research-primary);">查看详情</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer style="padding-top:32px;border-top:1px solid var(--research-border);font-size:13px;color:var(--research-ink-3);">科研工作站 · 文献阅读 · 共 47 篇</footer>
+      </div>
+
+      <style>
+        aside nav a:hover { background-color: var(--research-surface-2); }
+        aside nav a { transition: background-color 0.15s ease; }
+      </style>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

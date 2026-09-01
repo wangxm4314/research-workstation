@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章撰写</title>
+    <style id="theme-vars">
+/* ============================================================
+   Research Workstation — Warm Editorial Theme
+   科研暖色编辑风格 · 琥珀赭色系
+   ============================================================ */
+
+/* ---- Brand Prefix: research ---- */
+
+:root {
+  /* ---- Primary Brand Hue (Amber/Ochre) ---- */
+  --color-brand-50: #FBF4E8;
+  --color-brand-100: #F5E6CC;
+  --color-brand-200: #EBCFA0;
+  --color-brand-300: #DDB26E;
+  --color-brand-400: #C99542;
+  --color-brand-500: #B8770C;
+  --color-brand-600: #A06608;
+  --color-brand-700: #84540A;
+  --color-brand-800: #6B450C;
+  --color-brand-900: #543708;
+
+  /* ---- Neutral Scale (Warm) ---- */
+  --color-neutral-50: #FAF7F2;
+  --color-neutral-100: #F5F1EB;
+  --color-neutral-200: #E8E2D8;
+  --color-neutral-300: #D4CCC0;
+  --color-neutral-400: #B0A89C;
+  --color-neutral-500: #8A8275;
+  --color-neutral-600: #6B6357;
+  --color-neutral-700: #4D463C;
+  --color-neutral-800: #363028;
+  --color-neutral-900: #241F1A;
+
+  /* ---- Semantic Aliases (Light Mode) ---- */
+  --research-background: #FAF7F2;
+  --research-foreground: #241F1A;
+  --research-card: #FFFFFF;
+  --research-card-foreground: #241F1A;
+  --research-popover: #FFFFFF;
+  --research-popover-foreground: #241F1A;
+  --research-primary: #B8770C;
+  --research-primary-foreground: #FFFFFF;
+  --research-muted: #F5F1EB;
+  --research-muted-foreground: #6B6357;
+  --research-border: #E8E2D8;
+  --research-input: #E8E2D8;
+  --research-ring: #B8770C;
+
+  /* ---- Surface Tokens ---- */
+  --research-surface: #FFFFFF;
+  --research-surface-2: #F5F1EB;
+  --research-surface-3: #EFE9DF;
+
+  /* ---- Ink Tokens ---- */
+  --research-ink: #241F1A;
+  --research-ink-2: #4D463C;
+  --research-ink-3: #8A8275;
+
+  /* ---- Line Token ---- */
+  --research-line: #E8E2D8;
+
+  /* ---- Radius Scale ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --research-radius-small: 4px;
+  --research-radius-medium: 8px;
+  --research-radius-large: 16px;
+
+  /* ---- Shadow Scale ---- */
+  --research-shadow-1: 0 1px 2px rgba(36, 31, 26, 0.04), 0 1px 1px rgba(36, 31, 26, 0.02);
+  --research-shadow-floating: 0 8px 24px -8px rgba(36, 31, 26, 0.12);
+  --research-shadow-modal: 0 24px 60px -20px rgba(36, 31, 26, 0.20);
+
+  /* ---- Spacing Scale (8pt grid) ---- */
+  --research-s-1: 4px;
+  --research-s-2: 8px;
+  --research-s-3: 12px;
+  --research-s-4: 16px;
+  --research-s-5: 24px;
+  --research-s-6: 32px;
+  --research-s-7: 48px;
+  --research-s-8: 80px;
+
+  /* ---- State Colors ---- */
+  --state-success: #4A7C4A;
+  --state-warning: #C99542;
+  --state-error: #B0454B;
+  --state-info: #4A6B8A;
+
+  /* ---- Typography ---- */
+  --research-font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --research-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --research-font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Cascadia Code", monospace;
+
+  /* ---- Color alias for general use ---- */
+  --research-brand: #B8770C;
+  --research-brand-ink: #FFFFFF;
+}
+
+/* ---- Dark Mode ---- */
+.dark {
+  --research-background: #1A1612;
+  --research-foreground: #E8E2D8;
+  --research-card: #241F1A;
+  --research-card-foreground: #E8E2D8;
+  --research-popover: #2A241E;
+  --research-popover-foreground: #E8E2D8;
+  --research-primary: #C99542;
+  --research-primary-foreground: #1A1612;
+  --research-muted: #2A241E;
+  --research-muted-foreground: #B0A89C;
+  --research-border: #363028;
+  --research-input: #363028;
+  --research-ring: #C99542;
+
+  --research-surface: #241F1A;
+  --research-surface-2: #2A241E;
+  --research-surface-3: #363028;
+
+  --research-ink: #E8E2D8;
+  --research-ink-2: #B0A89C;
+  --research-ink-3: #8A8275;
+
+  --research-line: #363028;
+
+  --state-success: #6B9C6B;
+  --state-warning: #DDB26E;
+  --state-error: #D06870;
+  --state-info: #7A9CBA;
+
+  --research-brand: #C99542;
+  --research-brand-ink: #1A1612;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--research-background);
+    --color-foreground: var(--research-foreground);
+    --color-card: var(--research-card);
+    --color-card-foreground: var(--research-card-foreground);
+    --color-popover: var(--research-popover);
+    --color-popover-foreground: var(--research-popover-foreground);
+    --color-primary: var(--research-primary);
+    --color-primary-foreground: var(--research-primary-foreground);
+    --color-muted: var(--research-muted);
+    --color-muted-foreground: var(--research-muted-foreground);
+    --color-border: var(--research-border);
+    --color-input: var(--research-input);
+    --color-ring: var(--research-ring);
+    --radius-sm: var(--research-radius-small);
+    --radius-md: var(--research-radius-medium);
+    --radius-lg: var(--research-radius-large);
+  }
+  @layer base {
+    body { background: var(--research-background); color: var(--research-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--research-background); }
+      .text-background { color: var(--research-background); }
+      .border-background { border-color: var(--research-background); }
+      .ring-background { --tw-ring-color: var(--research-background); }
+      .bg-foreground { background-color: var(--research-foreground); }
+      .text-foreground { color: var(--research-foreground); }
+      .border-foreground { border-color: var(--research-foreground); }
+      .ring-foreground { --tw-ring-color: var(--research-foreground); }
+      .bg-card { background-color: var(--research-card); }
+      .text-card { color: var(--research-card); }
+      .border-card { border-color: var(--research-card); }
+      .ring-card { --tw-ring-color: var(--research-card); }
+      .bg-card-foreground { background-color: var(--research-card-foreground); }
+      .text-card-foreground { color: var(--research-card-foreground); }
+      .border-card-foreground { border-color: var(--research-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--research-card-foreground); }
+      .bg-popover { background-color: var(--research-popover); }
+      .text-popover { color: var(--research-popover); }
+      .border-popover { border-color: var(--research-popover); }
+      .ring-popover { --tw-ring-color: var(--research-popover); }
+      .bg-popover-foreground { background-color: var(--research-popover-foreground); }
+      .text-popover-foreground { color: var(--research-popover-foreground); }
+      .border-popover-foreground { border-color: var(--research-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--research-popover-foreground); }
+      .bg-primary { background-color: var(--research-primary); }
+      .text-primary { color: var(--research-primary); }
+      .border-primary { border-color: var(--research-primary); }
+      .ring-primary { --tw-ring-color: var(--research-primary); }
+      .bg-primary-foreground { background-color: var(--research-primary-foreground); }
+      .text-primary-foreground { color: var(--research-primary-foreground); }
+      .border-primary-foreground { border-color: var(--research-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--research-primary-foreground); }
+      .bg-muted { background-color: var(--research-muted); }
+      .text-muted { color: var(--research-muted); }
+      .border-muted { border-color: var(--research-muted); }
+      .ring-muted { --tw-ring-color: var(--research-muted); }
+      .bg-muted-foreground { background-color: var(--research-muted-foreground); }
+      .text-muted-foreground { color: var(--research-muted-foreground); }
+      .border-muted-foreground { border-color: var(--research-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--research-muted-foreground); }
+      .bg-border { background-color: var(--research-border); }
+      .text-border { color: var(--research-border); }
+      .border-border { border-color: var(--research-border); }
+      .ring-border { --tw-ring-color: var(--research-border); }
+      .bg-input { background-color: var(--research-input); }
+      .text-input { color: var(--research-input); }
+      .border-input { border-color: var(--research-input); }
+      .ring-input { --tw-ring-color: var(--research-input); }
+      .bg-ring { background-color: var(--research-ring); }
+      .text-ring { color: var(--research-ring); }
+      .border-ring { border-color: var(--research-ring); }
+      .ring-ring { --tw-ring-color: var(--research-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+      <!-- Shared Sidebar -->
+      <aside style="position:fixed; left:0; top:0; width:240px; height:100vh; background:var(--research-surface); border-right:1px solid var(--research-border); z-index:50; display:flex; flex-direction:column;">
+        <!-- Logo -->
+        <div style="padding:20px 24px; border-bottom:1px solid var(--research-border);">
+          <span style="font-family:var(--research-font-serif); font-size:18px; font-weight:600; color:var(--research-ink);">科研工作站</span>
+        </div>
+        <!-- Nav -->
+        <nav style="flex:1; display:flex; flex-direction:column; padding-top:8px; overflow-y:auto;">
+          <a data-dom-id="nav-dashboard" data-nav-key="dashboard" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-ink-2); border-left:3px solid transparent; text-decoration:none;">
+            <i data-lucide="layout-dashboard" style="width:20px; height:20px;"></i>
+            <span>概览</span>
+          </a>
+          <a data-dom-id="nav-mp-articles" data-nav-key="mp-articles" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-ink-2); border-left:3px solid transparent; text-decoration:none;">
+            <i data-lucide="newspaper" style="width:20px; height:20px;"></i>
+            <span>公众号推文</span>
+          </a>
+          <a data-dom-id="nav-scripts" data-nav-key="scripts" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-ink-2); border-left:3px solid transparent; text-decoration:none;">
+            <i data-lucide="code-2" style="width:20px; height:20px;"></i>
+            <span>脚本仓库</span>
+          </a>
+          <a data-dom-id="nav-literature" data-nav-key="literature" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-ink-2); border-left:3px solid transparent; text-decoration:none;">
+            <i data-lucide="book-open" style="width:20px; height:20px;"></i>
+            <span>文献阅读</span>
+          </a>
+          <a data-dom-id="nav-gallery" data-nav-key="gallery" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-ink-2); border-left:3px solid transparent; text-decoration:none;">
+            <i data-lucide="image" style="width:20px; height:20px;"></i>
+            <span>图片存储</span>
+          </a>
+          <a data-dom-id="nav-writing" data-nav-key="writing" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-primary); border-left:3px solid var(--research-primary); background:var(--research-surface-2); text-decoration:none;">
+            <i data-lucide="pen-line" style="width:20px; height:20px;"></i>
+            <span>文章撰写</span>
+          </a>
+          <a data-dom-id="nav-knowledge-network" data-nav-key="knowledge-network" href="#" style="display:flex; align-items:center; gap:12px; padding:12px 24px; font-size:14px; color:var(--research-ink-2); border-left:3px solid transparent; text-decoration:none;">
+            <i data-lucide="share-2" style="width:20px; height:20px;"></i>
+            <span>知识网络</span>
+          </a>
+        </nav>
+        <!-- Bottom avatar -->
+        <div style="display:flex; align-items:center; gap:12px; padding:20px 24px; border-top:1px solid var(--research-border);">
+          <div style="width:32px; height:32px; border-radius:var(--radius-full); background:var(--research-primary); color:var(--research-primary-foreground); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:500; font-family:var(--research-font-sans);">研</div>
+          <span style="font-size:14px; color:var(--research-ink-2); font-family:var(--research-font-sans);">研究员</span>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div style="margin-left:240px; padding:32px; background:var(--research-background); min-height:100vh;">
+        <!-- Header Bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; height:60px; border-bottom:1px solid var(--research-border); margin-bottom:24px; padding-bottom:16px;">
+          <h1 style="font-family:var(--research-font-serif); font-size:24px; font-weight:600; color:var(--research-ink); margin:0;">文章撰写</h1>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <input type="text" placeholder="搜索文章..." style="width:240px; padding:8px 12px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; font-family:var(--research-font-sans); outline:none;">
+            <button style="background:var(--research-primary); color:var(--research-primary-foreground); padding:8px 16px; border-radius:var(--radius-md); border:none; font-size:14px; font-weight:500; font-family:var(--research-font-sans); cursor:pointer;">新建文章</button>
+          </div>
+        </div>
+
+        <!-- Kanban Board -->
+        <div style="display:flex; gap:20px; overflow-x:auto; min-height:500px;">
+
+          <!-- Column 1: 大纲阶段 -->
+          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
+            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
+              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--state-info); margin-right:8px;"></span>
+              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">大纲阶段</span>
+              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">1</span>
+            </div>
+            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
+              <!-- Card -->
+              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
+                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">肿瘤微环境与免疫治疗综述</div>
+                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">综述</span>
+                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
+                  <div style="width:15%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-09-01</span>
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">800字</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: 撰写中 -->
+          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
+            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
+              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--state-warning); margin-right:8px;"></span>
+              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">撰写中</span>
+              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">2</span>
+            </div>
+            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
+              <!-- Card 1 -->
+              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
+                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">CRISPR-Cas9在癌症治疗中的应用</div>
+                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">研究论文</span>
+                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
+                  <div style="width:45%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-08-28</span>
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">4,500字</span>
+                </div>
+              </div>
+              <!-- Card 2 -->
+              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
+                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">单细胞测序数据分析方法比较</div>
+                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">方法文章</span>
+                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
+                  <div style="width:60%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-08-25</span>
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">6,200字</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: 审阅修改 -->
+          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
+            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
+              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--research-primary); margin-right:8px;"></span>
+              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">审阅修改</span>
+              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">1</span>
+            </div>
+            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
+              <!-- Card -->
+              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
+                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">RNA-seq数据分析最佳实践</div>
+                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">方法文章</span>
+                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
+                  <div style="width:85%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-08-20</span>
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">8,000字</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 4: 已完成 -->
+          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
+            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
+              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--state-success); margin-right:8px;"></span>
+              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">已完成</span>
+              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">2</span>
+            </div>
+            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
+              <!-- Card 1 -->
+              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
+                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Western Blot实验指南</div>
+                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">综述</span>
+                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
+                  <div style="width:100%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-07-15</span>
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">12,000字</span>
+                </div>
+              </div>
+              <!-- Card 2 -->
+              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
+                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">基因编辑技术进展回顾</div>
+                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">综述</span>
+                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
+                  <div style="width:100%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-06-20</span>
+                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">9,500字</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="padding-top:32px; margin-top:24px; border-top:1px solid var(--research-border);">
+          <span style="font-size:13px; color:var(--research-ink-3); font-family:var(--research-font-sans);">科研工作站 · 文章撰写 · 共 6 篇在写/已完成</span>
+        </div>
+      </div>
+    </main>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
