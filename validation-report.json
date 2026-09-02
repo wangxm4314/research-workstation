@@ -16,10 +16,13 @@
   },
   "operatingMode": "free-explore",
   "renderBlockingErrorCount": 0,
-  "softWarningCount": 4,
+  "softWarningCount": 7,
   "renderBlockingErrors": [],
   "errorSignatures": [],
   "softWarnings": [
+    "[html-head-style] literature.html: found 1 custom <style> block(s) in <head>. The <head> is owned by apply-html-head-contract.mjs; move custom styles before </body> or re-run apply-html-head-contract.mjs <css-path> <html-file> --replace-head to relocate them.",
+    "[html-head-style] mp-articles.html: found 1 custom <style> block(s) in <head>. The <head> is owned by apply-html-head-contract.mjs; move custom styles before </body> or re-run apply-html-head-contract.mjs <css-path> <html-file> --replace-head to relocate them.",
+    "[html-head-style] scripts.html: found 1 custom <style> block(s) in <head>. The <head> is owned by apply-html-head-contract.mjs; move custom styles before </body> or re-run apply-html-head-contract.mjs <css-path> <html-file> --replace-head to relocate them.",
     "[repair-ledger] validationRepairLedger[0].repairActions[] is missing",
     "[repair-ledger] validationRepairLedger[0].revalidationReportPath is missing",
     "[repair-ledger] validationRepairLedger[0].revalidationReportHash is missing",
@@ -28,9 +31,12 @@
   "repairPlanHints": [],
   "repairActionTable": [],
   "errorCount": 0,
-  "warningCount": 4,
+  "warningCount": 7,
   "errors": [],
   "warnings": [
+    "[html-head-style] literature.html: found 1 custom <style> block(s) in <head>. The <head> is owned by apply-html-head-contract.mjs; move custom styles before </body> or re-run apply-html-head-contract.mjs <css-path> <html-file> --replace-head to relocate them.",
+    "[html-head-style] mp-articles.html: found 1 custom <style> block(s) in <head>. The <head> is owned by apply-html-head-contract.mjs; move custom styles before </body> or re-run apply-html-head-contract.mjs <css-path> <html-file> --replace-head to relocate them.",
+    "[html-head-style] scripts.html: found 1 custom <style> block(s) in <head>. The <head> is owned by apply-html-head-contract.mjs; move custom styles before </body> or re-run apply-html-head-contract.mjs <css-path> <html-file> --replace-head to relocate them.",
     "[repair-ledger] validationRepairLedger[0].repairActions[] is missing",
     "[repair-ledger] validationRepairLedger[0].revalidationReportPath is missing",
     "[repair-ledger] validationRepairLedger[0].revalidationReportHash is missing",
@@ -72,7 +78,7 @@
       "read_status": "ok"
     },
     "renderBlockingErrorCount": 0,
-    "softWarningCount": 4,
+    "softWarningCount": 7,
     "renderBlockingErrors": [],
     "repairActionTable": [],
     "nextCheck": {
@@ -89,19 +95,19 @@
     ]
   },
   "projectFileHashes": {
-    "research-workstation.design": "35f043bacfb2c999ff0d62caf823f1d7a5ef141622755bb223cac30df23e2fa7",
+    "research-workstation.design": "30f12ca12b64110adb6f18b21a111761210fe7ec98e5f9983d4683729d8e622d",
     "colors_and_type.css": "16684d1f83d578652346d56b0f297bb3cad50a12b696bb4def780a2b8038429d",
     "runtime-orchestration-summary.json": "cc241e64abd0f142791d955d3807f48e55defea3b8758bc2739ee78aceca96b7",
-    "pages/dashboard.html": "492ebdc1884a36b0a216848afb8e12c4aa7614c5ccbc37f71107c5466191085e",
-    "pages/gallery.html": "7003b211d1d8c6f786c8dfa7dcb2413faac67406a2d589915c627bdec4cebf2e",
-    "pages/knowledge-network.html": "19630da6fa11aa13f78687fe7a30122d98ed9e21becd0457918385fe7bf7e3f5",
-    "pages/literature.html": "0b576a07889f2e0051ab5f0c6e0a7455aecd3e3877eb6212112e2c2e3225be90",
-    "pages/mp-articles.html": "5c43f8173159048657a91b3deb42b8f3dc5bfa83232bdc08245d9fefa64da074",
-    "pages/scripts.html": "e006dd1aece8ddb1e2039abcb2061c78eaa512ce2e9f496d0bddd044f2e43c77",
-    "pages/writing.html": "54adf8d2c943bab60c8d29b83f686e88898ccdd7e522160df2e6c1b8b186e338"
+    "pages/dashboard.html": "e6e5effeb894fa865235d4a5ff4cc1d18b5c1baa72d8f2d57b83165cf295c3ba",
+    "pages/gallery.html": "3f30d41e123c186f840b1225fc2e4af705597ce4af9ae549a287a21347108681",
+    "pages/knowledge-network.html": "e385dba87bca0e56fdd9d772e89f3d9ab7c5a77d9e68587471889b523a1c76e3",
+    "pages/literature.html": "70b581f0c769db5e795fd14ff8bff567335691cf5941d5869356689befad9f88",
+    "pages/mp-articles.html": "a8d8f373338df0c051ca23bc1fb7b2c40302bca8034bdac6c9d0c5bddef90d8b",
+    "pages/scripts.html": "dff5fa3998824fe0152ec5b5e03bd6289b17170555f1aea0f743cdfd01195371",
+    "pages/writing.html": "1718e350ef98feb9e6958f04e0cd3d7f893e3d1b49cc98a24ca8df4f3edc4554"
   },
   "designDir": "/Users/xiaoman/Desktop/文献阅读/research-workstation",
   "expectedPages": null,
   "requireInteractions": null,
-  "checkedAt": "2026-09-01T23:30:06.057Z"
+  "checkedAt": "2026-09-02T00:30:26.338Z"
 }

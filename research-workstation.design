@@ -56,42 +56,6 @@
             "targetPageId": "page-knowledge-network",
             "hideEdge": true,
             "transitionLabel": "知识网络"
-          },
-          {
-            "domId": "cta-mp-articles",
-            "targetPageId": "page-mp-articles",
-            "hideEdge": true,
-            "transitionLabel": "查看公众号推文"
-          },
-          {
-            "domId": "cta-scripts",
-            "targetPageId": "page-scripts",
-            "hideEdge": true,
-            "transitionLabel": "查看脚本仓库"
-          },
-          {
-            "domId": "cta-literature",
-            "targetPageId": "page-literature",
-            "hideEdge": true,
-            "transitionLabel": "查看文献阅读"
-          },
-          {
-            "domId": "cta-gallery",
-            "targetPageId": "page-gallery",
-            "hideEdge": true,
-            "transitionLabel": "查看图片存储"
-          },
-          {
-            "domId": "cta-writing",
-            "targetPageId": "page-writing",
-            "hideEdge": true,
-            "transitionLabel": "查看文章撰写"
-          },
-          {
-            "domId": "cta-knowledge-network",
-            "targetPageId": "page-knowledge-network",
-            "hideEdge": true,
-            "transitionLabel": "查看知识网络"
           }
         ]
       }

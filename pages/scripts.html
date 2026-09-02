@@ -142,6 +142,7 @@
 }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="../assets/app.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
   @theme inline {
@@ -237,6 +238,37 @@
         mask-position: center;
         background-color: currentColor;
       }
+      /* Form field styles using CSS variables */
+      .rw-input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid var(--research-border);
+        border-radius: var(--radius-md);
+        background: var(--research-card);
+        color: var(--research-ink);
+        font-size: 14px;
+        outline: none;
+        font-family: var(--research-font-sans);
+        box-sizing: border-box;
+      }
+      .rw-input:focus {
+        border-color: var(--research-primary);
+      }
+      .rw-input::placeholder {
+        color: var(--research-ink-3);
+      }
+      .rw-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--research-ink-2);
+        margin-bottom: 6px;
+      }
+      textarea.rw-input {
+        font-family: var(--research-font-mono);
+        line-height: 1.5;
+        resize: vertical;
+      }
     </style>
 </head>
 <body class="min-h-screen font-sans antialiased">
@@ -287,262 +319,495 @@
 
       <!-- ============ Main Content ============ -->
       <div style="margin-left:240px;padding:32px;background:var(--research-background);min-height:100vh;">
-        <!-- Header Bar -->
+        <!-- Header Bar / Toolbar -->
         <div style="height:60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--research-border);margin-bottom:24px;padding-bottom:16px;">
           <h1 style="font-family:var(--research-font-serif);font-size:24px;font-weight:600;color:var(--research-ink);margin:0;">脚本仓库</h1>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <input type="text" placeholder="搜索脚本..." style="width:240px;padding:8px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:var(--research-card);color:var(--research-ink);font-size:14px;outline:none;font-family:var(--research-font-sans);">
-            <button style="background:var(--research-primary);color:var(--research-primary-foreground);padding:8px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:500;border:none;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:6px;">
-              <i data-lucide="upload" style="width:16px;height:16px;"></i>
-              上传脚本
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <input id="searchInput" type="text" placeholder="搜索标题或描述..." style="width:220px;padding:8px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:var(--research-card);color:var(--research-ink);font-size:14px;outline:none;font-family:var(--research-font-sans);" oninput="onSearchInput(this.value)">
+            <select id="langFilter" style="padding:8px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:var(--research-card);color:var(--research-ink);font-size:14px;outline:none;font-family:var(--research-font-sans);cursor:pointer;" onchange="onLangFilter(this.value)">
+              <option value="">全部语言</option>
+              <option value="Python">Python</option>
+              <option value="R">R</option>
+              <option value="Shell">Shell</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="其他">其他</option>
+            </select>
+            <select id="catFilter" style="padding:8px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:var(--research-card);color:var(--research-ink);font-size:14px;outline:none;font-family:var(--research-font-sans);cursor:pointer;" onchange="onCatFilter(this.value)">
+              <option value="">全部分类</option>
+              <option value="数据处理">数据处理</option>
+              <option value="可视化">可视化</option>
+              <option value="统计分析">统计分析</option>
+              <option value="文件操作">文件操作</option>
+              <option value="其他">其他</option>
+            </select>
+            <button onclick="openAddModal()" style="background:var(--research-primary);color:var(--research-primary-foreground);padding:8px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:500;border:none;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:6px;">
+              <i data-lucide="plus" style="width:16px;height:16px;"></i>
+              添加脚本
             </button>
           </div>
         </div>
 
         <!-- Two-column layout -->
         <div style="display:grid;grid-template-columns:240px 1fr;gap:24px;">
-          <!-- Left Column: Category Tree -->
-          <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:16px;">
-            <div style="font-family:var(--research-font-serif);font-size:16px;font-weight:600;color:var(--research-ink);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--research-border);">分类</div>
-            <div style="display:flex;flex-direction:column;gap:4px;">
-              <div style="padding:8px 12px;font-size:14px;background:var(--research-surface-2);color:var(--research-primary);border-radius:var(--radius-sm);cursor:pointer;font-weight:500;display:flex;justify-content:space-between;align-items:center;">
-                <span>数据分析</span>
-                <span style="background:var(--research-primary);color:var(--research-primary-foreground);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">4</span>
-              </div>
-              <div style="padding:8px 12px;font-size:14px;color:var(--research-ink-2);border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="this.style.background='var(--research-surface-2)'" onmouseout="this.style.background='transparent'">
-                <span>可视化</span>
-                <span style="background:var(--research-surface-3);color:var(--research-ink-2);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">2</span>
-              </div>
-              <div style="padding:8px 12px;font-size:14px;color:var(--research-ink-2);border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="this.style.background='var(--research-surface-2)'" onmouseout="this.style.background='transparent'">
-                <span>文件处理</span>
-                <span style="background:var(--research-surface-3);color:var(--research-ink-2);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">1</span>
-              </div>
-              <div style="padding:8px 12px;font-size:14px;color:var(--research-ink-2);border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="this.style.background='var(--research-surface-2)'" onmouseout="this.style.background='transparent'">
-                <span>统计检验</span>
-                <span style="background:var(--research-surface-3);color:var(--research-ink-2);font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">1</span>
-              </div>
-            </div>
+          <!-- Left Column: Category Tree (collapsible) -->
+          <div id="categoryTree" style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:16px;">
+            <!-- Dynamically rendered -->
           </div>
 
           <!-- Right Column: Script List -->
-          <div style="display:flex;flex-direction:column;gap:16px;">
-
-            <!-- Script 1 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">bulk_RNA_seq_pipeline.py</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">批量RNA-seq数据分析标准流程，包含质控、比对、定量</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import subprocess
-
-def run_pipeline(fastq_files, reference):
-    # Step 1: Quality control
-    subprocess.run(['fastqc', '-o', 'qc_results', fastq_files])
-    # Step 2: Alignment
-    subprocess.run(['hisat2', '-x', reference, '-U', fastq_files])</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-08-28</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">RNA-seq</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">生物信息</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 2 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">single_cell_qc.R</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">单细胞数据质控和过滤，使用Seurat框架</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">library(Seurat)
-
-obj &lt;- CreateSeuratObject(counts = data)
-obj &lt;- PercentageFeatureSet(obj, pattern = "^MT-", col.name = "percent.mt")
-obj &lt;- subset(obj, subset = nFeature_RNA &gt; 200 & nFeature_RNA &lt; 2500 & percent.mt &lt; 20)</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-08-15</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">单细胞</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">质控</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 3 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">volcano_plot.py</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">火山图绘制脚本，支持自定义阈值和标注</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import matplotlib.pyplot as plt
-import numpy as np
-
-def volcano_plot(df, log2fc_col, pval_col, threshold=0.05):
-    df['-log10p'] = -np.log10(df[pval_col])</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-07-20</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">可视化</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">火山图</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 4 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">gene_ontology_enrichment.R</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">GO富集分析及可视化</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">library(clusterProfiler)
-library(org.Hs.eg.db)
-
-ego &lt;- enrichGO(gene = gene_list, OrgDb = org.Hs.eg.db, ont = "BP")</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-07-10</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">GO分析</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">富集</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 5 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">file_rename_batch.py</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">批量重命名文件，支持正则匹配和模板替换</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import os, re
-
-def batch_rename(directory, pattern, replacement):
-    for filename in os.listdir(directory):
-        new_name = re.sub(pattern, replacement, filename)</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-06-05</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">文件处理</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 6 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">statistical_test_groups.R</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">多组间统计检验和事后比较</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;"># ANOVA + Tukey HSD
-result &lt;- aov(value ~ group, data = df)
-summary(result)
-TukeyHSD(result)</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-05-15</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">统计</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">ANOVA</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 7 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">heatmap_complex.py</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">Python</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">复杂热图绘制，支持行列注释</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">import seaborn as sns
-import matplotlib.pyplot as plt
-
-fig, ax = plt.subplots(figsize=(10, 8))
-sns.heatmap(data, annot=True, cmap='YlOrBr', ax=ax)</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-04-20</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">可视化</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">热图</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
-            <!-- Script 8 -->
-            <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">differential_expression.R</span>
-                  <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">R</span>
-                </div>
-                <button style="font-size:13px;color:var(--research-primary);padding:4px 12px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
-                  <i data-lucide="copy" style="width:14px;height:14px;"></i>
-                  复制
-                </button>
-              </div>
-              <p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">差异表达分析，支持DESeq2和edgeR</p>
-              <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre;margin:0;">library(DESeq2)
-
-dds &lt;- DESeqDataSetFromMatrix(countData = cts, colData = coldata, design = ~ condition)
-dds &lt;- DESeq(dds)
-res &lt;- results(dds)</pre>
-              <div style="display:flex;gap:12px;align-items:center;margin-top:12px;">
-                <span style="font-size:13px;color:var(--research-ink-3);">2024-03-10</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">差异表达</span>
-                <span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">DESeq2</span>
-                <a href="#" style="font-size:13px;color:var(--research-primary);text-decoration:none;margin-left:auto;">查看详情</a>
-              </div>
-            </div>
-
+          <div id="scriptList" style="display:flex;flex-direction:column;gap:16px;">
+            <!-- Dynamically rendered -->
           </div>
         </div>
 
         <!-- Footer -->
-        <div style="padding-top:32px;margin-top:32px;border-top:1px solid var(--research-border);font-size:13px;color:var(--research-ink-3);">
-          科研工作站 · 脚本仓库 · 共 8 个脚本
+        <div id="footer" style="padding-top:32px;margin-top:32px;border-top:1px solid var(--research-border);font-size:13px;color:var(--research-ink-3);">
+          科研工作站 · 脚本仓库
         </div>
       </div>
     </main>
-    <script>lucide.createIcons();</script>
+
+<script>
+// ============================================================
+//  脚本仓库 CRUD 逻辑
+// ============================================================
+
+const LANGUAGES = ['Python', 'R', 'Shell', 'JavaScript', '其他'];
+const CATEGORIES = ['数据处理', '可视化', '统计分析', '文件操作', '其他'];
+
+// 状态
+const state = {
+  search: '',
+  langFilter: '',
+  catFilter: '',
+  categoryCollapsed: false
+};
+
+// ---- 获取所有脚本 ----
+function getAllScripts() {
+  return DB.getAll(DB.KEYS.SCRIPTS);
+}
+
+// ---- 过后的脚本列表 ----
+function getFilteredScripts() {
+  let list = getAllScripts();
+  if (state.langFilter) {
+    list = list.filter(s => s.language === state.langFilter);
+  }
+  if (state.catFilter) {
+    list = list.filter(s => s.category === state.catFilter);
+  }
+  if (state.search.trim()) {
+    const q = state.search.trim().toLowerCase();
+    list = list.filter(s =>
+      (s.title || '').toLowerCase().includes(q) ||
+      (s.description || '').toLowerCase().includes(q)
+    );
+  }
+  return list;
+}
+
+// ---- 渲染分类树 ----
+function renderCategoryTree() {
+  const container = document.getElementById('categoryTree');
+  const allScripts = getAllScripts();
+
+  // 统计每个分类数量
+  const counts = {};
+  CATEGORIES.forEach(c => counts[c] = 0);
+  allScripts.forEach(s => {
+    if (s.category && counts[s.category] !== undefined) {
+      counts[s.category]++;
+    }
+  });
+
+  // 全部计数
+  const totalAll = allScripts.length;
+
+  // 当前选中状态
+  const isAllActive = !state.catFilter;
+
+  let html = `
+    <div onclick="toggleCategoryTree()" style="font-family:var(--research-font-serif);font-size:16px;font-weight:600;color:var(--research-ink);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--research-border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+      <span>分类</span>
+      <i data-lucide="${state.categoryCollapsed ? 'chevron-right' : 'chevron-down'}" style="width:16px;height:16px;color:var(--research-ink-3);"></i>
+    </div>
+  `;
+
+  if (!state.categoryCollapsed) {
+    html += `<div style="display:flex;flex-direction:column;gap:4px;">`;
+    // 全部
+    html += `
+      <div onclick="selectCategory('')" style="padding:8px 12px;font-size:14px;${isAllActive ? 'background:var(--research-surface-2);color:var(--research-primary);font-weight:500;' : 'color:var(--research-ink-2);'}border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="if(!${isAllActive})this.style.background='var(--research-surface-2)'" onmouseout="if(!${isAllActive})this.style.background='transparent'">
+        <span>全部脚本</span>
+        <span style="background:${isAllActive ? 'var(--research-primary)' : 'var(--research-surface-3)'};color:${isAllActive ? 'var(--research-primary-foreground)' : 'var(--research-ink-2)'};font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">${totalAll}</span>
+      </div>
+    `;
+    // 各分类
+    CATEGORIES.forEach(cat => {
+      const isActive = state.catFilter === cat;
+      const count = counts[cat] || 0;
+      html += `
+        <div onclick="selectCategory('${cat}')" style="padding:8px 12px;font-size:14px;${isActive ? 'background:var(--research-surface-2);color:var(--research-primary);font-weight:500;' : 'color:var(--research-ink-2);'}border-radius:var(--radius-sm);cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onmouseover="if(!${isActive})this.style.background='var(--research-surface-2)'" onmouseout="if(!${isActive})this.style.background='transparent'">
+          <span>${cat}</span>
+          <span style="background:${isActive ? 'var(--research-primary)' : 'var(--research-surface-3)'};color:${isActive ? 'var(--research-primary-foreground)' : 'var(--research-ink-2)'};font-size:11px;padding:1px 6px;border-radius:var(--radius-full);">${count}</span>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+  lucide.createIcons();
+}
+
+// ---- 折叠/展开分类树 ----
+function toggleCategoryTree() {
+  state.categoryCollapsed = !state.categoryCollapsed;
+  renderCategoryTree();
+}
+
+// ---- 选择分类 ----
+function selectCategory(cat) {
+  state.catFilter = cat;
+  document.getElementById('catFilter').value = cat;
+  renderCategoryTree();
+  renderScriptList();
+}
+
+// ---- 渲染脚本列表 ----
+function renderScriptList() {
+  const container = document.getElementById('scriptList');
+  const scripts = getFilteredScripts();
+
+  if (scripts.length === 0) {
+    container.innerHTML = `
+      <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:64px 32px;text-align:center;">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:var(--radius-full);background:var(--research-surface-2);margin-bottom:16px;">
+          <i data-lucide="file-code" style="width:28px;height:28px;color:var(--research-ink-3);"></i>
+        </div>
+        <p style="font-size:16px;color:var(--research-ink-2);margin:0 0 8px;">暂无脚本</p>
+        <p style="font-size:14px;color:var(--research-ink-3);margin:0 0 20px;">${state.search || state.langFilter || state.catFilter ? '没有匹配的脚本，试试调整筛选条件' : '点击"添加脚本"按钮来创建你的第一个脚本'}</p>
+        ${state.search || state.langFilter || state.catFilter ? '' : `<button onclick="openAddModal()" style="background:var(--research-primary);color:var(--research-primary-foreground);padding:8px 20px;border-radius:var(--radius-md);font-size:14px;font-weight:500;border:none;cursor:pointer;font-family:var(--research-font-sans);display:inline-flex;align-items:center;gap:6px;"><i data-lucide="plus" style="width:16px;height:16px;"></i>添加脚本</button>`}
+      </div>
+    `;
+    lucide.createIcons();
+    updateFooter(scripts.length);
+    return;
+  }
+
+  let html = '';
+  scripts.forEach(s => {
+    const keywords = (s.keywords || []).map(kw =>
+      `<span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">${DB.escape(kw)}</span>`
+    ).join(' ');
+
+    const codePreview = (s.code || '').substring(0, 200);
+    const escapedCode = DB.escape(codePreview);
+
+    html += `
+      <div style="background:var(--research-card);border:1px solid var(--research-border);border-radius:var(--radius-lg);padding:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span style="font-family:var(--research-font-mono);font-size:15px;font-weight:500;color:var(--research-ink);">${DB.escape(s.title || '未命名脚本')}</span>
+            <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">${DB.escape(s.language || '其他')}</span>
+            <span style="font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);background:var(--research-surface-3);color:var(--research-ink-2);">${DB.escape(s.category || '其他')}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button onclick="openViewModal('${s.id}')" title="查看" style="font-size:13px;color:var(--research-ink-2);padding:4px 10px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+              <i data-lucide="eye" style="width:14px;height:14px;"></i>查看
+            </button>
+            <button onclick="openEditModal('${s.id}')" title="编辑" style="font-size:13px;color:var(--research-primary);padding:4px 10px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+              <i data-lucide="pencil" style="width:14px;height:14px;"></i>编辑
+            </button>
+            <button onclick="deleteScript('${s.id}')" title="删除" style="font-size:13px;color:var(--state-error);padding:4px 10px;border:1px solid var(--research-border);border-radius:var(--radius-md);background:transparent;cursor:pointer;font-family:var(--research-font-sans);display:flex;align-items:center;gap:4px;">
+              <i data-lucide="trash-2" style="width:14px;height:14px;"></i>删除
+            </button>
+          </div>
+        </div>
+        ${s.description ? `<p style="font-size:14px;color:var(--research-ink-2);margin:8px 0;">${DB.escape(s.description)}</p>` : ''}
+        ${s.code ? `<pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:hidden;max-height:120px;white-space:pre-wrap;margin:0;">${escapedCode}${(s.code || '').length > 200 ? '\n…' : ''}</pre>` : ''}
+        <div style="display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap;">
+          <span style="font-size:13px;color:var(--research-ink-3);">${DB.formatDate(s.createdAt)}</span>
+          ${keywords}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+  lucide.createIcons();
+  updateFooter(scripts.length);
+}
+
+// ---- 更新页脚 ----
+function updateFooter(count) {
+  document.getElementById('footer').textContent = `科研工作站 · 脚本仓库 · 共 ${count} 个脚本`;
+}
+
+// ---- 搜索输入 ----
+function onSearchInput(val) {
+  state.search = val;
+  renderScriptList();
+}
+
+// ---- 语言筛选 ----
+function onLangFilter(val) {
+  state.langFilter = val;
+  renderScriptList();
+}
+
+// ---- 分类筛选 ----
+function onCatFilter(val) {
+  state.catFilter = val;
+  renderCategoryTree();
+  renderScriptList();
+}
+
+// ---- 添加脚本弹窗 ----
+function openAddModal() {
+  const bodyHTML = getScriptFormHTML(null);
+  const { close } = UI.modal('添加脚本', bodyHTML);
+
+  // 绑定提交
+  const form = document.getElementById('scriptForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = getFormData();
+    if (!data.title.trim()) {
+      UI.toast('请输入脚本标题', 'error');
+      return;
+    }
+    DB.add(DB.KEYS.SCRIPTS, data);
+    UI.toast('脚本添加成功', 'success');
+    close();
+    refreshAll();
+  });
+
+  lucide.createIcons();
+}
+
+// ---- 编辑脚本弹窗 ----
+function openEditModal(id) {
+  const script = DB.get(DB.KEYS.SCRIPTS, id);
+  if (!script) {
+    UI.toast('脚本不存在', 'error');
+    return;
+  }
+
+  const bodyHTML = getScriptFormHTML(script);
+  const { close } = UI.modal('编辑脚本', bodyHTML);
+
+  const form = document.getElementById('scriptForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = getFormData();
+    if (!data.title.trim()) {
+      UI.toast('请输入脚本标题', 'error');
+      return;
+    }
+    DB.update(DB.KEYS.SCRIPTS, id, data);
+    UI.toast('脚本更新成功', 'success');
+    close();
+    refreshAll();
+  });
+
+  lucide.createIcons();
+}
+
+// ---- 查看详情弹窗 ----
+function openViewModal(id) {
+  const script = DB.get(DB.KEYS.SCRIPTS, id);
+  if (!script) {
+    UI.toast('脚本不存在', 'error');
+    return;
+  }
+
+  const keywords = (script.keywords || []).map(kw => DB.escape(kw)).join('、');
+
+  const bodyHTML = `
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:4px;">标题</div>
+        <div style="font-family:var(--research-font-mono);font-size:16px;font-weight:600;color:var(--research-ink);">${DB.escape(script.title || '未命名脚本')}</div>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:4px;">语言</div>
+          <span style="font-size:13px;padding:2px 10px;border-radius:var(--radius-sm);background:var(--research-surface-2);color:var(--research-ink-2);">${DB.escape(script.language || '其他')}</span>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:4px;">分类</div>
+          <span style="font-size:13px;padding:2px 10px;border-radius:var(--radius-sm);background:var(--research-surface-3);color:var(--research-ink-2);">${DB.escape(script.category || '其他')}</span>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:4px;">创建时间</div>
+          <span style="font-size:13px;color:var(--research-ink-2);">${DB.formatDate(script.createdAt)}</span>
+        </div>
+      </div>
+      ${script.description ? `
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:4px;">描述</div>
+        <div style="font-size:14px;color:var(--research-ink-2);line-height:1.6;">${DB.escape(script.description)}</div>
+      </div>` : ''}
+      ${keywords ? `
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:4px;">关键词</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          ${(script.keywords || []).map(kw => `<span style="background:var(--research-surface-2);color:var(--research-ink-2);font-size:12px;padding:2px 8px;border-radius:var(--radius-sm);">${DB.escape(kw)}</span>`).join('')}
+        </div>
+      </div>` : ''}
+      ${script.code ? `
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--research-ink-3);margin-bottom:8px;">代码</div>
+        <pre style="background:var(--research-surface-3);border-radius:var(--radius-md);padding:16px;font-family:var(--research-font-mono);font-size:13px;line-height:1.5;color:var(--research-ink-2);overflow:auto;max-height:400px;white-space:pre-wrap;margin:0;">${DB.escape(script.code)}</pre>
+      </div>` : ''}
+    </div>
+  `;
+
+  UI.modal('查看脚本', bodyHTML);
+  lucide.createIcons();
+}
+
+// ---- 删除脚本 ----
+function deleteScript(id) {
+  const script = DB.get(DB.KEYS.SCRIPTS, id);
+  if (!script) {
+    UI.toast('脚本不存在', 'error');
+    return;
+  }
+  if (UI.confirm(`确定要删除脚本"${script.title || '未命名脚本'}"吗？`)) {
+    DB.remove(DB.KEYS.SCRIPTS, id);
+    UI.toast('脚本已删除', 'success');
+    refreshAll();
+  }
+}
+
+// ---- 表单 HTML ----
+function getScriptFormHTML(script) {
+  const s = script || {};
+  const langOptions = LANGUAGES.map(l =>
+    `<option value="${l}" ${s.language === l ? 'selected' : ''}>${l}</option>`
+  ).join('');
+  const catOptions = CATEGORIES.map(c =>
+    `<option value="${c}" ${s.category === c ? 'selected' : ''}>${c}</option>`
+  ).join('');
+
+  return `
+    <form id="scriptForm" style="display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <label class="rw-label">标题 <span style="color:var(--state-error);">*</span></label>
+        <input type="text" name="title" class="rw-input" placeholder="例如：bulk_RNA_seq_pipeline.py" value="${DB.escape(s.title || '')}" required>
+      </div>
+      <div>
+        <label class="rw-label">描述</label>
+        <textarea name="description" class="rw-input" rows="2" placeholder="简要描述脚本用途...">${DB.escape(s.description || '')}</textarea>
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div style="flex:1;">
+          <label class="rw-label">语言</label>
+          <select name="language" class="rw-input" style="cursor:pointer;">
+            ${langOptions}
+          </select>
+        </div>
+        <div style="flex:1;">
+          <label class="rw-label">分类</label>
+          <select name="category" class="rw-input" style="cursor:pointer;">
+            ${catOptions}
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="rw-label">代码</label>
+        <textarea name="code" class="rw-input" rows="8" placeholder="粘贴脚本代码...">${DB.escape(s.code || '')}</textarea>
+      </div>
+      <div>
+        <label class="rw-label">关键词</label>
+        <input type="text" name="keywords" class="rw-input" placeholder="多个关键词用逗号分隔" value="${DB.escape((s.keywords || []).join(', '))}">
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px;">
+        <button type="button" class="modal-close" style="padding:8px 20px;border-radius:var(--radius-md);font-size:14px;border:1px solid var(--research-border);background:transparent;color:var(--research-ink-2);cursor:pointer;font-family:var(--research-font-sans);">取消</button>
+        <button type="submit" style="padding:8px 20px;border-radius:var(--radius-md);font-size:14px;font-weight:500;border:none;background:var(--research-primary);color:var(--research-primary-foreground);cursor:pointer;font-family:var(--research-font-sans);">${script ? '保存修改' : '添加脚本'}</button>
+      </div>
+    </form>
+  `;
+}
+
+// ---- 获取表单数据 ----
+function getFormData() {
+  const form = document.getElementById('scriptForm');
+  return {
+    title: form.title.value.trim(),
+    description: form.description.value.trim(),
+    language: form.language.value,
+    category: form.category.value,
+    code: form.code.value,
+    keywords: form.keywords.value
+      .split(',')
+      .map(k => k.trim())
+      .filter(k => k.length > 0)
+  };
+}
+
+// ---- 刷新全部 ----
+function refreshAll() {
+  renderCategoryTree();
+  renderScriptList();
+}
+
+// ---- 初始化 ----
+(function init() {
+  // 如果没有数据，添加一些示例数据
+  const existing = getAllScripts();
+  if (existing.length === 0) {
+    const samples = [
+      {
+        title: 'bulk_RNA_seq_pipeline.py',
+        description: '批量RNA-seq数据分析标准流程，包含质控、比对、定量',
+        language: 'Python',
+        code: 'import subprocess\n\ndef run_pipeline(fastq_files, reference):\n    # Step 1: Quality control\n    subprocess.run([\'fastqc\', \'-o\', \'qc_results\', fastq_files])\n    # Step 2: Alignment\n    subprocess.run([\'hisat2\', \'-x\', reference, \'-U\', fastq_files])',
+        category: '数据处理',
+        keywords: ['RNA-seq', '生物信息']
+      },
+      {
+        title: 'single_cell_qc.R',
+        description: '单细胞数据质控和过滤，使用Seurat框架',
+        language: 'R',
+        code: 'library(Seurat)\n\nobj <- CreateSeuratObject(counts = data)\nobj <- PercentageFeatureSet(obj, pattern = "^MT-", col.name = "percent.mt")\nobj <- subset(obj, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent.mt < 20)',
+        category: '数据处理',
+        keywords: ['单细胞', '质控']
+      },
+      {
+        title: 'volcano_plot.py',
+        description: '火山图绘制脚本，支持自定义阈值和标注',
+        language: 'Python',
+        code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\ndef volcano_plot(df, log2fc_col, pval_col, threshold=0.05):\n    df[\'-log10p\'] = -np.log10(df[pval_col])',
+        category: '可视化',
+        keywords: ['火山图', '差异表达']
+      },
+      {
+        title: 'statistical_test_groups.R',
+        description: '多组间统计检验和事后比较',
+        language: 'R',
+        code: '# ANOVA + Tukey HSD\nresult <- aov(value ~ group, data = df)\nsummary(result)\nTukeyHSD(result)',
+        category: '统计分析',
+        keywords: ['ANOVA', 'Tukey']
+      },
+      {
+        title: 'file_rename_batch.sh',
+        description: '批量重命名文件，支持正则匹配',
+        language: 'Shell',
+        code: '#!/bin/bash\n\nfor file in *.txt; do\n  mv "$file" "prefix_${file}"\ndone',
+        category: '文件操作',
+        keywords: ['批量', '重命名']
+      }
+    ];
+    samples.forEach(s => DB.add(DB.KEYS.SCRIPTS, s));
+  }
+
+  refreshAll();
+  lucide.createIcons();
+})();
+</script>
 </body>
 </html>

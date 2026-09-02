@@ -143,6 +143,7 @@
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="../assets/app.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
   @theme inline {
@@ -289,141 +290,383 @@
       <!-- Main Content -->
       <div style="margin-left:240px; padding:32px; background:var(--research-background); min-height:100vh;">
         <!-- Header Bar -->
-        <div style="display:flex; justify-content:space-between; align-items:center; height:60px; border-bottom:1px solid var(--research-border); margin-bottom:24px; padding-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; min-height:60px; border-bottom:1px solid var(--research-border); margin-bottom:24px; padding-bottom:16px; flex-wrap:wrap; gap:12px;">
           <h1 style="font-family:var(--research-font-serif); font-size:24px; font-weight:600; color:var(--research-ink); margin:0;">文章撰写</h1>
-          <div style="display:flex; align-items:center; gap:12px;">
-            <input type="text" placeholder="搜索文章..." style="width:240px; padding:8px 12px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; font-family:var(--research-font-sans); outline:none;">
-            <button style="background:var(--research-primary); color:var(--research-primary-foreground); padding:8px 16px; border-radius:var(--radius-md); border:none; font-size:14px; font-weight:500; font-family:var(--research-font-sans); cursor:pointer;">新建文章</button>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <input id="rw-search" type="text" placeholder="搜索文章..." style="width:240px; padding:8px 12px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; font-family:var(--research-font-sans); outline:none;">
+            <select id="rw-filter" style="padding:8px 12px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; font-family:var(--research-font-sans); outline:none; cursor:pointer;">
+              <option value="all">全部状态</option>
+              <option value="draft">草稿</option>
+              <option value="revising">修改中</option>
+              <option value="reviewing">审阅中</option>
+              <option value="completed">已完成</option>
+            </select>
+            <button id="rw-new-btn" style="background:var(--research-primary); color:var(--research-primary-foreground); padding:8px 16px; border-radius:var(--radius-md); border:none; font-size:14px; font-weight:500; font-family:var(--research-font-sans); cursor:pointer;">新建文章</button>
           </div>
         </div>
 
         <!-- Kanban Board -->
-        <div style="display:flex; gap:20px; overflow-x:auto; min-height:500px;">
-
-          <!-- Column 1: 大纲阶段 -->
-          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
-            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
-              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--state-info); margin-right:8px;"></span>
-              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">大纲阶段</span>
-              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">1</span>
-            </div>
-            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
-              <!-- Card -->
-              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
-                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">肿瘤微环境与免疫治疗综述</div>
-                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">综述</span>
-                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
-                  <div style="width:15%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-09-01</span>
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">800字</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Column 2: 撰写中 -->
-          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
-            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
-              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--state-warning); margin-right:8px;"></span>
-              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">撰写中</span>
-              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">2</span>
-            </div>
-            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
-              <!-- Card 1 -->
-              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
-                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">CRISPR-Cas9在癌症治疗中的应用</div>
-                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">研究论文</span>
-                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
-                  <div style="width:45%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-08-28</span>
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">4,500字</span>
-                </div>
-              </div>
-              <!-- Card 2 -->
-              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
-                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">单细胞测序数据分析方法比较</div>
-                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">方法文章</span>
-                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
-                  <div style="width:60%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-08-25</span>
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">6,200字</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Column 3: 审阅修改 -->
-          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
-            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
-              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--research-primary); margin-right:8px;"></span>
-              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">审阅修改</span>
-              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">1</span>
-            </div>
-            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
-              <!-- Card -->
-              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
-                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">RNA-seq数据分析最佳实践</div>
-                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">方法文章</span>
-                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
-                  <div style="width:85%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-08-20</span>
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">8,000字</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Column 4: 已完成 -->
-          <div style="flex-shrink:0; width:300px; display:flex; flex-direction:column;">
-            <div style="padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;">
-              <span style="width:8px; height:8px; border-radius:var(--radius-full); background:var(--state-success); margin-right:8px;"></span>
-              <span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">已完成</span>
-              <span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">2</span>
-            </div>
-            <div style="flex:1; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;">
-              <!-- Card 1 -->
-              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
-                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Western Blot实验指南</div>
-                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">综述</span>
-                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
-                  <div style="width:100%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-07-15</span>
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">12,000字</span>
-                </div>
-              </div>
-              <!-- Card 2 -->
-              <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:pointer;">
-                <div style="font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">基因编辑技术进展回顾</div>
-                <span style="display:inline-block; font-size:12px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); margin-top:8px; font-family:var(--research-font-sans);">综述</span>
-                <div style="height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;">
-                  <div style="width:100%; height:100%; background:var(--research-primary); border-radius:var(--radius-full);"></div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">更新 2024-06-20</span>
-                  <span style="font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);">9,500字</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div id="rw-board" style="display:flex; gap:20px; overflow-x:auto; min-height:500px; align-items:flex-start;">
+          <!-- Columns rendered by JS -->
         </div>
 
         <!-- Footer -->
         <div style="padding-top:32px; margin-top:24px; border-top:1px solid var(--research-border);">
-          <span style="font-size:13px; color:var(--research-ink-3); font-family:var(--research-font-sans);">科研工作站 · 文章撰写 · 共 6 篇在写/已完成</span>
+          <span id="rw-footer" style="font-size:13px; color:var(--research-ink-3); font-family:var(--research-font-sans);">科研工作站 · 文章撰写</span>
         </div>
       </div>
     </main>
-    <script>lucide.createIcons();</script>
+
+    <script>
+    (function () {
+      "use strict";
+
+      var COLUMNS = [
+        { key: 'draft',     label: '草稿',     dot: 'var(--state-info)' },
+        { key: 'revising',  label: '修改中',   dot: 'var(--state-warning)' },
+        { key: 'reviewing', label: '审阅中',   dot: 'var(--research-primary)' },
+        { key: 'completed', label: '已完成',   dot: 'var(--state-success)' }
+      ];
+
+      var KEY = DB.KEYS.WRITINGS;
+      var state = { search: '', filter: 'all', dragId: null };
+
+      // ---- Helpers ----
+      function getWritings() { return DB.getAll(KEY); }
+
+      function filteredByStatus(status) {
+        var list = getWritings().filter(function (w) { return w.status === status; });
+        var q = state.search.trim().toLowerCase();
+        if (q) {
+          list = list.filter(function (w) {
+            return (w.title || '').toLowerCase().indexOf(q) > -1 ||
+                   (w.abstract || '').toLowerCase().indexOf(q) > -1;
+          });
+        }
+        return list;
+      }
+
+      function progressColor(p) {
+        p = Number(p) || 0;
+        if (p >= 100) return 'var(--state-success)';
+        if (p >= 70) return 'var(--research-primary)';
+        if (p >= 40) return 'var(--state-warning)';
+        return 'var(--state-info)';
+      }
+
+      function escapeAttr(s) { return String(s == null ? '' : s).replace(/"/g, '&quot;'); }
+
+      // ---- Render ----
+      function renderBoard() {
+        var board = document.getElementById('rw-board');
+        board.innerHTML = '';
+
+        COLUMNS.forEach(function (col) {
+          // filteredByStatus already applies search; filter select suppresses other columns
+          if (state.filter !== 'all' && state.filter !== col.key) return;
+
+          var items = filteredByStatus(col.key);
+          var colEl = document.createElement('div');
+          colEl.className = 'rw-col';
+          colEl.setAttribute('data-status', col.key);
+          colEl.style.cssText = 'flex-shrink:0; width:300px; display:flex; flex-direction:column;';
+
+          // Header
+          var head = document.createElement('div');
+          head.style.cssText = 'padding:12px 16px; background:var(--research-surface-2); border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--research-border); border-bottom:none; display:flex; align-items:center;';
+          head.innerHTML =
+            '<span style="width:8px; height:8px; border-radius:var(--radius-full); background:' + col.dot + '; margin-right:8px;"></span>' +
+            '<span style="font-family:var(--research-font-serif); font-size:15px; font-weight:600; color:var(--research-ink);">' + col.label + '</span>' +
+            '<span style="background:var(--research-surface-3); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-size:12px; margin-left:8px; font-family:var(--research-font-sans);">' + items.length + '</span>';
+          colEl.appendChild(head);
+
+          // Body (drop target)
+          var body = document.createElement('div');
+          body.className = 'rw-col-body';
+          body.setAttribute('data-status', col.key);
+          body.style.cssText = 'flex:1; min-height:120px; background:var(--research-surface); border:1px solid var(--research-border); border-top:none; border-radius:0 0 var(--radius-md) var(--radius-md); padding:12px; display:flex; flex-direction:column; gap:12px;';
+
+          if (items.length === 0) {
+            var empty = document.createElement('div');
+            empty.style.cssText = 'flex:1; display:flex; align-items:center; justify-content:center; color:var(--research-ink-3); font-size:13px; font-family:var(--research-font-sans); padding:24px 8px;';
+            empty.textContent = '暂无文章，拖拽或新建到此处';
+            body.appendChild(empty);
+          } else {
+            items.forEach(function (w) { body.appendChild(renderCard(w)); });
+          }
+
+          // Drag & drop events
+          body.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            body.style.background = 'var(--research-surface-2)';
+          });
+          body.addEventListener('dragleave', function () {
+            body.style.background = 'var(--research-surface)';
+          });
+          body.addEventListener('drop', function (e) {
+            e.preventDefault();
+            body.style.background = 'var(--research-surface)';
+            var id = e.dataTransfer.getData('text/plain');
+            if (id && state.dragId === id) {
+              var newStatus = col.key;
+              var w = DB.get(KEY, id);
+              if (w && w.status !== newStatus) {
+                DB.update(KEY, id, { status: newStatus });
+                if (newStatus === 'completed') DB.update(KEY, id, { progress: 100 });
+                UI.toast('已移动到「' + col.label + '」', 'success');
+                renderAll();
+              }
+            }
+          });
+
+          colEl.appendChild(body);
+          board.appendChild(colEl);
+        });
+
+        // Footer count
+        var total = getWritings().length;
+        document.getElementById('rw-footer').textContent =
+          '科研工作站 · 文章撰写 · 共 ' + total + ' 篇';
+      }
+
+      function renderCard(w) {
+        var card = document.createElement('div');
+        card.setAttribute('data-id', w.id);
+        card.setAttribute('draggable', 'true');
+        card.style.cssText = 'background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-md); padding:16px; cursor:grab;';
+
+        // Title
+        var title = document.createElement('div');
+        title.style.cssText = 'font-family:var(--research-font-serif); font-size:14px; font-weight:600; color:var(--research-ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;';
+        title.textContent = w.title || '（无标题）';
+        card.appendChild(title);
+
+        // Abstract
+        if (w.abstract) {
+          var abs = document.createElement('div');
+          abs.style.cssText = 'font-size:12px; color:var(--research-ink-2); font-family:var(--research-font-sans); margin-top:8px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;';
+          abs.textContent = w.abstract;
+          card.appendChild(abs);
+        }
+
+        // Keywords
+        if (w.keywords && w.keywords.length) {
+          var kw = document.createElement('div');
+          kw.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;';
+          w.keywords.forEach(function (k) {
+            var tag = document.createElement('span');
+            tag.style.cssText = 'font-size:11px; background:var(--research-surface-2); color:var(--research-ink-2); padding:2px 8px; border-radius:var(--radius-sm); font-family:var(--research-font-sans);';
+            tag.textContent = k;
+            kw.appendChild(tag);
+          });
+          card.appendChild(kw);
+        }
+
+        // Progress bar
+        var p = Number(w.progress) || 0;
+        var track = document.createElement('div');
+        track.style.cssText = 'height:4px; background:var(--research-surface-3); border-radius:var(--radius-full); margin-top:12px;';
+        var fill = document.createElement('div');
+        fill.style.cssText = 'width:' + p + '%; height:100%; background:' + progressColor(p) + '; border-radius:var(--radius-full);';
+        track.appendChild(fill);
+        card.appendChild(track);
+
+        // Meta + actions
+        var meta = document.createElement('div');
+        meta.style.cssText = 'display:flex; justify-content:space-between; align-items:center; margin-top:12px;';
+        var date = document.createElement('span');
+        date.style.cssText = 'font-size:12px; color:var(--research-ink-3); font-family:var(--research-font-sans);';
+        date.textContent = w.updatedAt ? ('更新 ' + DB.formatDate(w.updatedAt)) : '';
+        var actions = document.createElement('div');
+        actions.style.cssText = 'display:flex; gap:8px;';
+        var editBtn = document.createElement('button');
+        editBtn.style.cssText = 'background:none; border:none; cursor:pointer; color:var(--research-primary); font-size:12px; font-family:var(--research-font-sans); padding:0;';
+        editBtn.textContent = '编辑';
+        editBtn.addEventListener('click', function (e) { e.stopPropagation(); openForm(w.id); });
+        var delBtn = document.createElement('button');
+        delBtn.style.cssText = 'background:none; border:none; cursor:pointer; color:var(--state-error); font-size:12px; font-family:var(--research-font-sans); padding:0;';
+        delBtn.textContent = '删除';
+        delBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (UI.confirm('确定删除文章「' + (w.title || '无标题') + '」吗？')) {
+            DB.remove(KEY, w.id);
+            UI.toast('已删除', 'success');
+            renderAll();
+          }
+        });
+        actions.appendChild(editBtn);
+        actions.appendChild(delBtn);
+        meta.appendChild(date);
+        meta.appendChild(actions);
+        card.appendChild(meta);
+
+        // Drag events
+        card.addEventListener('dragstart', function (e) {
+          state.dragId = w.id;
+          e.dataTransfer.setData('text/plain', w.id);
+          e.dataTransfer.effectAllowed = 'move';
+          card.style.opacity = '0.5';
+        });
+        card.addEventListener('dragend', function () {
+          state.dragId = null;
+          card.style.opacity = '1';
+        });
+        card.addEventListener('click', function () { openForm(w.id); });
+
+        return card;
+      }
+
+      // ---- Form (new / edit) ----
+      function openForm(id) {
+        var w = id ? DB.get(KEY, id) : null;
+        var isNew = !w;
+        var data = w || { title: '', abstract: '', content: '', status: 'draft', keywords: [], notes: '', progress: 0 };
+
+        var bodyHTML =
+          '<div style="display:flex; flex-direction:column; gap:16px; font-family:var(--research-font-sans);">' +
+            field('标题', '<input id="rw-f-title" type="text" value="' + escapeAttr(data.title) + '" style="' + inputStyle() + '" placeholder="请输入文章标题">') +
+            field('摘要', '<textarea id="rw-f-abstract" rows="2" style="' + inputStyle() + '" placeholder="一句话摘要">' + DB.escape(data.abstract) + '</textarea>') +
+            field('正文', '<textarea id="rw-f-content" rows="6" style="' + inputStyle() + '" placeholder="支持简单 Markdown，下方可预览">' + DB.escape(data.content) + '</textarea>') +
+            '<div>' +
+              '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;"><span style="font-size:13px; color:var(--research-ink-2);">Markdown 预览</span></div>' +
+              '<div id="rw-f-preview" style="border:1px solid var(--research-border); border-radius:var(--radius-md); padding:12px; background:var(--research-surface-2); min-height:60px; font-size:13px; color:var(--research-ink-2);"></div>' +
+            '</div>' +
+            field('关键词（逗号分隔）', '<input id="rw-f-keywords" type="text" value="' + escapeAttr((data.keywords || []).join(', ')) + '" style="' + inputStyle() + '" placeholder="如：CRISPR, 癌症">') +
+            '<div style="display:flex; gap:16px;">' +
+              '<div style="flex:1;">' + label('状态') +
+                '<select id="rw-f-status" style="' + inputStyle() + '; cursor:pointer;">' +
+                  opt('draft', '草稿', data.status) + opt('revising', '修改中', data.status) + opt('reviewing', '审阅中', data.status) + opt('completed', '已完成', data.status) +
+                '</select>' +
+              '</div>' +
+              '<div style="flex:1;">' + label('进度：') +
+                '<div style="display:flex; align-items:center; gap:8px;">' +
+                  '<input id="rw-f-progress" type="range" min="0" max="100" value="' + (Number(data.progress) || 0) + '" style="flex:1;">' +
+                  '<span id="rw-f-progress-val" style="font-size:13px; color:var(--research-ink-2); width:40px; text-align:right;">' + (Number(data.progress) || 0) + '%</span>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            field('备注', '<textarea id="rw-f-notes" rows="2" style="' + inputStyle() + '" placeholder="写作备注">' + DB.escape(data.notes || '') + '</textarea>') +
+            '<div style="display:flex; justify-content:flex-end; gap:12px; margin-top:8px;">' +
+              '<button class="rw-cancel" style="background:var(--research-surface-3); color:var(--research-ink-2); padding:8px 16px; border-radius:var(--radius-md); border:none; font-size:14px; cursor:pointer;">取消</button>' +
+              '<button class="rw-save" style="background:var(--research-primary); color:var(--research-primary-foreground); padding:8px 16px; border-radius:var(--radius-md); border:none; font-size:14px; font-weight:500; cursor:pointer;">' + (isNew ? '创建' : '保存') + '</button>' +
+            '</div>' +
+          '</div>';
+
+        var m = UI.modal(isNew ? '新建文章' : '编辑文章', bodyHTML);
+        var overlay = m.overlay;
+
+        function inputStyle() {
+          return 'width:100%; padding:8px 12px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; font-family:var(--research-font-sans); outline:none; box-sizing:border-box;';
+        }
+        function label(t) { return '<div style="font-size:13px; color:var(--research-ink-2); margin-bottom:6px;">' + t + '</div>'; }
+        function field(t, html) { return '<div>' + label(t) + html + '</div>'; }
+        function opt(v, l, cur) { return '<option value="' + v + '"' + (cur === v ? ' selected' : '') + '>' + l + '</option>'; }
+
+        // wire preview + progress
+        var contentEl = overlay.querySelector('#rw-f-content');
+        var previewEl = overlay.querySelector('#rw-f-preview');
+        var progressEl = overlay.querySelector('#rw-f-progress');
+        var progressVal = overlay.querySelector('#rw-f-progress-val');
+
+        function renderPreview() {
+          var raw = contentEl.value || '';
+          previewEl.innerHTML = miniMarkdown(raw);
+        }
+        contentEl.addEventListener('input', renderPreview);
+        renderPreview();
+
+        progressEl.addEventListener('input', function () { progressVal.textContent = progressEl.value + '%'; });
+
+        // status -> progress sync
+        var statusEl = overlay.querySelector('#rw-f-status');
+        statusEl.addEventListener('change', function () {
+          if (statusEl.value === 'completed') {
+            progressEl.value = 100;
+            progressVal.textContent = '100%';
+          }
+        });
+
+        // actions
+        overlay.querySelector('.rw-cancel').addEventListener('click', m.close);
+        overlay.querySelector('.rw-save').addEventListener('click', function () {
+          var titleVal = overlay.querySelector('#rw-f-title').value.trim();
+          if (!titleVal) { UI.toast('请填写标题', 'error'); return; }
+          var kwRaw = overlay.querySelector('#rw-f-keywords').value.trim();
+          var kwList = kwRaw ? kwRaw.split(/[,，、\s]+/).map(function (s) { return s.trim(); }).filter(Boolean) : [];
+          var payload = {
+            title: titleVal,
+            abstract: overlay.querySelector('#rw-f-abstract').value.trim(),
+            content: overlay.querySelector('#rw-f-content').value,
+            keywords: kwList,
+            status: statusEl.value,
+            progress: Number(progressEl.value) || 0,
+            notes: overlay.querySelector('#rw-f-notes').value.trim()
+          };
+          if (payload.status === 'completed') payload.progress = 100;
+
+          if (isNew) {
+            DB.add(KEY, payload);
+            UI.toast('已创建文章', 'success');
+          } else {
+            DB.update(KEY, id, payload);
+            UI.toast('已保存修改', 'success');
+          }
+          m.close();
+          renderAll();
+        });
+      }
+
+      // ---- Mini Markdown preview ----
+      function miniMarkdown(src) {
+        var html = DB.escape(src);
+        // headings
+        html = html.replace(/^### (.*)$/gm, '<strong style="font-family:var(--research-font-serif);">$1</strong>');
+        html = html.replace(/^## (.*)$/gm, '<strong style="font-family:var(--research-font-serif); font-size:15px;">$1</strong>');
+        html = html.replace(/^# (.*)$/gm, '<strong style="font-family:var(--research-font-serif); font-size:16px;">$1</strong>');
+        // bold / italic
+        html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        // inline code
+        html = html.replace(/`([^`]+)`/g, '<code style="background:var(--research-surface-3); padding:1px 4px; border-radius:var(--radius-sm);">$1</code>');
+        // line breaks
+        html = html.replace(/\n/g, '<br>');
+        if (!html.trim()) html = '<span style="color:var(--research-ink-3);">无预览内容</span>';
+        return html;
+      }
+
+      // ---- Render all ----
+      function renderAll() { renderBoard(); }
+
+      // ---- Event wiring ----
+      document.getElementById('rw-new-btn').addEventListener('click', function () { openForm(null); });
+      document.getElementById('rw-search').addEventListener('input', function (e) {
+        state.search = e.target.value;
+        renderAll();
+      });
+      document.getElementById('rw-filter').addEventListener('change', function (e) {
+        state.filter = e.target.value;
+        renderAll();
+      });
+
+      // ---- Init: seed sample data if empty ----
+      (function initSeed() {
+        var list = getWritings();
+        if (list.length > 0) return;
+        var samples = [
+          { title: '肿瘤微环境与免疫治疗综述', abstract: '梳理 TME 中免疫细胞互作与治疗靶点。', content: '# 肿瘤微环境\n\n**免疫细胞** 是关键。', status: 'draft', keywords: ['肿瘤', '免疫'], notes: '需补充图表', progress: 15 },
+          { title: 'CRISPR-Cas9在癌症治疗中的应用', abstract: '综述 CRISPR 在实体瘤中的临床进展。', content: '## 前言\n\nCRISPR-Cas9...', status: 'revising', keywords: ['CRISPR', '癌症'], notes: '二审中', progress: 45 },
+          { title: '单细胞测序数据分析方法比较', abstract: '对比 Seurat 与 Scanpy 工作流。', content: '# 方法对比\n\nSeurat vs Scanpy', status: 'revising', keywords: ['单细胞', '生信'], notes: '', progress: 60 },
+          { title: 'RNA-seq数据分析最佳实践', abstract: '从质控到差异表达的完整流程。', content: '## 流程\n\n1. 质控\n2. 比对', status: 'reviewing', keywords: ['RNA-seq', '生信'], notes: '导师审阅中', progress: 85 },
+          { title: 'Western Blot实验指南', abstract: '标准操作流程与疑难解答。', content: '# WB 指南\n\n已完成。', status: 'completed', keywords: ['WB', '实验'], notes: '', progress: 100 },
+          { title: '基因编辑技术进展回顾', abstract: '十年回顾与未来展望。', content: '# 回顾\n\n十年发展。', status: 'completed', keywords: ['基因编辑'], notes: '', progress: 100 }
+        ];
+        samples.forEach(function (s) { DB.add(KEY, s); });
+      })();
+
+      renderAll();
+      lucide.createIcons();
+    })();
+    </script>
 </body>
 </html>

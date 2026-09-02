@@ -143,6 +143,7 @@
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="../assets/app.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
   @theme inline {
@@ -343,6 +344,7 @@
           font-family: var(--research-font-sans);
           outline: none;
         }
+        .gw-search:focus { border-color: var(--research-primary); }
         .gw-search::placeholder { color: var(--research-ink-3); }
         .gw-btn-primary {
           background: var(--research-primary);
@@ -358,6 +360,7 @@
           gap: 6px;
           font-family: var(--research-font-sans);
         }
+        .gw-btn-primary:hover { opacity: 0.9; }
         .gw-btn-primary [data-lucide] { width: 16px; height: 16px; }
 
         /* ---- Filter bar ---- */
@@ -377,6 +380,7 @@
           cursor: pointer;
           font-family: var(--research-font-sans);
         }
+        .gw-pill:hover { border-color: var(--research-primary); }
         .gw-pill.is-active {
           background: var(--research-primary);
           color: var(--research-primary-foreground);
@@ -394,12 +398,14 @@
           border: 1px solid var(--research-border);
           border-radius: var(--radius-lg);
           overflow: hidden;
-          cursor: pointer;
-          transition: border-color 120ms ease;
+          transition: border-color 120ms ease, box-shadow 120ms ease;
           display: flex;
           flex-direction: column;
         }
-        .gw-card:hover { border-color: var(--research-primary); }
+        .gw-card:hover {
+          border-color: var(--research-primary);
+          box-shadow: var(--research-shadow-floating);
+        }
         .gw-card-thumb {
           width: 100%;
           aspect-ratio: 4 / 3;
@@ -407,9 +413,16 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          overflow: hidden;
+          position: relative;
+        }
+        .gw-card-thumb img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
         .gw-card-thumb [data-lucide] { width: 48px; height: 48px; color: var(--research-ink-3); }
-        .gw-card-body { padding: 16px; }
+        .gw-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
         .gw-card-title {
           font-family: var(--research-font-serif);
           font-size: 14px;
@@ -419,40 +432,167 @@
           overflow: hidden;
           text-overflow: ellipsis;
         }
-        .gw-card-meta {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: 8px;
-        }
-        .gw-card-date { font-size: 13px; color: var(--research-ink-3); }
-        .gw-card-cat {
+        .gw-card-desc {
           font-size: 12px;
+          color: var(--research-ink-3);
+          margin-top: 4px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .gw-card-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-top: 10px;
+        }
+        .gw-card-cat {
+          font-size: 11px;
           background: var(--research-surface-2);
           color: var(--research-ink-2);
           padding: 2px 8px;
           border-radius: var(--radius-sm);
         }
-
-        /* ---- Upload zone ---- */
-        .gw-upload {
-          margin-top: 24px;
-          border: 2px dashed var(--research-border);
-          border-radius: var(--radius-lg);
-          padding: 48px;
-          text-align: center;
-          background: var(--research-surface);
+        .gw-card-source {
+          font-size: 11px;
+          background: var(--research-brand);
+          color: var(--research-brand-ink);
+          padding: 2px 8px;
+          border-radius: var(--radius-sm);
         }
-        .gw-upload [data-lucide] { width: 48px; height: 48px; color: var(--research-ink-3); }
-        .gw-upload-text {
-          font-size: 16px;
-          color: var(--research-ink-2);
+        .gw-card-actions {
+          display: flex;
+          gap: 6px;
           margin-top: 12px;
+          padding-top: 12px;
+          border-top: 1px solid var(--research-border);
         }
-        .gw-upload-sub {
-          font-size: 13px;
+        .gw-icon-btn {
+          flex: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 6px;
+          border: 1px solid var(--research-border);
+          border-radius: var(--radius-md);
+          background: var(--research-surface);
+          color: var(--research-ink-2);
+          font-size: 12px;
+          cursor: pointer;
+          font-family: var(--research-font-sans);
+        }
+        .gw-icon-btn:hover { border-color: var(--research-primary); color: var(--research-primary); }
+        .gw-icon-btn.danger:hover { border-color: var(--state-error); color: var(--state-error); }
+        .gw-icon-btn [data-lucide] { width: 14px; height: 14px; }
+
+        /* ---- Empty state ---- */
+        .gw-empty {
+          text-align: center;
+          padding: 80px 20px;
           color: var(--research-ink-3);
-          margin-top: 4px;
+        }
+        .gw-empty [data-lucide] { width: 56px; height: 56px; color: var(--research-ink-3); }
+        .gw-empty-title {
+          font-family: var(--research-font-serif);
+          font-size: 18px;
+          color: var(--research-ink-2);
+          margin-top: 16px;
+        }
+        .gw-empty-sub {
+          font-size: 14px;
+          margin-top: 8px;
+        }
+
+        /* ---- Modal form ---- */
+        .gw-form-group { margin-bottom: 16px; }
+        .gw-form-label {
+          display: block;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--research-ink-2);
+          margin-bottom: 6px;
+          font-family: var(--research-font-sans);
+        }
+        .gw-form-input,
+        .gw-form-textarea,
+        .gw-form-select {
+          width: 100%;
+          padding: 8px 12px;
+          border: 1px solid var(--research-border);
+          border-radius: var(--radius-md);
+          background: var(--research-surface);
+          color: var(--research-ink);
+          font-size: 14px;
+          font-family: var(--research-font-sans);
+          outline: none;
+          box-sizing: border-box;
+        }
+        .gw-form-input:focus,
+        .gw-form-textarea:focus,
+        .gw-form-select:focus { border-color: var(--research-primary); }
+        .gw-form-textarea { resize: vertical; min-height: 72px; }
+        .gw-file-drop {
+          border: 2px dashed var(--research-border);
+          border-radius: var(--radius-md);
+          padding: 24px;
+          text-align: center;
+          cursor: pointer;
+          background: var(--research-surface-2);
+          transition: border-color 120ms ease;
+        }
+        .gw-file-drop:hover { border-color: var(--research-primary); }
+        .gw-file-drop [data-lucide] { width: 36px; height: 36px; color: var(--research-ink-3); }
+        .gw-file-drop-text { font-size: 14px; color: var(--research-ink-2); margin-top: 8px; }
+        .gw-file-drop-sub { font-size: 12px; color: var(--research-ink-3); margin-top: 4px; }
+        .gw-preview {
+          margin-top: 12px;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          border: 1px solid var(--research-border);
+          max-height: 200px;
+          display: none;
+        }
+        .gw-preview img { width: 100%; display: block; }
+        .gw-form-actions {
+          display: flex;
+          gap: 12px;
+          justify-content: flex-end;
+          margin-top: 24px;
+          padding-top: 20px;
+          border-top: 1px solid var(--research-border);
+        }
+        .gw-btn-secondary {
+          padding: 8px 16px;
+          border-radius: var(--radius-md);
+          font-size: 14px;
+          font-weight: 500;
+          border: 1px solid var(--research-border);
+          background: var(--research-surface);
+          color: var(--research-ink-2);
+          cursor: pointer;
+          font-family: var(--research-font-sans);
+        }
+        .gw-btn-secondary:hover { border-color: var(--research-primary); color: var(--research-primary); }
+
+        /* ---- Preview modal ---- */
+        .gw-preview-large {
+          width: 100%;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          background: var(--research-surface-3);
+          margin-bottom: 16px;
+          display: flex;
+          justify-content: center;
+        }
+        .gw-preview-large img { max-width: 100%; max-height: 400px; object-fit: contain; }
+        .gw-meta-row {
+          display: flex;
+          gap: 8px;
+          margin-bottom: 12px;
+          font-size: 13px;
+          color: var(--research-ink-2);
         }
 
         /* ---- Footer ---- */
@@ -490,117 +630,360 @@
           <header class="gw-header">
             <h1>图片存储</h1>
             <div class="gw-header-actions">
-              <input type="text" class="gw-search" placeholder="搜索图片...">
-              <button class="gw-btn-primary"><i data-lucide="upload"></i>上传图片</button>
+              <input type="text" id="searchInput" class="gw-search" placeholder="搜索图片标题或描述...">
+              <button class="gw-btn-primary" id="uploadBtn"><i data-lucide="upload"></i>上传图片</button>
             </div>
           </header>
 
           <!-- Filter bar -->
-          <div class="gw-filter">
-            <span class="gw-pill is-active">全部</span>
-            <span class="gw-pill">信号通路</span>
-            <span class="gw-pill">实验流程</span>
-            <span class="gw-pill">数据图表</span>
-            <span class="gw-pill">机制示意</span>
-            <span class="gw-pill">封面图</span>
-          </div>
+          <div class="gw-filter" id="filterBar"></div>
 
           <!-- Image grid -->
-          <div class="gw-grid">
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="git-branch"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">Wnt信号通路图</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-09-01</span>
-                  <span class="gw-card-cat">信号通路</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="flask-conical"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">CRISPR-Cas9编辑机制</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-08-25</span>
-                  <span class="gw-card-cat">机制示意</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="list-ordered"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">单细胞测序流程</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-08-20</span>
-                  <span class="gw-card-cat">实验流程</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="microscope"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">肿瘤微环境示意图</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-08-15</span>
-                  <span class="gw-card-cat">机制示意</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="bar-chart-3"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">基因表达热图</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-08-10</span>
-                  <span class="gw-card-cat">数据图表</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="share-2"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">细胞凋亡通路</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-08-05</span>
-                  <span class="gw-card-cat">信号通路</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="git-fork"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">蛋白印迹实验流程</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-07-28</span>
-                  <span class="gw-card-cat">实验流程</span>
-                </div>
-              </div>
-            </div>
-            <div class="gw-card">
-              <div class="gw-card-thumb"><i data-lucide="image"></i></div>
-              <div class="gw-card-body">
-                <div class="gw-card-title">公众号封面-CRISPR</div>
-                <div class="gw-card-meta">
-                  <span class="gw-card-date">2024-07-20</span>
-                  <span class="gw-card-cat">封面图</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Upload zone -->
-          <div class="gw-upload">
-            <i data-lucide="upload-cloud"></i>
-            <div class="gw-upload-text">拖拽图片到此处或点击上传</div>
-            <div class="gw-upload-sub">支持 PNG, JPG, SVG, BioRender 导出文件</div>
-          </div>
+          <div class="gw-grid" id="imageGrid"></div>
 
           <!-- Footer -->
-          <div class="gw-footer">科研工作站 · 图片存储 · 共 23 张图片</div>
+          <div class="gw-footer" id="footerText">科研工作站 · 图片存储</div>
         </div>
       </div>
     </main>
-    <script>lucide.createIcons();</script>
+
+    <script>
+    (function() {
+      'use strict';
+
+      const SOURCES = ['BioRender', 'Illustrator', 'GraphPad', '其他'];
+      let currentFilter = '全部';
+      let currentSearch = '';
+
+      // ---- 日期格式化 ----
+      function formatDate(dateStr) {
+        if (!dateStr) return '';
+        const d = new Date(dateStr);
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      }
+
+      // ---- HTML 转义 ----
+      function esc(str) {
+        const div = document.createElement('div');
+        div.textContent = str || '';
+        return div.innerHTML;
+      }
+
+      // ---- 图片压缩（canvas resize，最大宽度 800px）----
+      function compressImage(file, callback) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            const MAX_WIDTH = 800;
+            let width = img.width;
+            let height = img.height;
+            if (width > MAX_WIDTH) {
+              height = Math.round((height * MAX_WIDTH) / width);
+              width = MAX_WIDTH;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            // 使用 JPEG 格式，质量 0.85，减少体积
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+            callback(dataUrl);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // ---- 获取筛选后的图片 ----
+      function getFilteredImages() {
+        let images = DB.getAll(DB.KEYS.IMAGES);
+        if (currentFilter !== '全部') {
+          images = images.filter(img => (img.source || '其他') === currentFilter);
+        }
+        if (currentSearch) {
+          const q = currentSearch.toLowerCase();
+          images = images.filter(img => {
+            const title = (img.title || '').toLowerCase();
+            const desc = (img.description || '').toLowerCase();
+            return title.includes(q) || desc.includes(q);
+          });
+        }
+        return images;
+      }
+
+      // ---- 渲染分类筛选 ----
+      function renderFilter() {
+        const filterBar = document.getElementById('filterBar');
+        const pills = ['全部'].concat(SOURCES);
+        filterBar.innerHTML = pills.map(p => {
+          const active = p === currentFilter ? ' is-active' : '';
+          return '<span class="gw-pill' + active + '" data-filter="' + esc(p) + '">' + esc(p) + '</span>';
+        }).join('');
+        filterBar.querySelectorAll('.gw-pill').forEach(pill => {
+          pill.addEventListener('click', function() {
+            currentFilter = pill.getAttribute('data-filter');
+            renderFilter();
+            renderGrid();
+          });
+        });
+      }
+
+      // ---- 渲染图片网格 ----
+      function renderGrid() {
+        const grid = document.getElementById('imageGrid');
+        const images = getFilteredImages();
+        const footer = document.getElementById('footerText');
+        footer.textContent = '科研工作站 · 图片存储 · 共 ' + images.length + ' 张图片';
+
+        if (images.length === 0) {
+          grid.innerHTML =
+            '<div class="gw-empty" style="grid-column: 1 / -1;">' +
+              '<i data-lucide="image-off"></i>' +
+              '<div class="gw-empty-title">' + (currentSearch || currentFilter !== '全部' ? '未找到匹配的图片' : '暂无图片') + '</div>' +
+              '<div class="gw-empty-sub">' + (currentSearch || currentFilter !== '全部' ? '尝试调整搜索或筛选条件' : '点击右上角"上传图片"按钮添加') + '</div>' +
+            '</div>';
+          lucide.createIcons();
+          return;
+        }
+
+        grid.innerHTML = images.map(img => {
+          const thumb = img.dataUrl
+            ? '<img src="' + esc(img.dataUrl) + '" alt="' + esc(img.title) + '">'
+            : '<i data-lucide="image"></i>';
+          const sourceTag = img.source
+            ? '<span class="gw-card-source">' + esc(img.source) + '</span>'
+            : '';
+          const catTag = img.category
+            ? '<span class="gw-card-cat">' + esc(img.category) + '</span>'
+            : '';
+          return '' +
+            '<div class="gw-card" data-id="' + esc(img.id) + '">' +
+              '<div class="gw-card-thumb">' + thumb + '</div>' +
+              '<div class="gw-card-body">' +
+                '<div class="gw-card-title">' + esc(img.title || '无标题') + '</div>' +
+                (img.description ? '<div class="gw-card-desc">' + esc(img.description) + '</div>' : '') +
+                '<div class="gw-card-tags">' + catTag + sourceTag + '</div>' +
+                '<div class="gw-card-actions">' +
+                  '<button class="gw-icon-btn" data-action="view" data-id="' + esc(img.id) + '"><i data-lucide="eye"></i>查看</button>' +
+                  '<button class="gw-icon-btn" data-action="edit" data-id="' + esc(img.id) + '"><i data-lucide="pencil"></i>编辑</button>' +
+                  '<button class="gw-icon-btn danger" data-action="delete" data-id="' + esc(img.id) + '"><i data-lucide="trash-2"></i>删除</button>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+        }).join('');
+
+        lucide.createIcons();
+
+        // 绑定卡片事件
+        grid.querySelectorAll('[data-action]').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const action = btn.getAttribute('data-action');
+            const id = btn.getAttribute('data-id');
+            if (action === 'view') viewImage(id);
+            else if (action === 'edit') editImage(id);
+            else if (action === 'delete') deleteImage(id);
+          });
+        });
+
+        grid.querySelectorAll('.gw-card-thumb').forEach(thumb => {
+          thumb.addEventListener('click', function() {
+            const card = thumb.closest('.gw-card');
+            const id = card.getAttribute('data-id');
+            viewImage(id);
+          });
+        });
+      }
+
+      // ---- 上传图片表单 ----
+      function openUploadForm(existing) {
+        const isEdit = !!existing;
+        const img = existing || {};
+        const bodyHTML = '' +
+          '<div class="gw-form-group">' +
+            '<label class="gw-form-label">选择图片</label>' +
+            '<div class="gw-file-drop" id="fileDrop">' +
+              '<i data-lucide="upload-cloud"></i>' +
+              '<div class="gw-file-drop-text">' + (isEdit ? '点击更换图片（可选）' : '点击选择图片文件') + '</div>' +
+              '<div class="gw-file-drop-sub">支持 PNG / JPG / JPEG / GIF / WebP，将自动压缩</div>' +
+            '</div>' +
+            '<input type="file" id="fileInput" accept="image/*" style="display:none;">' +
+            '<div class="gw-preview" id="filePreview">' + (img.dataUrl ? '<img src="' + esc(img.dataUrl) + '">' : '') + '</div>' +
+          '</div>' +
+          '<div class="gw-form-group">' +
+            '<label class="gw-form-label">标题</label>' +
+            '<input type="text" class="gw-form-input" id="imgTitle" value="' + esc(img.title || '') + '" placeholder="请输入图片标题">' +
+          '</div>' +
+          '<div class="gw-form-group">' +
+            '<label class="gw-form-label">描述</label>' +
+            '<textarea class="gw-form-textarea" id="imgDesc" placeholder="请输入图片描述">' + esc(img.description || '') + '</textarea>' +
+          '</div>' +
+          '<div class="gw-form-group">' +
+            '<label class="gw-form-label">来源分类</label>' +
+            '<select class="gw-form-select" id="imgSource">' +
+              SOURCES.map(s => '<option value="' + s + '"' + ((img.source || 'BioRender') === s ? ' selected' : '') + '>' + s + '</option>').join('') +
+            '</select>' +
+          '</div>' +
+          '<div class="gw-form-group">' +
+            '<label class="gw-form-label">关键词（逗号分隔）</label>' +
+            '<input type="text" class="gw-form-input" id="imgKeywords" value="' + esc((img.keywords || []).join(', ')) + '" placeholder="如：信号通路, Wnt, 机制图">' +
+          '</div>' +
+          '<div class="gw-form-actions">' +
+            '<button class="gw-btn-secondary" id="formCancel">取消</button>' +
+            '<button class="gw-btn-primary" id="formSave"><i data-lucide="save"></i>' + (isEdit ? '保存修改' : '上传保存') + '</button>' +
+          '</div>';
+
+        const m = UI.modal(isEdit ? '编辑图片' : '上传图片', bodyHTML);
+        lucide.createIcons();
+
+        const fileDrop = m.modal.querySelector('#fileDrop');
+        const fileInput = m.modal.querySelector('#fileInput');
+        const filePreview = m.modal.querySelector('#filePreview');
+        let currentDataUrl = img.dataUrl || '';
+
+        // 显示已有预览
+        if (currentDataUrl) {
+          filePreview.style.display = 'block';
+        }
+
+        fileDrop.addEventListener('click', function() { fileInput.click(); });
+        fileInput.addEventListener('change', function() {
+          const file = fileInput.files[0];
+          if (!file) return;
+          if (file.size > 10 * 1024 * 1024) {
+            UI.toast('图片文件过大，请选择 10MB 以内的文件', 'error');
+            return;
+          }
+          compressImage(file, function(dataUrl) {
+            currentDataUrl = dataUrl;
+            filePreview.innerHTML = '<img src="' + dataUrl + '">';
+            filePreview.style.display = 'block';
+          });
+        });
+
+        m.modal.querySelector('#formCancel').addEventListener('click', m.close);
+        m.modal.querySelector('#formSave').addEventListener('click', function() {
+          const title = m.modal.querySelector('#imgTitle').value.trim();
+          const description = m.modal.querySelector('#imgDesc').value.trim();
+          const source = m.modal.querySelector('#imgSource').value;
+          const keywordsRaw = m.modal.querySelector('#imgKeywords').value.trim();
+          const keywords = keywordsRaw ? keywordsRaw.split(/[,，]/).map(k => k.trim()).filter(Boolean) : [];
+
+          if (!title) {
+            UI.toast('请输入图片标题', 'error');
+            return;
+          }
+          if (!currentDataUrl) {
+            UI.toast('请选择图片文件', 'error');
+            return;
+          }
+
+          try {
+            if (isEdit) {
+              DB.update(DB.KEYS.IMAGES, img.id, {
+                title, description, source, keywords,
+                dataUrl: currentDataUrl
+              });
+              UI.toast('图片已更新', 'success');
+            } else {
+              DB.add(DB.KEYS.IMAGES, {
+                title, description, source, keywords,
+                dataUrl: currentDataUrl
+              });
+              UI.toast('图片上传成功', 'success');
+            }
+            m.close();
+            renderGrid();
+          } catch (e) {
+            UI.toast('保存失败：存储空间不足，请删除旧图片后重试', 'error');
+          }
+        });
+      }
+
+      // ---- 查看图片（大图预览 + 编辑入口）----
+      function viewImage(id) {
+        const img = DB.get(DB.KEYS.IMAGES, id);
+        if (!img) {
+          UI.toast('图片不存在', 'error');
+          return;
+        }
+        const keywords = (img.keywords || []).join('、') || '无';
+        const bodyHTML = '' +
+          '<div class="gw-preview-large">' +
+            (img.dataUrl ? '<img src="' + esc(img.dataUrl) + '" alt="' + esc(img.title) + '">' : '<i data-lucide="image-off"></i>') +
+          '</div>' +
+          '<div class="gw-form-group">' +
+            '<label class="gw-form-label">标题</label>' +
+            '<div style="font-size:15px;color:var(--research-ink);">' + esc(img.title || '无标题') + '</div>' +
+          '</div>' +
+          (img.description ? '<div class="gw-form-group"><label class="gw-form-label">描述</label><div style="font-size:14px;color:var(--research-ink-2);">' + esc(img.description) + '</div></div>' : '') +
+          '<div class="gw-meta-row"><span>来源：</span><strong>' + esc(img.source || '其他') + '</strong></div>' +
+          '<div class="gw-meta-row"><span>关键词：</span><strong>' + esc(keywords) + '</strong></div>' +
+          '<div class="gw-meta-row"><span>创建时间：</span><strong>' + esc(formatDate(img.createdAt)) + '</strong></div>' +
+          '<div class="gw-form-actions">' +
+            '<button class="gw-btn-secondary" id="previewClose">关闭</button>' +
+            '<button class="gw-btn-primary" id="previewEdit"><i data-lucide="pencil"></i>编辑</button>' +
+          '</div>';
+
+        const m = UI.modal('查看图片', bodyHTML);
+        lucide.createIcons();
+        m.modal.querySelector('#previewClose').addEventListener('click', m.close);
+        m.modal.querySelector('#previewEdit').addEventListener('click', function() {
+          m.close();
+          editImage(id);
+        });
+      }
+
+      // ---- 编辑图片 ----
+      function editImage(id) {
+        const img = DB.get(DB.KEYS.IMAGES, id);
+        if (!img) {
+          UI.toast('图片不存在', 'error');
+          return;
+        }
+        openUploadForm(img);
+      }
+
+      // ---- 删除图片 ----
+      function deleteImage(id) {
+        const img = DB.get(DB.KEYS.IMAGES, id);
+        if (!img) {
+          UI.toast('图片不存在', 'error');
+          return;
+        }
+        if (UI.confirm('确定要删除"' + (img.title || '此图片') + '"吗？此操作不可撤销。')) {
+          DB.remove(DB.KEYS.IMAGES, id);
+          UI.toast('图片已删除', 'success');
+          renderGrid();
+        }
+      }
+
+      // ---- 初始化 ----
+      function init() {
+        renderFilter();
+        renderGrid();
+
+        document.getElementById('uploadBtn').addEventListener('click', function() {
+          openUploadForm(null);
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function() {
+          currentSearch = searchInput.value.trim();
+          renderGrid();
+        });
+
+        lucide.createIcons();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
 </body>
 </html>

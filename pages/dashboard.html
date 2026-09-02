@@ -143,6 +143,7 @@
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="../assets/app.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
   @theme inline {
@@ -292,7 +293,10 @@
       <div style="margin-left:240px; padding:32px; background:var(--research-background); min-height:100vh; display:flex; flex-direction:column;">
         <!-- Top Header Bar -->
         <header style="height:60px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--research-border); margin-bottom:32px; padding-bottom:16px;">
-          <h1 style="font-family:var(--research-font-serif); font-size:24px; font-weight:600; color:var(--research-ink); margin:0;">概览</h1>
+          <div style="display:flex; align-items:baseline; gap:16px;">
+            <h1 style="font-family:var(--research-font-serif); font-size:24px; font-weight:600; color:var(--research-ink); margin:0;">科研工作站</h1>
+            <span id="today-date" style="font-size:14px; color:var(--research-ink-3);"></span>
+          </div>
           <div style="display:flex; align-items:center; gap:16px;">
             <input type="text" placeholder="搜索..." style="width:200px; padding:8px 12px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-surface); color:var(--research-ink); font-size:14px; outline:none;" onfocus="this.style.borderColor='var(--research-primary)'" onblur="this.style.borderColor='var(--research-border)'">
             <div style="width:36px; height:36px; border-radius:var(--radius-full); background:var(--research-surface-3); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -301,161 +305,8 @@
           </div>
         </header>
 
-        <!-- Section 1: Stats Cards Row -->
-        <section style="display:grid; grid-template-columns:repeat(5, 1fr); gap:16px;">
-          <!-- Card 1: 公众号推文 -->
-          <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--research-shadow-1);">
-            <div style="position:absolute; top:24px; right:24px;">
-              <i data-lucide="newspaper" style="width:20px; height:20px; color:var(--research-ink-3);"></i>
-            </div>
-            <div style="font-family:var(--research-font-serif); font-size:32px; font-weight:600; color:var(--research-ink); font-variant-numeric:tabular-nums; line-height:1;">12</div>
-            <div style="margin-top:8px; font-size:13px; color:var(--research-ink-3);">篇推文</div>
-            <div style="margin-top:4px; font-size:12px; color:var(--research-ink-3);">公众号推文</div>
-          </div>
-          <!-- Card 2: 脚本仓库 -->
-          <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--research-shadow-1);">
-            <div style="position:absolute; top:24px; right:24px;">
-              <i data-lucide="code-2" style="width:20px; height:20px; color:var(--research-ink-3);"></i>
-            </div>
-            <div style="font-family:var(--research-font-serif); font-size:32px; font-weight:600; color:var(--research-ink); font-variant-numeric:tabular-nums; line-height:1;">8</div>
-            <div style="margin-top:8px; font-size:13px; color:var(--research-ink-3);">个脚本</div>
-            <div style="margin-top:4px; font-size:12px; color:var(--research-ink-3);">脚本仓库</div>
-          </div>
-          <!-- Card 3: 文献阅读 -->
-          <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--research-shadow-1);">
-            <div style="position:absolute; top:24px; right:24px;">
-              <i data-lucide="book-open" style="width:20px; height:20px; color:var(--research-ink-3);"></i>
-            </div>
-            <div style="font-family:var(--research-font-serif); font-size:32px; font-weight:600; color:var(--research-ink); font-variant-numeric:tabular-nums; line-height:1;">47</div>
-            <div style="margin-top:8px; font-size:13px; color:var(--research-ink-3);">篇文献</div>
-            <div style="margin-top:4px; font-size:12px; color:var(--research-ink-3);">文献阅读</div>
-          </div>
-          <!-- Card 4: 图片存储 -->
-          <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--research-shadow-1);">
-            <div style="position:absolute; top:24px; right:24px;">
-              <i data-lucide="image" style="width:20px; height:20px; color:var(--research-ink-3);"></i>
-            </div>
-            <div style="font-family:var(--research-font-serif); font-size:32px; font-weight:600; color:var(--research-ink); font-variant-numeric:tabular-nums; line-height:1;">23</div>
-            <div style="margin-top:8px; font-size:13px; color:var(--research-ink-3);">张图片</div>
-            <div style="margin-top:4px; font-size:12px; color:var(--research-ink-3);">图片存储</div>
-          </div>
-          <!-- Card 5: 文章撰写 -->
-          <div style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--research-shadow-1);">
-            <div style="position:absolute; top:24px; right:24px;">
-              <i data-lucide="pen-line" style="width:20px; height:20px; color:var(--research-ink-3);"></i>
-            </div>
-            <div style="font-family:var(--research-font-serif); font-size:32px; font-weight:600; color:var(--research-ink); font-variant-numeric:tabular-nums; line-height:1;">3</div>
-            <div style="margin-top:8px; font-size:13px; color:var(--research-ink-3);">篇在写</div>
-            <div style="margin-top:4px; font-size:12px; color:var(--research-ink-3);">文章撰写</div>
-          </div>
-        </section>
-
-        <!-- Section 2: Quick Access Cards -->
-        <section style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:32px;">
-          <!-- CTA: 公众号推文管理 -->
-          <div data-dom-id="cta-mp-articles" style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-              <div>
-                <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">公众号推文管理</h3>
-                <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">查看和管理已发布的推文</p>
-              </div>
-              <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
-            </div>
-          </div>
-          <!-- CTA: 脚本仓库 -->
-          <div data-dom-id="cta-scripts" style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-              <div>
-                <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">脚本仓库</h3>
-                <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">存放常用分析脚本和工具代码</p>
-              </div>
-              <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
-            </div>
-          </div>
-          <!-- CTA: 文献阅读 -->
-          <div data-dom-id="cta-literature" style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-              <div>
-                <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">文献阅读</h3>
-                <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">追踪阅读进度和文献笔记</p>
-              </div>
-              <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
-            </div>
-          </div>
-          <!-- CTA: 图片存储 -->
-          <div data-dom-id="cta-gallery" style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-              <div>
-                <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">图片存储</h3>
-                <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">BioRender制图和科研插图</p>
-              </div>
-              <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
-            </div>
-          </div>
-          <!-- CTA: 文章撰写 -->
-          <div data-dom-id="cta-writing" style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-              <div>
-                <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">文章撰写</h3>
-                <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">课题文章生产过程追踪</p>
-              </div>
-              <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
-            </div>
-          </div>
-          <!-- CTA: 知识网络 -->
-          <div data-dom-id="cta-knowledge-network" style="background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
-            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-              <div>
-                <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">知识网络</h3>
-                <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">跨模块关键词关联图谱</p>
-              </div>
-              <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 3: Recent Activity Timeline -->
-        <section style="margin-top:32px;">
-          <h2 style="font-family:var(--research-font-serif); font-size:18px; font-weight:600; color:var(--research-ink); margin:0 0 16px 0;">最近活动</h2>
-          <div>
-            <!-- Timeline Item 1 -->
-            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
-              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:96px;">2024-09-01</span>
-              <span style="font-size:14px; color:var(--research-ink); flex:1;">发布公众号推文《CRISPR-Cas9基因编辑技术进展》</span>
-              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">公众号推文</span>
-            </div>
-            <!-- Timeline Item 2 -->
-            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
-              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:96px;">2024-08-30</span>
-              <span style="font-size:14px; color:var(--research-ink); flex:1;">添加文献 A single-cell atlas of the human... (Nature 2024)</span>
-              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">文献阅读</span>
-            </div>
-            <!-- Timeline Item 3 -->
-            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
-              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:96px;">2024-08-28</span>
-              <span style="font-size:14px; color:var(--research-ink); flex:1;">更新脚本 bulk_RNA_seq_pipeline.py</span>
-              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">脚本</span>
-            </div>
-            <!-- Timeline Item 4 -->
-            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
-              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:96px;">2024-08-25</span>
-              <span style="font-size:14px; color:var(--research-ink); flex:1;">上传图片 信号通路图_v3.png</span>
-              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">图片存储</span>
-            </div>
-            <!-- Timeline Item 5 -->
-            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
-              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:96px;">2024-08-22</span>
-              <span style="font-size:14px; color:var(--research-ink); flex:1;">撰写文章 肿瘤微环境综述 第二稿</span>
-              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">文章撰写</span>
-            </div>
-            <!-- Timeline Item 6 -->
-            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
-              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:96px;">2024-08-20</span>
-              <span style="font-size:14px; color:var(--research-ink); flex:1;">添加文献 Tumor microenvironment... (Cell 2024)</span>
-              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">文献阅读</span>
-            </div>
-          </div>
-        </section>
+        <!-- Dynamic Content Container -->
+        <div id="dashboard-content"></div>
 
         <!-- Footer -->
         <footer style="padding-top:32px; border-top:1px solid var(--research-border); margin-top:auto;">
@@ -463,6 +314,258 @@
         </footer>
       </div>
     </main>
-    <script>lucide.createIcons();</script>
+
+    <script>
+    (function() {
+      // 模块定义
+      var MODULES = [
+        { key: DB.KEYS.ARTICLES,   statKey: 'articles',   icon: 'newspaper', name: '公众号推文', unit: '篇推文', page: 'mp-articles.html' },
+        { key: DB.KEYS.SCRIPTS,    statKey: 'scripts',    icon: 'code-2',    name: '脚本仓库',   unit: '个脚本', page: 'scripts.html' },
+        { key: DB.KEYS.LITERATURE, statKey: 'literature', icon: 'book-open', name: '文献阅读',   unit: '篇文献', page: 'literature.html' },
+        { key: DB.KEYS.IMAGES,     statKey: 'images',     icon: 'image',     name: '图片存储',   unit: '张图片', page: 'gallery.html' },
+        { key: DB.KEYS.WRITINGS,   statKey: 'writings',   icon: 'pen-line',  name: '文章撰写',   unit: '篇在写', page: 'writing.html' }
+      ];
+
+      var container = document.getElementById('dashboard-content');
+
+      // 格式化当前日期
+      function formatToday() {
+        var d = new Date();
+        var weekdays = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+        return d.getFullYear() + '年' + String(d.getMonth()+1).padStart(2,'0') + '月' + String(d.getDate()).padStart(2,'0') + '日 ' + weekdays[d.getDay()];
+      }
+      document.getElementById('today-date').textContent = formatToday();
+
+      // 格式化日期时间（用于时间线）
+      function formatDateTime(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr);
+        return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0') + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+      }
+
+      // 渲染空状态
+      function renderEmptyState() {
+        container.innerHTML = `
+          <section style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 32px; text-align:center;">
+            <div style="width:80px; height:80px; border-radius:var(--radius-full); background:var(--research-surface-2); display:flex; align-items:center; justify-content:center; margin-bottom:24px;">
+              <i data-lucide="sparkles" style="width:40px; height:40px; color:var(--research-primary);"></i>
+            </div>
+            <h2 style="font-family:var(--research-font-serif); font-size:22px; font-weight:600; color:var(--research-ink); margin:0 0 12px 0;">欢迎使用科研工作站</h2>
+            <p style="font-size:15px; color:var(--research-ink-3); margin:0 0 32px 0; max-width:480px; line-height:1.6;">这是一个个人知识管理系统，涵盖公众号推文、脚本仓库、文献阅读、图片存储和文章撰写五大模块。点击下方任意快捷入口，开始记录你的科研工作。</p>
+            <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+              ${MODULES.map(function(m) {
+                return `
+                  <a href="${m.page}" style="display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; text-decoration:none; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)';this.style.color='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)';this.style.color='var(--research-ink)'">
+                    <i data-lucide="${m.icon}" style="width:18px; height:18px;"></i>
+                    <span>${m.name}</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </section>
+        `;
+      }
+
+      // 渲染统计卡片
+      function renderStats(stats) {
+        return `
+          <section style="display:grid; grid-template-columns:repeat(5, 1fr); gap:16px;">
+            ${MODULES.map(function(m) {
+              var count = stats[m.statKey] || 0;
+              return `
+                <a href="${m.page}" style="display:block; background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; position:relative; box-shadow:var(--research-shadow-1); text-decoration:none; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
+                  <div style="position:absolute; top:24px; right:24px;">
+                    <i data-lucide="${m.icon}" style="width:20px; height:20px; color:var(--research-ink-3);"></i>
+                  </div>
+                  <div style="font-family:var(--research-font-serif); font-size:32px; font-weight:600; color:var(--research-ink); font-variant-numeric:tabular-nums; line-height:1;">${count}</div>
+                  <div style="margin-top:8px; font-size:13px; color:var(--research-ink-3);">${m.unit}</div>
+                  <div style="margin-top:4px; font-size:12px; color:var(--research-ink-3);">${m.name}</div>
+                </a>
+              `;
+            }).join('')}
+          </section>
+        `;
+      }
+
+      // 渲染快捷入口
+      function renderQuickAccess() {
+        return `
+          <section style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:32px;">
+            ${MODULES.map(function(m) {
+              var descMap = {
+                '公众号推文': '查看和管理已发布的推文',
+                '脚本仓库': '存放常用分析脚本和工具代码',
+                '文献阅读': '追踪阅读进度和文献笔记',
+                '图片存储': 'BioRender制图和科研插图',
+                '文章撰写': '课题文章生产过程追踪'
+              };
+              return `
+                <a href="${m.page}" style="display:block; background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; text-decoration:none; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+                    <div>
+                      <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">${m.name}</h3>
+                      <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">${descMap[m.name]}</p>
+                    </div>
+                    <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
+                  </div>
+                </a>
+              `;
+            }).join('')}
+            <a href="knowledge-network.html" style="display:block; background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg); padding:24px; cursor:pointer; text-decoration:none; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+                <div>
+                  <h3 style="font-family:var(--research-font-serif); font-size:16px; font-weight:600; color:var(--research-ink); margin:0 0 8px 0;">知识网络</h3>
+                  <p style="font-size:13px; color:var(--research-ink-3); margin:0; line-height:1.5;">跨模块关键词关联图谱</p>
+                </div>
+                <i data-lucide="arrow-right" style="width:20px; height:20px; color:var(--research-primary); flex-shrink:0;"></i>
+              </div>
+            </a>
+          </section>
+        `;
+      }
+
+      // 渲染最近活动时间线
+      function renderTimeline() {
+        var allItems = [];
+        MODULES.forEach(function(m) {
+          var records = DB.getAll(m.key);
+          records.forEach(function(r) {
+            allItems.push({
+              title: r.title || r.name || '无标题',
+              updatedAt: r.updatedAt || r.createdAt || '',
+              moduleName: m.name,
+              icon: m.icon
+            });
+          });
+        });
+
+        allItems.sort(function(a, b) {
+          var ta = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
+          var tb = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
+          return tb - ta;
+        });
+
+        var recent = allItems.slice(0, 10);
+
+        if (recent.length === 0) {
+          return `
+            <section style="margin-top:32px;">
+              <h2 style="font-family:var(--research-font-serif); font-size:18px; font-weight:600; color:var(--research-ink); margin:0 0 16px 0;">最近活动</h2>
+              <div style="padding:32px; text-align:center; background:var(--research-card); border:1px solid var(--research-border); border-radius:var(--radius-lg);">
+                <i data-lucide="inbox" style="width:32px; height:32px; color:var(--research-ink-3); margin-bottom:8px;"></i>
+                <p style="font-size:14px; color:var(--research-ink-3); margin:0;">暂无活动记录</p>
+              </div>
+            </section>
+          `;
+        }
+
+        var itemsHTML = recent.map(function(item) {
+          return `
+            <div style="display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--research-border);">
+              <i data-lucide="${item.icon}" style="width:16px; height:16px; color:var(--research-ink-3); flex-shrink:0;"></i>
+              <span style="font-size:13px; color:var(--research-ink-3); white-space:nowrap; min-width:140px;">${formatDateTime(item.updatedAt)}</span>
+              <span style="font-size:14px; color:var(--research-ink); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${DB.escape(item.title)}</span>
+              <span style="height:22px; display:inline-flex; align-items:center; background:var(--research-surface-2); color:var(--research-ink-2); border-radius:var(--radius-sm); padding:2px 8px; font-size:12px; white-space:nowrap;">${item.moduleName}</span>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <section style="margin-top:32px;">
+            <h2 style="font-family:var(--research-font-serif); font-size:18px; font-weight:600; color:var(--research-ink); margin:0 0 16px 0;">最近活动</h2>
+            <div>${itemsHTML}</div>
+          </section>
+        `;
+      }
+
+      // 渲染数据管理区
+      function renderDataManager() {
+        return `
+          <section style="margin-top:32px;">
+            <h2 style="font-family:var(--research-font-serif); font-size:18px; font-weight:600; color:var(--research-ink); margin:0 0 16px 0;">数据管理</h2>
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+              <button id="btn-export" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
+                <i data-lucide="download" style="width:18px; height:18px;"></i>
+                <span>导出全部数据</span>
+              </button>
+              <label style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border:1px solid var(--research-border); border-radius:var(--radius-md); background:var(--research-card); color:var(--research-ink); font-size:14px; cursor:pointer; transition:border-color 120ms;" onmouseover="this.style.borderColor='var(--research-primary)'" onmouseout="this.style.borderColor='var(--research-border)'">
+                <i data-lucide="upload" style="width:18px; height:18px;"></i>
+                <span>导入数据</span>
+                <input type="file" id="btn-import" accept=".json" style="display:none;">
+              </label>
+            </div>
+          </section>
+        `;
+      }
+
+      // 绑定数据管理事件
+      function bindDataManager() {
+        var exportBtn = document.getElementById('btn-export');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', function() {
+            var data = DB.exportAll();
+            var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'research-workstation-backup-' + new Date().toISOString().slice(0,10) + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            UI.toast('数据导出成功', 'success');
+          });
+        }
+
+        var importInput = document.getElementById('btn-import');
+        if (importInput) {
+          importInput.addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+            if (!UI.confirm('导入数据将覆盖当前所有内容，确定继续吗？')) {
+              importInput.value = '';
+              return;
+            }
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+              var success = DB.importAll(ev.target.result);
+              if (success) {
+                UI.toast('数据导入成功', 'success');
+                setTimeout(function() { location.reload(); }, 1000);
+              } else {
+                UI.toast('数据导入失败，请检查文件格式', 'error');
+              }
+            };
+            reader.readAsText(file);
+          });
+        }
+      }
+
+      // 主渲染函数
+      function render() {
+        var stats = DB.getStats();
+        var total = stats.articles + stats.scripts + stats.literature + stats.images + stats.writings;
+
+        if (total === 0) {
+          renderEmptyState();
+        } else {
+          container.innerHTML =
+            renderStats(stats) +
+            renderQuickAccess() +
+            renderTimeline() +
+            renderDataManager();
+          bindDataManager();
+        }
+
+        // 重新创建图标
+        if (window.lucide && lucide.createIcons) {
+          lucide.createIcons();
+        }
+      }
+
+      // 启动渲染
+      render();
+    })();
+    </script>
 </body>
 </html>

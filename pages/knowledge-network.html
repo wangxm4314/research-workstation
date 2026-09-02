@@ -96,6 +96,15 @@
   --state-error: #B0454B;
   --state-info: #4A6B8A;
 
+  /* ---- Node Type Colors (知识网络) ---- */
+  --research-node-keyword: #B8770C;   /* 琥珀色 */
+  --research-node-article: #4A6B8A;   /* 蓝色 */
+  --research-node-literature: #4A7C4A; /* 绿色 */
+  --research-node-script: #7B5EA7;    /* 紫色 */
+  --research-node-writing: #D97706;    /* 橙色 */
+  --research-node-image: #0E9EAE;     /* 青色 */
+  --research-edge: #B0A89C;           /* 连线灰 */
+
   /* ---- Typography ---- */
   --research-font-serif: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
   --research-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
@@ -137,12 +146,22 @@
   --state-error: #D06870;
   --state-info: #7A9CBA;
 
+  /* ---- Node Type Colors (Dark) ---- */
+  --research-node-keyword: #C99542;
+  --research-node-article: #7A9CBA;
+  --research-node-literature: #6B9C6B;
+  --research-node-script: #9B7EC7;
+  --research-node-writing: #E8923A;
+  --research-node-image: #3AB8C6;
+  --research-edge: #6B6357;
+
   --research-brand: #C99542;
   --research-brand-ink: #1A1612;
 }
 
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="../assets/app.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
     <style type="text/tailwindcss">
   @theme inline {
@@ -287,79 +306,41 @@
       </aside>
 
       <!-- ============ Main Content ============ -->
-      <div style="margin-left: 240px; padding: 32px; background: var(--research-background); min-height: 100vh;">
-        <!-- Header Bar -->
-        <header class="flex items-center justify-between" style="height: 60px; border-bottom: 1px solid var(--research-border); margin-bottom: 24px; padding-bottom: 16px;">
+      <div id="main-content" style="margin-left: 240px; padding: 32px; background: var(--research-background); min-height: 100vh;">
+        <!-- Toolbar -->
+        <header class="flex items-center justify-between flex-wrap" style="gap: 12px; border-bottom: 1px solid var(--research-border); margin-bottom: 24px; padding-bottom: 16px;">
           <h1 style="font-family: var(--research-font-serif); font-size: 24px; font-weight: 600; color: var(--research-ink);">知识网络</h1>
-          <div class="flex items-center gap-3">
-            <input type="text" placeholder="搜索关键词..." style="width: 280px; padding: 8px 12px; border: 1px solid var(--research-border); border-radius: var(--radius-md); font-size: 14px; color: var(--research-ink); background: var(--research-card); outline: none;"/>
-            <button style="background: var(--research-surface); border: 1px solid var(--research-border); color: var(--research-ink); padding: 8px 16px; border-radius: var(--radius-md); font-size: 14px; cursor: pointer;">重新布局</button>
+          <div class="flex items-center" style="gap: 12px; flex-wrap: wrap;">
+            <!-- Module Filter -->
+            <div id="module-filter" class="flex items-center" style="gap: 8px; flex-wrap: wrap;"></div>
+            <!-- Refresh Button -->
+            <button id="btn-refresh" class="flex items-center" style="gap: 6px; background: var(--research-card); border: 1px solid var(--research-border); color: var(--research-ink); padding: 8px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer;">
+              <i data-lucide="refresh-cw" style="width:15px;height:15px;"></i>
+              <span>刷新</span>
+            </button>
+            <!-- Relayout Button -->
+            <button id="btn-relayout" class="flex items-center" style="gap: 6px; background: var(--research-primary); border: 1px solid var(--research-primary); color: var(--research-primary-foreground); padding: 8px 14px; border-radius: var(--radius-md); font-size: 13px; cursor: pointer;">
+              <i data-lucide="shuffle" style="width:15px;height:15px;"></i>
+              <span>重新布局</span>
+            </button>
           </div>
         </header>
 
         <!-- Info Bar -->
-        <div class="flex items-center gap-3" style="margin-bottom: 24px; padding: 12px 16px; background: var(--research-surface-2); border-radius: var(--radius-md);">
-          <i data-lucide="info" style="width:16px;height:16px;color:var(--research-ink-3);"></i>
-          <span style="font-size: 13px; color: var(--research-ink-2);">跨模块关键词索引网络 — 展示公众号推文、文献、脚本、图片之间的关键词关联关系</span>
+        <div class="flex items-center" style="gap: 12px; margin-bottom: 24px; padding: 12px 16px; background: var(--research-surface-2); border-radius: var(--radius-md);">
+          <i data-lucide="info" style="width:16px;height:16px;color:var(--research-ink-3);flex-shrink:0;"></i>
+          <span style="font-size: 13px; color: var(--research-ink-2);">跨模块关键词索引网络 — 展示公众号推文、文献、脚本、图片、文章撰写之间的关键词关联关系。拖拽节点可调整位置。</span>
         </div>
 
-        <!-- Main Layout: Two columns -->
-        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 24px;">
-          <!-- Left Column: Network Visualization -->
-          <div style="background: var(--research-card); border: 1px solid var(--research-border); border-radius: var(--radius-lg); padding: 24px; min-height: 600px; position: relative;">
+        <!-- Main Layout: Graph + Legend -->
+        <div style="display: grid; grid-template-columns: 1fr 280px; gap: 24px;">
+          <!-- Network Visualization -->
+          <div style="background: var(--research-card); border: 1px solid var(--research-border); border-radius: var(--radius-lg); padding: 24px; min-height: 620px; position: relative;">
             <div style="position: absolute; top: 16px; left: 24px; font-family: var(--research-font-serif); font-size: 16px; font-weight: 600; color: var(--research-ink); z-index: 2;">关键词关联网络</div>
-            <svg width="100%" height="560px" viewBox="0 0 800 560" style="display: block; margin-top: 8px;">
-              <!-- Edges -->
-              <line x1="200" y1="100" x2="400" y2="80" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="200" y1="100" x2="350" y2="350" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="200" y1="100" x2="650" y2="150" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="150" y1="250" x2="500" y2="200" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="150" y1="250" x2="550" y2="400" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="500" y1="200" x2="450" y2="280" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="300" y1="400" x2="700" y2="350" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="350" y1="350" x2="250" y2="500" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="450" y1="280" x2="550" y2="400" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="650" y1="150" x2="400" y2="80" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="150" y1="250" x2="600" y2="500" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="650" y1="280" x2="350" y2="350" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-              <line x1="300" y1="400" x2="350" y2="350" stroke="var(--research-border)" stroke-width="1.5" opacity="0.6"/>
-
-              <!-- Nodes: Articles (amber) -->
-              <circle cx="200" cy="100" r="20" fill="var(--research-primary)" opacity="0.8"/>
-              <text x="200" y="134" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">CRISPR推文</text>
-              <circle cx="150" cy="250" r="20" fill="var(--research-primary)" opacity="0.8"/>
-              <text x="150" y="284" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">单细胞推文</text>
-              <circle cx="300" cy="400" r="20" fill="var(--research-primary)" opacity="0.8"/>
-              <text x="300" y="434" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">WB推文</text>
-
-              <!-- Nodes: Literature (blue) -->
-              <circle cx="400" cy="80" r="18" fill="var(--state-info)" opacity="0.8"/>
-              <text x="400" y="112" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">Nature-CRISPR</text>
-              <circle cx="500" cy="200" r="18" fill="var(--state-info)" opacity="0.8"/>
-              <text x="500" y="232" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">Cell-单细胞</text>
-              <circle cx="350" cy="350" r="18" fill="var(--state-info)" opacity="0.8"/>
-              <text x="350" y="382" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">NatGen-CRISPR</text>
-              <circle cx="550" cy="400" r="18" fill="var(--state-info)" opacity="0.8"/>
-              <text x="550" y="432" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">Cell-TME</text>
-
-              <!-- Nodes: Scripts (green) -->
-              <circle cx="650" cy="150" r="16" fill="var(--state-success)" opacity="0.8"/>
-              <text x="650" y="180" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">RNA-seq脚本</text>
-              <circle cx="700" cy="350" r="16" fill="var(--state-success)" opacity="0.8"/>
-              <text x="700" y="380" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">可视化脚本</text>
-
-              <!-- Nodes: Gallery (amber-light) -->
-              <circle cx="250" cy="500" r="16" fill="var(--state-warning)" opacity="0.8"/>
-              <text x="250" y="528" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">信号通路图</text>
-              <circle cx="600" cy="500" r="16" fill="var(--state-warning)" opacity="0.8"/>
-              <text x="600" y="528" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">单细胞图</text>
-
-              <!-- Nodes: Writing (dark) -->
-              <circle cx="450" cy="280" r="18" fill="var(--research-ink-2)" opacity="0.8"/>
-              <text x="450" y="312" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">TME综述</text>
-              <circle cx="650" cy="280" r="18" fill="var(--research-ink-2)" opacity="0.8"/>
-              <text x="650" y="312" font-size="10" fill="var(--research-ink-2)" text-anchor="middle">CRISPR综述</text>
-            </svg>
+            <!-- SVG container -->
+            <div id="svg-container" style="width: 100%; margin-top: 8px; position: relative;"></div>
+            <!-- Tooltip -->
+            <div id="tooltip" style="position: absolute; display: none; pointer-events: none; background: var(--research-popover); border: 1px solid var(--research-border); border-radius: var(--radius-md); padding: 10px 14px; font-size: 12px; color: var(--research-ink); box-shadow: var(--research-shadow-floating); z-index: 10; max-width: 240px; line-height: 1.6;"></div>
           </div>
 
           <!-- Right Column: Legend & Stats -->
@@ -367,80 +348,13 @@
             <!-- Legend Card -->
             <div style="background: var(--research-card); border: 1px solid var(--research-border); border-radius: var(--radius-lg); padding: 20px;">
               <div style="font-family: var(--research-font-serif); font-size: 14px; font-weight: 600; color: var(--research-ink); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--research-border);">图例</div>
-              <div class="flex items-center" style="gap: 12px; padding: 6px 0;">
-                <span style="width:12px;height:12px;border-radius:var(--radius-full);background:var(--research-primary);display:inline-block;"></span>
-                <span style="font-size:13px;color:var(--research-ink-2);">公众号推文</span>
-              </div>
-              <div class="flex items-center" style="gap: 12px; padding: 6px 0;">
-                <span style="width:12px;height:12px;border-radius:var(--radius-full);background:var(--state-info);display:inline-block;"></span>
-                <span style="font-size:13px;color:var(--research-ink-2);">文献阅读</span>
-              </div>
-              <div class="flex items-center" style="gap: 12px; padding: 6px 0;">
-                <span style="width:12px;height:12px;border-radius:var(--radius-full);background:var(--state-success);display:inline-block;"></span>
-                <span style="font-size:13px;color:var(--research-ink-2);">脚本仓库</span>
-              </div>
-              <div class="flex items-center" style="gap: 12px; padding: 6px 0;">
-                <span style="width:12px;height:12px;border-radius:var(--radius-full);background:var(--state-warning);display:inline-block;"></span>
-                <span style="font-size:13px;color:var(--research-ink-2);">图片存储</span>
-              </div>
-              <div class="flex items-center" style="gap: 12px; padding: 6px 0;">
-                <span style="width:12px;height:12px;border-radius:var(--radius-full);background:var(--research-ink-2);display:inline-block;"></span>
-                <span style="font-size:13px;color:var(--research-ink-2);">文章撰写</span>
-              </div>
+              <div id="legend-list" class="flex flex-col" style="gap: 4px;"></div>
             </div>
 
             <!-- Stats Card -->
             <div style="background: var(--research-card); border: 1px solid var(--research-border); border-radius: var(--radius-lg); padding: 20px;">
               <div style="font-family: var(--research-font-serif); font-size: 14px; font-weight: 600; color: var(--research-ink); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--research-border);">网络统计</div>
-              <div class="flex flex-col" style="gap: 12px;">
-                <div style="font-size:14px;color:var(--research-ink);">节点数: <span style="font-weight:700;">13</span></div>
-                <div style="font-size:14px;color:var(--research-ink);">连接数: <span style="font-weight:700;">15</span></div>
-                <div style="font-size:14px;color:var(--research-ink);">关键词: <span style="font-weight:700;">8</span></div>
-                <div style="font-size:14px;color:var(--research-ink);">最强关联: <span style="font-weight:700;">CRISPR (5个节点)</span></div>
-              </div>
-            </div>
-
-            <!-- Top Keywords Card -->
-            <div style="background: var(--research-card); border: 1px solid var(--research-border); border-radius: var(--radius-lg); padding: 20px;">
-              <div style="font-family: var(--research-font-serif); font-size: 14px; font-weight: 600; color: var(--research-ink); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--research-border);">高频关键词</div>
-              <div class="flex flex-col" style="gap: 8px;">
-                <!-- CRISPR-Cas9 100% -->
-                <div class="flex items-center" style="gap:0;">
-                  <span style="font-size:14px;color:var(--research-ink);min-width:90px;">CRISPR-Cas9</span>
-                  <div style="flex:1;height:6px;background:var(--research-surface-3);border-radius:var(--radius-full);margin:0 12px;"><div style="width:100%;height:6px;background:var(--research-primary);border-radius:var(--radius-full);"></div></div>
-                  <span style="font-size:13px;color:var(--research-ink-3);min-width:32px;text-align:right;">5次</span>
-                </div>
-                <!-- 单细胞测序 80% -->
-                <div class="flex items-center" style="gap:0;">
-                  <span style="font-size:14px;color:var(--research-ink);min-width:90px;">单细胞测序</span>
-                  <div style="flex:1;height:6px;background:var(--research-surface-3);border-radius:var(--radius-full);margin:0 12px;"><div style="width:80%;height:6px;background:var(--research-primary);border-radius:var(--radius-full);"></div></div>
-                  <span style="font-size:13px;color:var(--research-ink-3);min-width:32px;text-align:right;">4次</span>
-                </div>
-                <!-- 肿瘤微环境 60% -->
-                <div class="flex items-center" style="gap:0;">
-                  <span style="font-size:14px;color:var(--research-ink);min-width:90px;">肿瘤微环境</span>
-                  <div style="flex:1;height:6px;background:var(--research-surface-3);border-radius:var(--radius-full);margin:0 12px;"><div style="width:60%;height:6px;background:var(--research-primary);border-radius:var(--radius-full);"></div></div>
-                  <span style="font-size:13px;color:var(--research-ink-3);min-width:32px;text-align:right;">3次</span>
-                </div>
-                <!-- RNA-seq 60% -->
-                <div class="flex items-center" style="gap:0;">
-                  <span style="font-size:14px;color:var(--research-ink);min-width:90px;">RNA-seq</span>
-                  <div style="flex:1;height:6px;background:var(--research-surface-3);border-radius:var(--radius-full);margin:0 12px;"><div style="width:60%;height:6px;background:var(--research-primary);border-radius:var(--radius-full);"></div></div>
-                  <span style="font-size:13px;color:var(--research-ink-3);min-width:32px;text-align:right;">3次</span>
-                </div>
-                <!-- 基因编辑 60% -->
-                <div class="flex items-center" style="gap:0;">
-                  <span style="font-size:14px;color:var(--research-ink);min-width:90px;">基因编辑</span>
-                  <div style="flex:1;height:6px;background:var(--research-surface-3);border-radius:var(--radius-full);margin:0 12px;"><div style="width:60%;height:6px;background:var(--research-primary);border-radius:var(--radius-full);"></div></div>
-                  <span style="font-size:13px;color:var(--research-ink-3);min-width:32px;text-align:right;">3次</span>
-                </div>
-                <!-- 免疫治疗 40% -->
-                <div class="flex items-center" style="gap:0;">
-                  <span style="font-size:14px;color:var(--research-ink);min-width:90px;">免疫治疗</span>
-                  <div style="flex:1;height:6px;background:var(--research-surface-3);border-radius:var(--radius-full);margin:0 12px;"><div style="width:40%;height:6px;background:var(--research-primary);border-radius:var(--radius-full);"></div></div>
-                  <span style="font-size:13px;color:var(--research-ink-3);min-width:32px;text-align:right;">2次</span>
-                </div>
-              </div>
+              <div id="stats-list" class="flex flex-col" style="gap: 12px;"></div>
             </div>
           </div>
         </div>
@@ -449,6 +363,574 @@
         <footer style="padding-top: 32px; border-top: 1px solid var(--research-border); margin-top: 32px; font-size: 13px; color: var(--research-ink-3);">科研工作站 · 知识网络 · 跨模块关键词索引</footer>
       </div>
     </main>
+
+    <script>
+    (function() {
+      'use strict';
+
+      /* ============================================================
+         配置
+         ============================================================ */
+      var NODE_TYPES = [
+        { type: 'keyword',   label: '关键词',   color: 'var(--research-node-keyword)',   radius: 12 },
+        { type: 'article',   label: '公众号推文', color: 'var(--research-node-article)',   radius: 10 },
+        { type: 'literature',label: '文献阅读',   color: 'var(--research-node-literature)', radius: 10 },
+        { type: 'script',    label: '脚本仓库',   color: 'var(--research-node-script)',    radius: 9 },
+        { type: 'writing',   label: '文章撰写',   color: 'var(--research-node-writing)',   radius: 10 },
+        { type: 'image',     label: '图片存储',   color: 'var(--research-node-image)',     radius: 9 }
+      ];
+
+      var TYPE_MAP = {};
+      NODE_TYPES.forEach(function(t) { TYPE_MAP[t.type] = t; });
+
+      var SVG_WIDTH = 800;
+      var SVG_HEIGHT = 560;
+
+      /* ============================================================
+         状态
+         ============================================================ */
+      var selectedTypes = {}; // { keyword: true, article: true, ... }
+      NODE_TYPES.forEach(function(t) { selectedTypes[t.type] = true; });
+
+      var allData = { nodes: [], edges: [] };
+      var layoutNodes = [];   // 布局用: { id, x, y, vx, vy, ... }
+      var dragNode = null;
+      var simTimer = null;
+
+      /* ============================================================
+         DOM 引用
+         ============================================================ */
+      var svgContainer = document.getElementById('svg-container');
+      var tooltip = document.getElementById('tooltip');
+      var moduleFilter = document.getElementById('module-filter');
+      var legendList = document.getElementById('legend-list');
+      var statsList = document.getElementById('stats-list');
+
+      /* ============================================================
+         工具函数
+         ============================================================ */
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str || '';
+        return div.innerHTML;
+      }
+
+      function getTypeLabel(type) {
+        var t = TYPE_MAP[type];
+        return t ? t.label : type;
+      }
+
+      function getTypeColor(type) {
+        var t = TYPE_MAP[type];
+        return t ? t.color : 'var(--research-ink-2)';
+      }
+
+      function getTypeRadius(type) {
+        var t = TYPE_MAP[type];
+        return t ? t.radius : 8;
+      }
+
+      /* ============================================================
+         渲染模块筛选器
+         ============================================================ */
+      function renderModuleFilter() {
+        moduleFilter.innerHTML = '';
+        NODE_TYPES.forEach(function(t) {
+          var wrapper = document.createElement('label');
+          wrapper.className = 'flex items-center';
+          wrapper.style.cssText = 'gap:4px; cursor:pointer; background: var(--research-surface-2); border: 1px solid var(--research-border); border-radius: var(--radius-full); padding: 4px 10px; font-size: 12px; color: var(--research-ink-2);';
+          var dot = document.createElement('span');
+          dot.style.cssText = 'width:8px;height:8px;border-radius:var(--radius-full);background:' + t.color + ';display:inline-block;flex-shrink:0;';
+          var cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.checked = selectedTypes[t.type];
+          cb.style.cssText = 'margin:0;cursor:pointer;width:13px;height:13px;';
+          var lbl = document.createElement('span');
+          lbl.textContent = t.label;
+          lbl.style.color = 'var(--research-ink-2)';
+          wrapper.appendChild(dot);
+          wrapper.appendChild(cb);
+          wrapper.appendChild(lbl);
+          cb.addEventListener('change', function() {
+            selectedTypes[t.type] = cb.checked;
+            renderNetwork();
+          });
+          moduleFilter.appendChild(wrapper);
+        });
+      }
+
+      /* ============================================================
+         渲染图例
+         ============================================================ */
+      function renderLegend() {
+        legendList.innerHTML = '';
+        NODE_TYPES.forEach(function(t) {
+          var row = document.createElement('div');
+          row.className = 'flex items-center';
+          row.style.cssText = 'gap: 12px; padding: 6px 0;';
+          var dot = document.createElement('span');
+          dot.style.cssText = 'width:12px;height:12px;border-radius:var(--radius-full);background:' + t.color + ';display:inline-block;flex-shrink:0;';
+          var text = document.createElement('span');
+          text.style.cssText = 'font-size:13px;color:var(--research-ink-2);';
+          text.textContent = t.label;
+          row.appendChild(dot);
+          row.appendChild(text);
+          legendList.appendChild(row);
+        });
+      }
+
+      /* ============================================================
+         渲染统计
+         ============================================================ */
+      function renderStats() {
+        var filtered = getFilteredData();
+        var typeCounts = {};
+        NODE_TYPES.forEach(function(t) { typeCounts[t.type] = 0; });
+        filtered.nodes.forEach(function(n) {
+          if (typeCounts[n.type] !== undefined) typeCounts[n.type]++;
+        });
+
+        statsList.innerHTML = '';
+
+        // 总节点数 & 总连线数
+        var totalNodes = document.createElement('div');
+        totalNodes.style.cssText = 'font-size:14px;color:var(--research-ink);';
+        totalNodes.innerHTML = '总节点数: <span style="font-weight:700;">' + filtered.nodes.length + '</span>';
+        statsList.appendChild(totalNodes);
+
+        var totalEdges = document.createElement('div');
+        totalEdges.style.cssText = 'font-size:14px;color:var(--research-ink);';
+        totalEdges.innerHTML = '总连线数: <span style="font-weight:700;">' + filtered.edges.length + '</span>';
+        statsList.appendChild(totalEdges);
+
+        // 分隔线
+        var sep = document.createElement('div');
+        sep.style.cssText = 'height:1px;background:var(--research-border);margin:4px 0;';
+        statsList.appendChild(sep);
+
+        // 各类型节点数
+        NODE_TYPES.forEach(function(t) {
+          var row = document.createElement('div');
+          row.className = 'flex items-center';
+          row.style.cssText = 'gap:8px;font-size:13px;color:var(--research-ink-2);';
+          var dot = document.createElement('span');
+          dot.style.cssText = 'width:8px;height:8px;border-radius:var(--radius-full);background:' + t.color + ';display:inline-block;flex-shrink:0;';
+          var text = document.createElement('span');
+          text.style.flex = '1';
+          text.textContent = t.label;
+          var count = document.createElement('span');
+          count.style.cssText = 'font-weight:700;color:var(--research-ink);';
+          count.textContent = typeCounts[t.type];
+          row.appendChild(dot);
+          row.appendChild(text);
+          row.appendChild(count);
+          statsList.appendChild(row);
+        });
+      }
+
+      /* ============================================================
+         获取筛选后数据
+         ============================================================ */
+      function getFilteredData() {
+        var allowedTypeSet = {};
+        Object.keys(selectedTypes).forEach(function(k) {
+          if (selectedTypes[k]) allowedTypeSet[k] = true;
+        });
+
+        var nodes = allData.nodes.filter(function(n) {
+          return !!allowedTypeSet[n.type];
+        });
+
+        var nodeIdSet = {};
+        nodes.forEach(function(n) { nodeIdSet[n.id] = true; });
+
+        var edges = allData.edges.filter(function(e) {
+          return nodeIdSet[e.source] && nodeIdSet[e.target];
+        });
+
+        return { nodes: nodes, edges: edges };
+      }
+
+      /* ============================================================
+         力导向布局（简化版）
+         ============================================================ */
+      function initLayout(nodes) {
+        var cx = SVG_WIDTH / 2;
+        var cy = SVG_HEIGHT / 2;
+        layoutNodes = nodes.map(function(n, i) {
+          // 初始随机分布
+          var angle = (i / nodes.length) * Math.PI * 2;
+          var r = 80 + Math.random() * 160;
+          return {
+            id: n.id,
+            label: n.label,
+            type: n.type,
+            x: cx + Math.cos(angle) * r + (Math.random() - 0.5) * 40,
+            y: cy + Math.sin(angle) * r + (Math.random() - 0.5) * 40,
+            vx: 0,
+            vy: 0,
+            fx: null,
+            fy: null
+          };
+        });
+      }
+
+      function getNodeById(id) {
+        for (var i = 0; i < layoutNodes.length; i++) {
+          if (layoutNodes[i].id === id) return layoutNodes[i];
+        }
+        return null;
+      }
+
+      function runSimulation(iterations) {
+        var k = Math.sqrt((SVG_WIDTH * SVG_HEIGHT) / Math.max(layoutNodes.length, 1)) * 0.5;
+        var repulsion = 1200;
+        var linkDistance = 80;
+        var centerStrength = 0.02;
+
+        for (var iter = 0; iter < iterations; iter++) {
+          // 排斥力
+          for (var i = 0; i < layoutNodes.length; i++) {
+            var ni = layoutNodes[i];
+            if (ni.fx !== null) continue;
+            for (var j = 0; j < layoutNodes.length; j++) {
+              if (i === j) continue;
+              var nj = layoutNodes[j];
+              var dx = ni.x - nj.x;
+              var dy = ni.y - nj.y;
+              var dist2 = dx * dx + dy * dy;
+              if (dist2 < 1) dist2 = 1;
+              var dist = Math.sqrt(dist2);
+              var force = repulsion / dist2;
+              ni.vx += (dx / dist) * force;
+              ni.vy += (dy / dist) * force;
+            }
+          }
+
+          // 弹簧力（连线吸引）
+          var filtered = getFilteredData();
+          for (var e = 0; e < filtered.edges.length; e++) {
+            var source = getNodeById(filtered.edges[e].source);
+            var target = getNodeById(filtered.edges[e].target);
+            if (!source || !target) continue;
+            var dx = target.x - source.x;
+            var dy = target.y - source.y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 1) dist = 1;
+            var force = (dist - linkDistance) * 0.1;
+            var fx = (dx / dist) * force;
+            var fy = (dy / dist) * force;
+            if (source.fx === null) { source.vx += fx; source.vy += fy; }
+            if (target.fx === null) { target.vx -= fx; target.vy -= fy; }
+          }
+
+          // 中心引力 + 更新位置
+          var cx = SVG_WIDTH / 2;
+          var cy = SVG_HEIGHT / 2;
+          for (var i2 = 0; i2 < layoutNodes.length; i2++) {
+            var n = layoutNodes[i2];
+            if (n.fx !== null) continue;
+            n.vx += (cx - n.x) * centerStrength;
+            n.vy += (cy - n.y) * centerStrength;
+            // 阻尼
+            n.vx *= 0.85;
+            n.vy *= 0.85;
+            n.x += n.vx;
+            n.y += n.vy;
+            // 边界约束
+            var r = getTypeRadius(n.type);
+            if (n.x < r + 10) n.x = r + 10;
+            if (n.x > SVG_WIDTH - r - 10) n.x = SVG_WIDTH - r - 10;
+            if (n.y < r + 10) n.y = r + 10;
+            if (n.y > SVG_HEIGHT - r - 10) n.y = SVG_HEIGHT - r - 10;
+          }
+        }
+      }
+
+      /* ============================================================
+         渲染 SVG
+         ============================================================ */
+      function renderSVG() {
+        svgContainer.innerHTML = '';
+
+        var filtered = getFilteredData();
+        if (filtered.nodes.length === 0) {
+          renderEmptyState();
+          return;
+        }
+
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', SVG_HEIGHT + 'px');
+        svg.setAttribute('viewBox', '0 0 ' + SVG_WIDTH + ' ' + SVG_HEIGHT);
+        svg.style.cssText = 'display:block;';
+
+        var edgeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        var nodeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+        // 连线
+        filtered.edges.forEach(function(e) {
+          var s = getNodeById(e.source);
+          var t = getNodeById(e.target);
+          if (!s || !t) return;
+          var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', s.x);
+          line.setAttribute('y1', s.y);
+          line.setAttribute('x2', t.x);
+          line.setAttribute('y2', t.y);
+          line.setAttribute('stroke', 'var(--research-edge)');
+          line.setAttribute('stroke-width', '1.5');
+          line.setAttribute('opacity', '0.45');
+          line.setAttribute('data-source', e.source);
+          line.setAttribute('data-target', e.target);
+          edgeGroup.appendChild(line);
+        });
+
+        // 节点
+        layoutNodes.forEach(function(n) {
+          var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          g.setAttribute('data-node-id', n.id);
+          g.style.cssText = 'cursor: grab;';
+
+          var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', n.x);
+          circle.setAttribute('cy', n.y);
+          circle.setAttribute('r', getTypeRadius(n.type));
+          circle.setAttribute('fill', getTypeColor(n.type));
+          circle.setAttribute('opacity', '0.85');
+          circle.setAttribute('stroke', 'var(--research-card)');
+          circle.setAttribute('stroke-width', '2');
+          g.appendChild(circle);
+
+          var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.setAttribute('x', n.x);
+          text.setAttribute('y', n.y + getTypeRadius(n.type) + 14);
+          text.setAttribute('text-anchor', 'middle');
+          text.setAttribute('font-size', '10');
+          text.setAttribute('fill', 'var(--research-ink-2)');
+          // 截断过长标签
+          var lbl = n.label || '';
+          if (lbl.length > 12) lbl = lbl.substring(0, 11) + '…';
+          text.textContent = lbl;
+          g.appendChild(text);
+
+          // 事件
+          g.addEventListener('mousedown', function(ev) { onNodeMouseDown(ev, n); });
+          g.addEventListener('mouseenter', function(ev) { onNodeMouseEnter(ev, n); });
+          g.addEventListener('mouseleave', function() { hideTooltip(); });
+
+          nodeGroup.appendChild(g);
+        });
+
+        svg.appendChild(edgeGroup);
+        svg.appendChild(nodeGroup);
+        svgContainer.appendChild(svg);
+
+        // 缓存引用用于拖拽更新
+        svgContainer._svg = svg;
+        svgContainer._edgeGroup = edgeGroup;
+        svgContainer._nodeGroup = nodeGroup;
+      }
+
+      /* ============================================================
+         空状态
+         ============================================================ */
+      function renderEmptyState() {
+        svgContainer.innerHTML = '';
+        var box = document.createElement('div');
+        box.style.cssText = 'display:flex;flex-direction:column;align-items:center;justify-content:center;height:' + SVG_HEIGHT + 'px;gap:16px;';
+        var icon = document.createElement('div');
+        icon.innerHTML = '<i data-lucide="share-2" style="width:48px;height:48px;color:var(--research-ink-3);"></i>';
+        box.appendChild(icon);
+        var text = document.createElement('p');
+        text.style.cssText = 'font-size:15px;color:var(--research-ink-3);text-align:center;margin:0;';
+        text.textContent = '请先在各模块中添加内容和关键词';
+        box.appendChild(text);
+        svgContainer.appendChild(box);
+        if (window.lucide) lucide.createIcons();
+      }
+
+      /* ============================================================
+         拖拽
+         ============================================================ */
+      function onNodeMouseDown(ev, node) {
+        ev.preventDefault();
+        dragNode = node;
+        node.fx = node.x;
+        node.fy = node.y;
+        document.addEventListener('mousemove', onNodeMouseMove);
+        document.addEventListener('mouseup', onNodeMouseUp);
+      }
+
+      function onNodeMouseMove(ev) {
+        if (!dragNode) return;
+        var svg = svgContainer._svg;
+        if (!svg) return;
+        var rect = svg.getBoundingClientRect();
+        var scaleX = SVG_WIDTH / rect.width;
+        var scaleY = SVG_HEIGHT / rect.height;
+        var x = (ev.clientX - rect.left) * scaleX;
+        var y = (ev.clientY - rect.top) * scaleY;
+        dragNode.x = x;
+        dragNode.y = y;
+        dragNode.fx = x;
+        dragNode.fy = y;
+        // 实时更新位置
+        updateNodePositions();
+        runSimulation(3);
+        updateNodePositions();
+      }
+
+      function onNodeMouseUp() {
+        if (dragNode) {
+          dragNode.fx = null;
+          dragNode.fy = null;
+          dragNode = null;
+        }
+        document.removeEventListener('mousemove', onNodeMouseMove);
+        document.removeEventListener('mouseup', onNodeMouseUp);
+      }
+
+      function updateNodePositions() {
+        var nodeGroup = svgContainer._nodeGroup;
+        var edgeGroup = svgContainer._edgeGroup;
+        if (!nodeGroup) return;
+
+        // 更新节点
+        var nodeEls = nodeGroup.querySelectorAll('[data-node-id]');
+        var nodeMap = {};
+        layoutNodes.forEach(function(n) { nodeMap[n.id] = n; });
+
+        for (var i = 0; i < nodeEls.length; i++) {
+          var el = nodeEls[i];
+          var n = nodeMap[el.getAttribute('data-node-id')];
+          if (!n) continue;
+          var circle = el.querySelector('circle');
+          var text = el.querySelector('text');
+          if (circle) {
+            circle.setAttribute('cx', n.x);
+            circle.setAttribute('cy', n.y);
+          }
+          if (text) {
+            text.setAttribute('x', n.x);
+            text.setAttribute('y', n.y + getTypeRadius(n.type) + 14);
+          }
+        }
+
+        // 更新连线
+        if (edgeGroup) {
+          var lines = edgeGroup.querySelectorAll('line');
+          for (var j = 0; j < lines.length; j++) {
+            var ln = lines[j];
+            var s = nodeMap[ln.getAttribute('data-source')];
+            var t = nodeMap[ln.getAttribute('data-target')];
+            if (s) {
+              ln.setAttribute('x1', s.x);
+              ln.setAttribute('y1', s.y);
+            }
+            if (t) {
+              ln.setAttribute('x2', t.x);
+              ln.setAttribute('y2', t.y);
+            }
+          }
+        }
+      }
+
+      /* ============================================================
+         Tooltip
+         ============================================================ */
+      function onNodeMouseEnter(ev, node) {
+        var svg = svgContainer._svg;
+        var containerRect = svgContainer.getBoundingClientRect();
+        var svgRect = svg.getBoundingClientRect();
+        var offsetX = svgRect.left - containerRect.left;
+        var offsetY = svgRect.top - containerRect.top;
+
+        var typeLabel = getTypeLabel(node.type);
+        var connectedEdges = getFilteredData().edges.filter(function(e) {
+          return e.source === node.id || e.target === node.id;
+        });
+
+        tooltip.innerHTML =
+          '<div style="font-weight:700;margin-bottom:4px;color:var(--research-ink);">' + escapeHtml(node.label) + '</div>' +
+          '<div style="color:var(--research-ink-2);">类型: <span style="color:' + getTypeColor(node.type) + ';font-weight:600;">' + escapeHtml(typeLabel) + '</span></div>' +
+          '<div style="color:var(--research-ink-3);">关联数: ' + connectedEdges.length + '</div>';
+        tooltip.style.display = 'block';
+
+        // 定位
+        var tx = offsetX + (node.x / SVG_WIDTH) * svgRect.width + 15;
+        var ty = offsetY + (node.y / SVG_HEIGHT) * svgRect.height - 10;
+        // 确保不超出容器
+        var ttRect = tooltip.getBoundingClientRect();
+        if (tx + ttRect.width > containerRect.width) {
+          tx = offsetX + (node.x / SVG_WIDTH) * svgRect.width - ttRect.width - 15;
+        }
+        tooltip.style.left = tx + 'px';
+        tooltip.style.top = ty + 'px';
+      }
+
+      function hideTooltip() {
+        tooltip.style.display = 'none';
+      }
+
+      /* ============================================================
+         主渲染
+         ============================================================ */
+      function renderNetwork() {
+        // 读取数据
+        allData = DB.getAllKeywords();
+
+        var filtered = getFilteredData();
+        if (filtered.nodes.length === 0) {
+          renderSVG(); // 会显示空状态
+          renderStats();
+          return;
+        }
+
+        // 初始化布局
+        initLayout(filtered.nodes);
+        // 运行模拟
+        runSimulation(200);
+        // 渲染
+        renderSVG();
+        // 统计
+        renderStats();
+      }
+
+      function relayoutNetwork() {
+        var filtered = getFilteredData();
+        if (filtered.nodes.length === 0) return;
+        initLayout(filtered.nodes);
+        runSimulation(200);
+        renderSVG();
+      }
+
+      /* ============================================================
+         初始化
+         ============================================================ */
+      function init() {
+        renderModuleFilter();
+        renderLegend();
+        renderNetwork();
+
+        document.getElementById('btn-refresh').addEventListener('click', function() {
+          renderNetwork();
+          if (window.lucide) lucide.createIcons();
+        });
+
+        document.getElementById('btn-relayout').addEventListener('click', function() {
+          relayoutNetwork();
+        });
+      }
+
+      // DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    </script>
     <script>lucide.createIcons();</script>
 </body>
 </html>
